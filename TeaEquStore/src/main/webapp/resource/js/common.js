@@ -39,28 +39,26 @@ $(document).ready(function() {
 		},
 
 	});
-	// 注册表单验证
-$(function(){
-	
-	$("#registerForm").validate(alert($("input[name='userName']").val()),{
+})
+// 注册表单验证
+$(function() {
+	$("#registerForm").validate({
 		rules : {
-			username : {
+			userName : {
 				required : true,// 必填
 				minlength : 3, // 最少6个字符
 				maxlength : 32,// 最多20个字符
-				remote : {
-					url : ctx+"/userRegist",// 用户名重复检查，别跨域调用
-					type : "post",
+				/* username:true, */
+				remote : { // 验证用户名是否存在
+					type : "POST",
+					url : ctx+"/regist", // servlet
+					dataType : "JSON",
 					data : {
-						username : function() {
-							return $("input[name='userName']").val();
+						userName : function() {
+							return $("#userName").val();
 						}
-					},
-					success:function(data){
-							
 					}
-					
-				},
+				}
 			},
 			password : {
 				required : true,
@@ -110,12 +108,23 @@ $(function(){
 			},
 
 		},
+		submitHandler : function() {
+			alert("注册成功");
+		}
+
 	});
-	// 添加自定义验证规则
-	jQuery.validator.addMethod("phone_number", function(value, element) {
-		var length = value.length;
-		var phone_number = /^(((13[0-9]{1})|(15[0-9]{1}))+\d{8})$/
-		return this.optional(element) || (length == 11 && phone_number.test(value));
-	}, "手机号码格式错误");
-});
+
 })
+// 添加自定义验证规则
+jQuery.validator.addMethod("phone_number", function(value, element) {
+	var length = value.length;
+	var phone_number = /^(((13[0-9]{1})|(15[0-9]{1}))+\d{8})$/
+	return this.optional(element) || (length == 11 && phone_number.test(value));
+}, "手机号码格式错误");
+
+/*
+ * jQuery.validator.addMethod("username",function(value,element){ var length
+ * =value.length;
+ * 
+ * },该用户名已经存在);
+ */

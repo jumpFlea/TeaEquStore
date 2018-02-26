@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dy.model.User;
 import com.dy.service.UserService;
@@ -26,7 +27,7 @@ import com.dy.service.UserService;
  *
  */
 
-
+ 
 @Controller
 public class UserController {
 	
@@ -48,20 +49,23 @@ public class UserController {
 		return "login";
 	}
 	
+	/*用户注册时用户名判断*/
+	@RequestMapping("/regist")
+	@ResponseBody
+	public Object  userRegist(String userName){
+		
+		Integer i = userService.selectByUserName(userName); 
+		if(i==0){
+			return true;
+		}else
+			return false;
+	}
 	
 	/*用户注册*/
 	@RequestMapping("/userRegist")
-	public String  userRegist(User user){
-		
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		/*int i = userService.selectByUserName(user.getUserName()); */
-		System.out.println(user.getUserName());
-		
-		
-		return "login";
+	public   String userRegist(User user){
+		return null;
+	
 		
 	}
-	
 }

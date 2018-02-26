@@ -19,9 +19,9 @@
 			<p>welcome to the page</p>
 		</div>
 
-		<form action="" method="post" id="registerForm">
+		<form action="${ctx}/" method="post" id="registerForm">
 			<div>
-				<input type="text" name="userName" class="username" placeholder="您的用户名" autocomplete="off" />
+				<input type="text" id = "userName" name="userName" class="username" placeholder="您的用户名" autocomplete="off" />
 			</div>
 			<div>
 				<input type="password" name="userPassWord" class="password" placeholder="输入密码" oncontextmenu="return false" onpaste="return false" />
