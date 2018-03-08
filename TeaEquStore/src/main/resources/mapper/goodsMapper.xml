@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dy.dao.GoodsDao">
+
+	<!-- 查询商品信息记录 -->
+	<select id="selectAllGoods" parameterType="Page" resultType="Goods">
+		select * from equipment limit #{begin},#{limitPage};
+	</select>
+	
+	<!--查找销售全部商品的数量 -->
+	<select id="findAllNum" resultType="int">
+		SELECT COUNT(e_id) from equipment 
+	</select>
+	
+	<!--查找销售最热商品的数量 -->
+	<select id="findHotNum" resultType="int">
+		SELECT COUNT(e_id) from equipment where isHot = 1
+	</select>
+
+	<!--首页分页展示最热商品 -->
+	<select id="indexShow" parameterType="Page" resultType="Goods">
+		select * from equipment where isHot = 1 limit #{begin},#{limitPage};
+	</select>
+
+	<!--查询所有的一级分类 -->
+	
+	<!-- 一对多关联，多的一方使用collection表示 -->
+	<resultMap type="Category" id="CategoryList">
+		<id property="cateId" column="cateId" />
+		<result property="cateName" column="cateName" />
+		<collection property="categorysecond" javaType="ArrayList" ofType="Categorysecond">
+			<id property="cateSecId" column="cateSecId" />
+			<result property="cateSecName" column="cateSecName" />
+		</collection>
+	</resultMap>
+	<select id="findAllCate" resultMap="CategoryList" >
+		SELECT category.*,categorysecond.* from
+categorysecond JOIN category ON category.cateId=categorysecond.cateId;
+	</select>
+
+	<!--查询所有的二级分类 -->
+	<select id="findAllSecCate" resultType="Categorysecond">
+		select * from categorysecond;
+	</select>
+
+	<!--根据商品id查询商品信息 -->
+	<select id="findByGoodsId" resultType="Goods">
+		select * from equipment where e_id =#{goodsId};
+	</select>
+</mapper>
+	

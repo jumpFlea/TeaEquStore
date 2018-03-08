@@ -13,4 +13,6 @@ public interface UserService {
 	/*用户注册*/
 	User userRegist(User user);
 	
+	
+	
 }

@@ -26,7 +26,7 @@ import com.dy.service.UserService;
  * TIME:上午10:57:15
  *
  */
-
+ 
  
 @Controller
 public class UserController {
@@ -43,7 +43,7 @@ public class UserController {
 		/*System.out.println(user.getUserName());*/
 		if(user!=null){
 			request.getSession().setAttribute("user", user);
-			return "index";
+			return "redirect:/goodsShow?needPage=1";
 		}
 		/*logger.info("now {}" , user);*/
 		return "login";
@@ -65,7 +65,6 @@ public class UserController {
 	@RequestMapping("/userRegist")
 	public   String userRegist(User user){
 		return null;
-	
 		
 	}
 }

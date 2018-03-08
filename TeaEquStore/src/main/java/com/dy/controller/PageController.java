@@ -2,6 +2,7 @@ package com.dy.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = "/page")
@@ -21,5 +22,5 @@ public class PageController {
 	public String JumpRegist() {
 		return "register";
 	}
-
+	
 }
