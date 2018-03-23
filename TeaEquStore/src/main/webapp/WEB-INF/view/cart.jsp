@@ -1,19 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html dir="ltr" lang="en-US">
-<!--<![endif]-->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
-<title>Sommerce Shop | The perfect e-commerce solution</title>
+<title>cart</title>
 
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" media="all" href="css/style1.css" />
 <link rel="stylesheet" type="text/css" media="screen and (max-width: 980px)" href="css/lessthen980.css" />
 <link rel="stylesheet" type="text/css" media="screen and (max-width: 600px)" href="css/lessthen600.css" />
 <link rel="stylesheet" type="text/css" media="screen and (max-width: 480px)" href="css/lessthen480.css" />
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/shop.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/tipsy.css" type="text/css" media="all" />
@@ -54,47 +53,31 @@
 					<div class="inner group">
 						<!-- START LOGO -->
 						<div id="logo" class="group">
-							<a href="index.html" title="Sommerce Shop"> <span class="logo-title">教学器材专卖店</span>
+							<a href="index.html" title="Sommerce Shop"> <span class="logo-title">Sommerce Shop</span>
 							</a>
 							<p class="logo-description">The perfect e-commerce solution</p>
 						</div>
 						<!-- END LOGO -->
 						<!-- START LINKSBAR -->
 						<ul id="linksbar" class="group">
-							<li class="icon cart"><a class="trigger" href="myCart"> <span> 0 items &ndash; &euro;0.00 </span>
+							<li class="icon cart"><a class="trigger" href="cart.html"> <span> 0 items &ndash; &euro;0.00 </span>
 							</a> |
 								<div class="basketpopup">
-									<h3>购物车</h3>
-									<span class="empty">没有东西在购物车内</span>
+									<h3>My Cart</h3>
+									<span class="empty">No products in the cart.</span>
 								</div></li>
-							<li><a href="showOrderList?page=1">我的订单</a> |</li>
-							<li class="icon lock"><a href="#">退出</a> |</li>
-							<li><a href="contact.html">联系我们</a> |</li>
+							<li class="icon lock"><a href="#">Logout</a> |</li>
+							<li><a href="contact.html">Contact us</a> |</li>
 						</ul>
-						<div class="copyrights">
-							Collect from <a href="http://www.mycodes.net/" title="网站模板">网站模板</a>
-						</div>
+
 						<!-- END LINKSBAR -->
 						<div class="clear"></div>
 
 						<!-- START NAV -->
 						<div id="nav" class="group creative">
 							<ul id="menu-navigation" class="level-1">
-								<!--遍历出主页下的一二级分类-->
 								<li><a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=">主页</a>
-									<ul class="sub-menu">
-										<c:forEach items="${cate}" var="ca">
-											<li><a href="goodsShow?cateName=${ca.cateName}&mainPage=1&needPage=1&cateSecName=">${ca.cateName}</a>
-												<ul class="sub-menu">
-													<c:forEach items="${ca.categorysecond}" var="cat">
-														<li><a href="goodsShow?cateName=${ca.cateName}&mainPage=1&needPage=1&cateSecName=${cat.cateSecName}">${cat.cateSecName}</a></li>
-													</c:forEach>
-												</ul></li>
-										</c:forEach>
-									</ul></li>
-								<!--遍历出主页下的一二级分类end-->
-
-								<li class="megamenu"><a href="#">购物</a>
+								<li class="megamenu"><a href="#">Shopping By</a>
 									<ul class="sub-menu">
 										<li><a href="brand.html">Brand</a>
 											<ul class="sub-menu">
@@ -112,7 +95,7 @@
 												<li><a href="#">Bathroom</a></li>
 												<li><a href="#">Wood</a></li>
 											</ul></li>
-										<li><a href="#">价格</a>
+										<li><a href="#">Prices</a>
 											<ul class="sub-menu">
 												<li><a href="#">100 &#8211; 200 &euro;</a></li>
 												<li><a href="#">200 &#8211; 500 &euro;</a></li>
@@ -121,13 +104,13 @@
 												<li><a href="#">1000 &#8211; 1200 &euro;</a></li>
 											</ul></li>
 									</ul></li>
-								<li><a href="my-account.html">我的账户</a>
+								<li><a href="my-account.html">My Account</a>
 									<ul class="sub-menu">
 										<li><a href="change-password.html">Change Password</a></li>
 										<li><a href="edit-address.html">Edit My Address</a></li>
 										<li><a href="order-tracking.html">Track your order</a></li>
 									</ul></li>
-								<li><a href="shop.html">店</a></li>
+								<li><a href="shop.html">Shop</a></li>
 								<li><a href="blog.html">Blog</a>
 									<ul class="sub-menu">
 										<li><a href="blog.html">Big Image</a></li>
@@ -140,7 +123,7 @@
 										<li><a href="contact.html">Get in Touch</a></li>
 
 									</ul></li>
-								<li><a href="typography.html">简码</a>
+								<li><a href="typography.html">Shortcode</a>
 									<ul class="sub-menu">
 										<li><a href="typography.html">Typography</a></li>
 										<li><a href="alert-box-buttons.html">Alert box &#038; buttons</a></li>
@@ -170,186 +153,85 @@
 				</div>
 				<!-- END HEADER -->
 
-				<!-- START SLIDER -->
-				<div id="slider" class="group inner">
-					<ul class="group">
-						<li class="first slide-1 group image-content-type">
-							<div class="slider-featured group">
-								<a href="http://www.google.it"><img src="images/common/00111.jpg" width="960" height="338" alt="interior design" /></a>
-							</div>
-							<div class="slider-caption caption-right">
-								<!-- TITLE -->
-								<h2>
-									<a href="http://www.google.it">interior design</a>
-								</h2>
-								<!-- TEXT -->
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar turpis velit. Morbi rutrum, neque non pulvinar faucibus, ligula eros viverra ligula, et aliquam libero neque ac
-									nisl.</p>
-								<p>
-									<span class="special-font" style="font-size: 24px;">prices from <span style="font-size: 42px;">$45</span></span>
-								</p>
-							</div>
-						</li>
-						<li class="slide-2 group image-content-type">
-							<div class="slider-featured group">
-								<img src="images/common/0035.jpg" width="960" height="338" alt="Luxury gold" />
-							</div>
-							<div class="slider-caption caption-right">
-								<!-- TITLE -->
-								<h2>Luxury gold</h2>
-								<!-- TEXT -->
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar turpis velit. Morbi rutrum, neque non pulvinar faucibus, ligula eros viverra ligula, et aliquam libero neque ac
-									nisl.</p>
-							</div>
-						</li>
-						<li class="last slide-3 group image-content-type">
-							<div class="slider-featured group">
-								<img src="images/common/0031.jpg" width="960" height="338" alt="Gold Parquet" />
-							</div>
-							<div class="slider-caption caption-right">
-								<!-- TITLE -->
-								<h2>Gold Parquet</h2>
-								<!-- TEXT -->
-								<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum</p>
-								<p>
-									<span class="special-font" style="font-size: 24px;">prices from <span style="font-size: 42px;">$37</span></span>
-								</p>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<!-- END SLIDER -->
 				<div class="slider-mobile">
 					<!-- START SLIDER -->
 					<div id="slider" class="group mobile inner fixed-image">
-						<img src="images/common/001.jpg" width="960" height="338" alt="" />
+						<img src="images/slider/001.jpg" width="960" height="338" alt="" />
 					</div>
 					<!-- END SLIDER -->
-					<script type="text/javascript">
-						var yiw_slider_type = 'elegant', yiw_slider_elegant_easing = null, yiw_slider_elegant_fx = 'fade', yiw_slider_elegant_speed = 500, yiw_slider_elegant_timeout = 5000, yiw_slider_elegant_caption_speed = 500;
-					</script>
-
 				</div>
 				<!-- START PRIMARY SECTION -->
 				<div id="primary" class="inner group">
-					<div id="slogan" class="inner">
-						<h1>欢迎来到 教学器材专卖店, 带您走进一个不错的全新视角</h1>
-						<h3>unlimited layout styles by changing fonts, colors, backgrounds, images and sliders</h3>
-					</div>
-					<div class="layout-sidebar-no">
+					<div class="layout-sidebar-no group">
 						<!-- START CONTENT -->
-						<div id="content" role="main" class="group wrapper-content">
-							<div id="post-7" class="post-7 page type-page status-publish hentry group">
-								<!--主页显示的主要内容-->
-								<div class="boxed-content group">
-									<div class="box-title group">
-										<h3>主打产品</h3>
-										<p>our selection of specials items</p>
-									</div>
-									<div class="box-content group">
-										<ul class="products">
-											<c:forEach items="${showGoodsAllList.list}" var="g">
-												<li class="product border shadow first last-row"><a href="goodsDetails?goodsId=${g.e_id}">
-														<div class="thumbnail">
-															<img width="150" height="150" src="${g.equPicture}" class="attachment-shop_small wp-post-image" alt="001" title="001" />
-															<div class="thumb-shadow"></div>
-															<strong class="below-thumb">Elegant Glasses</strong>
-														</div> <span class="price">&#36;${g.sellPrice}</span>
-												</a>
-													<div class="buttons">
-														<a href="goodsDetails?goodsId=${g.e_id}" class="details">详情</a>&nbsp;<a href="addToCart?e_id=${g.e_id}&goodNum=1" class="add-to-cart">ADD TO CART</a>
-													</div></li>
-											</c:forEach>
-										</ul>
-										<div class="clear"></div>
-									</div>
-
-									<!--分页的样式-->
-									<div class="page-num">
-										<nav>
-											<ul class="pagination">
-												<c:if test="${showGoodsAllList.currentPage!=1}">
-													<li><a href="goodsShow?mainPage=${showGoodsAllList.currentPage-1}&cateName=${cateName}&needPage=1&cateSecName=${cateSecName}"><span aria-hidden="true">&laquo;</span></a></li>
-												</c:if>
-												<c:forEach var="i" begin="1" end="${showGoodsAllList.countPage}">
-													<c:if test="${i==showGoodsAllList.currentPage}">
-														<li class="active"><a>${i}</a></li>
-													</c:if>
-													<c:if test="${i!=showGoodsAllList.currentPage}">
-														<li><a href="goodsShow?mainPage=${i}&needPage=1&cateName=${cateName}&cateSecName=${cateSecName}">${i}</a></li>
-													</c:if>
-												</c:forEach>
-												<c:if test="${showGoodsAllList.currentPage!=showGoodsAllList.countPage}">
-													<li><a href="goodsShow?mainPage=${showGoodsAllList.currentPage+1}&cateName=${cateName}&needPage=1&cateSecName=${cateSecName}"><span>&raquo;</span></a></li>
-												</c:if>
-											</ul>
-										</nav>
-									</div>
-									<!--分页的样式-->
-								</div>
-								<!--主页显示的主要内容end-->
-
-								<!--火热畅销产品-->
-								<div class="boxed-content group">
-									<div class="box-title group">
-										<h3>火热销售中</h3>
-										<p>爱上他们，没选择！</p>
-									</div>
-									<div class="box-content group">
-										<ul class="products">
-											<c:forEach items="${showGoodsList.list}" var="g">
-												<li class="product border shadow first last-row"><a href="goodsDetails?goodsId=${g.e_id}">
-														<div class="thumbnail">
-															<img width="150" height="150" src="${g.equPicture}" class="attachment-shop_small wp-post-image" alt="001" title="001" />
-															<div class="thumb-shadow"></div>
-															<strong class="below-thumb">Elegant Glasses</strong>
-														</div> <span class="price">&#36;${g.sellPrice}</span>
-												</a>
-													<div class="buttons">
-														<a href="goodsDetails?goodsId=${g.e_id}" class="details">详情</a>&nbsp;<a href="#" class="add-to-cart">ADD TO CART</a>
-													</div></li>
-											</c:forEach>
-										</ul>
-										<div class="clear"></div>
-									</div>
-
-									<!--分页的样式-->
-									<div class="page-num">
-										<nav>
-											<ul class="pagination">
-												<c:if test="${showGoodsList.currentPage!=1}">
-													<li><a href="goodsShow?needPage=${showGoodsList.currentPage-1}&mainPage=1&cateName=&cateSecName="><span aria-hidden="true">&laquo;</span></a></li>
-												</c:if>
-												<c:forEach var="i" begin="1" end="${showGoodsList.countPage}">
-													<c:if test="${i==showGoodsList.currentPage}">
-														<li class="active"><a>${i}</a></li>
-													</c:if>
-													<c:if test="${i!=showGoodsList.currentPage}">
-														<li><a href="goodsShow?needPage=${i}&mainPage=1&cateName=&cateSecName=">${i}</a></li>
-													</c:if>
-												</c:forEach>
-												<c:if test="${showGoodsList.currentPage!=showGoodsList.countPage}">
-													<li><a href="goodsShow?needPage=${showGoodsList.currentPage+1}&mainPage=1&cateName=&cateSecName="><span>&raquo;</span></a></li>
-												</c:if>
-											</ul>
-										</nav>
-									</div>
-									<!--分页的样式-->
-								</div>
-								<!--火热畅销产品end-->
-
-
-								<div class="call-to-action-two group">
-									<div class="incipit">
-										<p class="special-font">
-											<span style="font-size: 52px;"><strong>35% </strong></span> <span style="font-size: 48px;">off everything </span> Sign in to our list before march 21 to enjoy our special sales!<br />
-										</p>
-									</div>
-									<a href="#" class="call-button"> SIGN IN NOW </a>
-								</div>
+						<div id="content" role="main" class="group">
+							<div id="crumbs" class="theme_breadcumb">
+								<a class="home" href="home.html">Home Page</a> &rsaquo; <a class="no-link current" href="#">Cart</a>
+								<div class="breadcrumb-end"></div>
 							</div>
+							<h2>Cart</h2>
+							<!--订单列表start-->
+							<div class="container cart">
+								<c:choose>
+									<c:when test="${cart.cartItems.size()!=0}">
+										<div class="span24">
+											<div class="step step1">购物车信息</div>
+											<table>
+												<tbody>
+													<tr>
+														<th>图片</th>
+														<th>商品</th>
+														<th>价格</th>
+														<th>数量</th>
+														<th>小计</th>
+														<th>操作</th>
+													</tr>
+													<c:forEach items="${cart.cartItems}" var="cartItem">
+														<tr>
+															<td width="60"><img src="${cartItem.goods.equPicture}"></td>
+															<td><a target="_blank"></a>${cartItem.goods.equName}</td>
+															<td>￥${cartItem.goods.sellPrice}</td>
+															<td class="quantity" width="60">${cartItem.goodNum}</td>
+															<td width="140"><span class="subtotal">￥${cartItem.subtotal}</span></td>
+															<td><a href="removeCart?gid=${cartItem.goods.e_id}" class="delete">删除</a></td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+											<dl id="giftItems" class="hidden" style="display: none;">
+											</dl>
+											<div class="total">
+												<em id="promotion"></em> <em> 登录后确认是否享有优惠 </em> 赠送积分: <em id="effectivePoint"></em> 商品金额: <strong id="effectivePrice">￥${cart.total}元 </strong>
+											</div>
+											<div class="bottom">
+												<a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=" class="large green sc-button">继续购物</a>
+												<a href="clearCart" id="clear" class="clear">清空购物车</a> <a href="submitOrder" id="submit" class="submit">提交订单</a>
+											</div>
+
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div id="post-12" class="post-12 page type-page status-publish hentry group">
+											<p>亲，你的购物车是空的</p>
+											<p>
+												<a class="button" href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=">&larr; 返回购物</a>
+											</p>
+											
+										</div>
+									</c:otherwise>
+								</c:choose>
+							</div>
+
+							<!--订单列表end-->
+
+							<div id="comments">
+								<!--<p class="nocomments">&nbsp;</p>-->
+							</div>
+							<!-- #comments -->
 						</div>
 						<!-- END CONTENT -->
+						<!-- START SIDEBAR -->
+						<!-- END SIDEBAR -->
 					</div>
 					<!-- START EXTRA CONTENT -->
 					<!-- END EXTRA CONTENT -->

@@ -7,6 +7,23 @@ public class User {
 	private String email;
 	private String telephone;
 	private String userStatus;
+	private String addressName;
+	private String address;
+	
+	public String getAddressName() {
+		return addressName;
+	}
+	public void setAddressName(String addressName) {
+		this.addressName = addressName;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	
 	
 	public Integer getU_id() {
 		return u_id;
@@ -47,7 +64,9 @@ public class User {
 	
 	public String toString(){
 		return "u_id"+u_id+";userName"+userName+";userPassWord"+userPassWord+
-				";email"+email+";telephone"+telephone+";userStatus"+userStatus;
+				";email"+email+";telephone"+telephone+";userStatus"+userStatus
+				+";addressName"+addressName+";address"+address;
+		
 	}
 	
 

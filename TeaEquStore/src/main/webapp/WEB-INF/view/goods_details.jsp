@@ -156,7 +156,7 @@
 						<div id="content" role="main">
 
 							<div id="breadcrumb">
-								<a class="home" href="home.html">首页</a> &rsaquo; <a href="#">Categories</a> &rsaquo; <a href="#">Garden</a> &rsaquo; Gold mahibo
+								<a class="home" href="home.html">首页</a> &rsaquo; <a href="#"></a> &rsaquo; <a href="#"></a> &rsaquo; Gold mahibo
 							</div>
 
 							<div class="product type-product status-publish hentry">
@@ -185,9 +185,10 @@
 									<p>${goods.equDescription}</p>
 									<p>剩余数量：<input name="quantity" value="${goods.number}" size="4" title="Qty" class="input-text qty text" maxlength="12" /><p>
 								
-								<form action="#" class="cart" method="post">
+								<form action="addToCart" class="cart" method="post">
 									<div class="quantity">
-										<input name="quantity" value="1" size="4" title="Qty" class="input-text qty text" maxlength="12" />
+										<input name="goodNum" value="1" size="4" title="Qty" class="input-text qty text" maxlength="12" />
+										<input name="e_id" type="hidden" value="${goods.e_id}" />
 									</div>
 									<button type="submit" class="button-alt">Add to cart</button>
 									<input type="hidden" id="_n" name="_n" value="a93bb4a4c2" /><input type="hidden" name="_wp_http_referer" value="/demo/sommerce/shop/gold-mahibo/" />

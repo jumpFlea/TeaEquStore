@@ -21,20 +21,50 @@ public class GoodsServiceImpl implements GoodsService {
 	@Autowired
 	private GoodsDao goodsDao;
 
-
-	
 	@Override
-	public Page<Goods> selectAllGoods(int currentPage, String type,String gname) {
+	public Page<Goods> selectAllGoods(int currentPage, String cateName, String cateSecName) {
 		// TODO Auto-generated method stub
 		Page<Goods> p = new Page<Goods>();
+		
 		// 将当前的页面设置到page中
 		p.setCurrentPage(currentPage);
 		// 设置每页显示的条数
 		int limit = 6;
 		p.setLimitPage(limit);
 		// 获取当前的总记录数，并设置到page里面对应的属性,设置总页数
-		int count = goodsDao.findAllNum();
-		if (count%limit == 0) {
+		int count  = goodsDao.findAllNum(cateName,cateSecName);
+		if (count % limit == 0) {
+			count = count / limit;
+			p.setCountPage(count);
+		} else {
+			count = (count / limit) + 1;
+			p.setCountPage(count);
+		}
+		// 设置开始显示记录的第一条的值
+		int begin = (currentPage - 1) * limit;
+		p.setBegin(begin);
+		p.setAttribute(cateName);
+		p.setCateSecName(cateSecName);
+		/* System.out.println(p.getAttribute()); */
+		/* p.setGname(gname); */
+		// 获取图片的信息，存于page中
+		List<Goods> imageList = goodsDao.selectAllGoods(p);
+		p.setList(imageList);
+		return p;
+	}
+
+	@Override
+	public Page<Goods> indexShow(int currentPage, String type, String gname) {
+		// TODO Auto-generated method stub
+		Page<Goods> p = new Page<Goods>();
+		// 将当前的页面设置到page中
+		p.setCurrentPage(currentPage);
+		// 设置每页显示的条数
+		int limit = 3;
+		p.setLimitPage(limit);
+		// 获取当前的总记录数，并设置到page里面对应的属性,设置总页数
+		int count = goodsDao.findHotNum();
+		if (count % limit == 0) {
 			count = count / limit;
 			p.setCountPage(count);
 		} else {
@@ -47,49 +77,17 @@ public class GoodsServiceImpl implements GoodsService {
 		p.setAttribute(type);
 		p.setGname(gname);
 		// 获取图片的信息，存于page中
-		List<Goods> imageList = goodsDao.indexShow(p);
+		List<Goods> imageList = new ArrayList<Goods>();
+		imageList = goodsDao.indexShow(p);
 		p.setList(imageList);
 		return p;
 	}
 
-
-	@Override
-	public Page<Goods> indexShow(int currentPage, String type,String gname) {
-		// TODO Auto-generated method stub
-			Page<Goods> p = new Page<Goods>();
-			// 将当前的页面设置到page中
-			p.setCurrentPage(currentPage);
-			// 设置每页显示的条数
-			int limit = 3;
-			p.setLimitPage(limit);
-			// 获取当前的总记录数，并设置到page里面对应的属性,设置总页数
-			int count = goodsDao.findHotNum();
-			if (count%limit == 0) {
-				count = count / limit;
-				p.setCountPage(count);
-			} else {
-				count = (count / limit) + 1;
-				p.setCountPage(count);
-			}
-			// 设置开始显示记录的第一条的值
-			int begin = (currentPage - 1) * limit;
-			p.setBegin(begin);
-			p.setAttribute(type);
-			p.setGname(gname);
-			// 获取图片的信息，存于page中
-			List<Goods> imageList = new ArrayList<Goods>();
-			imageList = goodsDao.indexShow(p);
-			p.setList(imageList);
-			return p;
-	}
-
-
 	@Override
 	public List<Category> findAllCate() {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 		return goodsDao.findAllCate();
 	}
-
 
 	@Override
 	public List<Categorysecond> findAllCateSec() {
@@ -97,13 +95,10 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDao.findAllCateSec();
 	}
 
-
 	@Override
 	public Goods findByGoodsId(int goodsId) {
 		// TODO Auto-generated method stub
 		return goodsDao.findByGoodsId(goodsId);
 	}
-	
-	
 
 }

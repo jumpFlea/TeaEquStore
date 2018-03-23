@@ -27,37 +27,43 @@ import com.dy.service.GoodsService;
 public class GoodsController {
 
 	private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
-	
+
 	@Resource
 	private GoodsService goodsService;
-	
-	
+
 	/* 首页商品展示 */
 	@RequestMapping("/goodsShow")
-	public String goodsShow(@RequestParam(value="needPage") Integer needPage,HttpServletRequest request) {
+	public String goodsShow(@RequestParam(value = "needPage") Integer needPage,@RequestParam(value = "mainPage") Integer mainPage,
+			@RequestParam(value = "cateName") String cateName, @RequestParam(value = "cateSecName") String cateSecName,HttpServletRequest request) {
+
+		/* System.out.println(needPage); */
 		
-	/*	System.out.println(needPage);*/
+		/*分页查询时的所有商品返回值*/
+		Page<Goods> showAllGoods = goodsService.selectAllGoods(mainPage, cateName, cateSecName);
 		
-		/*接受分页查出的返回值*/
+		/* 接受分页查出的热门商品返回值 */
 		Page<Goods> showGoods = goodsService.indexShow(needPage, null, null);
-		
+
 		List<Category> cate = goodsService.findAllCate();
-		
+
 		/* System.out.println(user.getUserName()); */
 		if (showGoods != null && cate != null) {
+			request.setAttribute("cateName", cateName);
+			request.setAttribute("cateSecName", cateSecName);
+			request.setAttribute("showGoodsAllList", showAllGoods);
 			request.setAttribute("showGoodsList", showGoods);
 			request.getSession().setAttribute("cate", cate);
-			/*System.out.println(showGoods);*/
+			/* System.out.println(showGoods); */
 			return "index";
 		}
 		return "error";
 	}
-	
-	/*商品详情*/
+
+	/* 商品详情 */
 	@RequestMapping(value = "/goodsDetails")
-	public String goodsDetails(@RequestParam(value="goodsId") Integer goodsId,HttpServletRequest request) {
-		Goods goods= new Goods();
-		goods=goodsService.findByGoodsId(goodsId);
+	public String goodsDetails(@RequestParam(value = "goodsId") Integer goodsId, HttpServletRequest request) {
+		Goods goods = new Goods();
+		goods = goodsService.findByGoodsId(goodsId);
 		request.setAttribute("goods", goods);
 		return "goods_details";
 	}

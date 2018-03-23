@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dy.dao.OrderDao">
+	<!-- 将值存入到订单表中 -->
+	<insert id="saveOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="oid" keyColumn="oid">
+		insert into orders(total,orderTime,orderState,name,address,phone,uid)
+		values(#{total},#{orderTime},#{orderState},#{name},#{address},#{phone},#{user.u_id})
+	</insert>
+
+	<!-- 将值存入到订单项表中 -->
+	<insert id="insertOrderItems" parameterType="java.util.Set">
+		insert into orderitems(goodNum,subtotal,eid,oid)
+		values
+		<foreach collection="orderItems" item="orderItems" index="index" separator=",">
+			(#{orderItems.goodNum},#{orderItems.subtotal},
+			#{orderItems.good.e_id},#{orderItems.order.oid})
+		</foreach>
+	</insert>
+
+	<!-- 根据此用户的id查询订单的记录数 -->
+	<select id="findOrderNum" parameterType="User" resultType="int">
+		select count(oid) FROM orders where uid=#{u_id}
+	</select>
+
+	<!--分页查询出所有订单 -->
+	<select id="showOrderList" parameterType="Page" resultMap="orderList">
+		select o.*,oi.itemsId,oi.goodNum,oi.subtotal,oi.eid,
+		e.e_id,e.equName,e.sellPrice,e.equPicture
+		from orders o
+		LEFT JOIN orderitems oi ON o.oid=oi.oid and o.uid=#{id}
+		LEFT JOIN equipment e on e.e_id=oi.eid 
+		ORDER BY orderTime DESC
+		LIMIT #{begin},#{limitPage}
+	</select>
+	<!-- 一个订单关联多个订单项 -->
+	<resultMap type="Orders" id="orderList">
+		<id column="oid" property="oid" />
+		<result column="total" property="total" />
+		<result column="orderTime" property="orderTime" />
+		<result column="orderState" property="orderState" />
+		<result column="name" property="name" />
+		<result column="address" property="address" />
+		<result column="phone" property="phone" />
+		<!-- 一个订单项关联一个商品，和一个用户Id -->
+		<collection property="orderItems" ofType="OrderItems">
+			<id column="itemsId" property="itemsId" />
+			<result column="goodNum" property="goodNum" />
+			<result column="subtotal" property="subtotal" />
+			<association property="good" javaType="Goods">
+				<id column="e_id" property="e_id" />
+				<result column="equName" property="equName" />
+				<result column="sellPrice" property="sellPrice" />
+				<result column="equPicture" property="equPicture" />
+			</association>
+		</collection>
+	</resultMap>
+
+
+
+
+</mapper>
+	

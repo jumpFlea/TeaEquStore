@@ -6,14 +6,43 @@
 
 	<!-- 查询商品信息记录 -->
 	<select id="selectAllGoods" parameterType="Page" resultType="Goods">
-		select * from equipment limit #{begin},#{limitPage};
+		select e.* 
+		<choose>
+			<when test="! attribute.equals('') and cateSecName.equals('')">
+				from equipment e,category c,categorysecond ca
+				where e.cateSecId=ca.cateSecId and ca.cateId=c.cateId
+				and c.cateName=#{attribute}
+			</when>
+			<when test="!cateSecName.equals('')">
+				from equipment e LEFT JOIN categorysecond ca on e.cateSecId=ca.cateSecId
+				JOIN category c on ca.cateId=c.cateId AND ca.cateSecName=#{cateSecName}
+			</when>
+			<otherwise>
+				from equipment e
+			</otherwise>
+		</choose>
+		limit #{begin},#{limitPage};
 	</select>
-	
-	<!--查找销售全部商品的数量 -->
+
+	<!--查找销售一级或全部商品的数量 -->
 	<select id="findAllNum" resultType="int">
-		SELECT COUNT(e_id) from equipment 
+		select count(e_id)
+		<choose>
+			<when test="! cateType.equals('') and cateSecName.equals('')">
+				from equipment e,category c,categorysecond ca
+				where e.cateSecId=ca.cateSecId and ca.cateId=c.cateId
+				and c.cateName=#{cateType}
+			</when>
+			<when test="!cateSecName.equals('')">
+				 from equipment e LEFT JOIN categorysecond ca on e.cateSecId=ca.cateSecId
+				JOIN category c on ca.cateId=c.cateId AND ca.cateSecName=#{cateSecName}
+			</when>
+			<otherwise>
+				from equipment e
+			</otherwise>
+		</choose>
 	</select>
-	
+
 	<!--查找销售最热商品的数量 -->
 	<select id="findHotNum" resultType="int">
 		SELECT COUNT(e_id) from equipment where isHot = 1
@@ -25,7 +54,7 @@
 	</select>
 
 	<!--查询所有的一级分类 -->
-	
+
 	<!-- 一对多关联，多的一方使用collection表示 -->
 	<resultMap type="Category" id="CategoryList">
 		<id property="cateId" column="cateId" />
@@ -35,9 +64,9 @@
 			<result property="cateSecName" column="cateSecName" />
 		</collection>
 	</resultMap>
-	<select id="findAllCate" resultMap="CategoryList" >
+	<select id="findAllCate" resultMap="CategoryList">
 		SELECT category.*,categorysecond.* from
-categorysecond JOIN category ON category.cateId=categorysecond.cateId;
+		categorysecond JOIN category ON category.cateId=categorysecond.cateId;
 	</select>
 
 	<!--查询所有的二级分类 -->

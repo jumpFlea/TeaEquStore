@@ -55,7 +55,7 @@ public class EmailUtil {
 	   send_mail("1391674791@qq.com","哈哈");
 }*/
 	
-	static ApplicationContext actx = new ClassPathXmlApplicationContext(
+	/*static ApplicationContext actx = new ClassPathXmlApplicationContext(
 			"applicationContext.xml");
 	static MailSender sender = (MailSender) actx.getBean("mailSender");
 	static SimpleMailMessage mailMessage = (SimpleMailMessage) actx.getBean("mailMessage");
@@ -65,6 +65,6 @@ public class EmailUtil {
 		mailMessage.setTo("1391674791@qq.com");
 		sender.send(mailMessage);
 	}
-   
+   */
    
 }

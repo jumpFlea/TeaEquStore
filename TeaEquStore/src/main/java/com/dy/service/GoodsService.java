@@ -11,7 +11,7 @@ import com.dy.model.Page;
 public interface GoodsService {
 	
 	/*获取全部商品信息*/
-	Page<Goods> selectAllGoods(int currentPage, String type,String gname);
+	Page<Goods> selectAllGoods(int currentPage, String cateName,String cateSecName);
 	
 	/*分页显示热火商品信息*/
 	Page<Goods> indexShow(int currentPage, String type,String gname);

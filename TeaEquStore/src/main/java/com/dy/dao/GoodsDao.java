@@ -3,6 +3,8 @@ package com.dy.dao;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.dy.model.Category;
 import com.dy.model.Categorysecond;
 import com.dy.model.Goods;
@@ -13,8 +15,11 @@ public interface GoodsDao {
 	/*获取全部商品信息*/
 	List<Goods> selectAllGoods(Page<Goods> page);
 	
-	/*查找所有商品的数量*/
-	int findAllNum();
+	/*查找一级分类或二级分类或所有商品的数量*/
+	int findAllNum(@Param(value="cateType") String cateType,@Param(value="cateSecName") String cateSecName);
+	
+	/*查找一级对应二级分类下的所有商品数量
+	int findAllSecNum(@Param(value="cateSecName") String cateSecName);*/
 	
 	/*分页显示商品信息*/
 	List<Goods> indexShow(Page<Goods> page);

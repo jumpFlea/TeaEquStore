@@ -2,10 +2,8 @@ package com.dy.model;
 
 import java.util.List;
 
-
 //分页
 public class Page<T> {
-
 
 	// 当前页数
 	private int currentPage;
@@ -13,21 +11,19 @@ public class Page<T> {
 	private int countPage;
 	// 每页限制的条数
 	private int limitPage;
-	//从那条数据开始
-	private int  begin;
-	//设置类型
+	// 从那条数据开始
+	private int begin;
+	// 设置类型
 	private String attribute;
-	//设置名字
+	// 设置二级分类名称
+	private String cateSecName;
+
+	// 设置名字
 	private String gname;
-	//为了方便，添增一个int属性
+	// 为了方便，添增一个int属性
 	private int id;
 
 	private List<T> list;
-
-
-
-
-
 
 	public String getAttribute() {
 		return attribute;
@@ -52,7 +48,6 @@ public class Page<T> {
 	public void setBegin(int begin) {
 		this.begin = begin;
 	}
-
 
 	public int getCountPage() {
 		return countPage;
@@ -85,6 +80,7 @@ public class Page<T> {
 	public void setList(List<T> list) {
 		this.list = list;
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -93,5 +89,14 @@ public class Page<T> {
 		this.id = id;
 	}
 
+	public String getCateSecName() {
+		return cateSecName;
+	}
+
+	public void setCateSecName(String cateSecName) {
+		this.cateSecName = cateSecName;
+	}
+
+	
 
 }
