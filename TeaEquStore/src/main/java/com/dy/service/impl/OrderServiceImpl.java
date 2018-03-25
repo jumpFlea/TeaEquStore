@@ -75,6 +75,18 @@ public class OrderServiceImpl implements OrderService{
 		pa.setList(ord);
 		return pa;
 	}
+
+	
+	//找到根据订单id找到订单
+	@Override
+	public Orders findByOrderId(Integer id) {
+		// TODO Auto-generated method stub
+		
+		return orderDao.findByOrderId(id);
+	}
+	
+	
+	
 	
 	
 }

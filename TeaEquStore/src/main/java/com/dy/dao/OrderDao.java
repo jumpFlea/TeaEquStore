@@ -23,5 +23,8 @@ public interface OrderDao {
 	
 	//返回一个OrderList列表
 	public List<Orders> showOrderList(Page<Orders> page);
+	
+	//找到根据订单id找到订单
+	public Orders findByOrderId(Integer id);
 
 }

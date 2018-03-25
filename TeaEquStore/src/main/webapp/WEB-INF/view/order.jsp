@@ -49,107 +49,7 @@
 			<div class="bgWrapper group">
 				<!-- START HEADER -->
 				<div id="header" class="group">
-					<!-- .inner -->
-					<div class="inner group">
-						<!-- START LOGO -->
-						<div id="logo" class="group">
-							<a href="index.html" title="Sommerce Shop"> <span class="logo-title">Sommerce Shop</span>
-							</a>
-							<p class="logo-description">The perfect e-commerce solution</p>
-						</div>
-						<!-- END LOGO -->
-						<!-- START LINKSBAR -->
-						<ul id="linksbar" class="group">
-							<li class="icon cart"><a class="trigger" href="cart.html"> <span> 0 items &ndash; &euro;0.00 </span>
-							</a> |
-								<div class="basketpopup">
-									<h3>My Cart</h3>
-									<span class="empty">No products in the cart.</span>
-								</div></li>
-							<li class="icon lock"><a href="#">Logout</a> |</li>
-							<li><a href="contact.html">Contact us</a> |</li>
-						</ul>
-
-						<!-- END LINKSBAR -->
-						<div class="clear"></div>
-
-						<!-- START NAV -->
-						<div id="nav" class="group creative">
-							<ul id="menu-navigation" class="level-1">
-								<li><a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=">主页</a>
-								<li class="megamenu"><a href="#">Shopping By</a>
-									<ul class="sub-menu">
-										<li><a href="brand.html">Brand</a>
-											<ul class="sub-menu">
-												<li><a href="#">Wallmart</a></li>
-												<li><a href="#">Ikea</a></li>
-												<li><a href="#">Pathio</a></li>
-												<li><a href="#">Furnishop</a></li>
-												<li><a href="#">Brand name</a></li>
-											</ul></li>
-										<li><a href="categories.html">Categories</a>
-											<ul class="sub-menu">
-												<li><a href="#">Kitchen</a></li>
-												<li><a href="#">Bedroom</a></li>
-												<li><a href="#">Garden</a></li>
-												<li><a href="#">Bathroom</a></li>
-												<li><a href="#">Wood</a></li>
-											</ul></li>
-										<li><a href="#">Prices</a>
-											<ul class="sub-menu">
-												<li><a href="#">100 &#8211; 200 &euro;</a></li>
-												<li><a href="#">200 &#8211; 500 &euro;</a></li>
-												<li><a href="#">500 &#8211; 800 &euro;</a></li>
-												<li><a href="#">800 &#8211; 1000 &euro;</a></li>
-												<li><a href="#">1000 &#8211; 1200 &euro;</a></li>
-											</ul></li>
-									</ul></li>
-								<li><a href="my-account.html">My Account</a>
-									<ul class="sub-menu">
-										<li><a href="change-password.html">Change Password</a></li>
-										<li><a href="edit-address.html">Edit My Address</a></li>
-										<li><a href="order-tracking.html">Track your order</a></li>
-									</ul></li>
-								<li><a href="shop.html">Shop</a></li>
-								<li><a href="blog.html">Blog</a>
-									<ul class="sub-menu">
-										<li><a href="blog.html">Big Image</a></li>
-										<li><a href="blog-small.html">Small Image</a></li>
-									</ul></li>
-								<li><a href="#">Pages</a>
-									<ul class="sub-menu">
-										<li><a href="testimonials.html">Testimonials</a></li>
-										<li><a href="faq.html">Faq</a></li>
-										<li><a href="contact.html">Get in Touch</a></li>
-
-									</ul></li>
-								<li><a href="typography.html">Shortcode</a>
-									<ul class="sub-menu">
-										<li><a href="typography.html">Typography</a></li>
-										<li><a href="alert-box-buttons.html">Alert box &#038; buttons</a></li>
-										<li><a href="icon-sections.html">Icon Sections</a></li>
-										<li><a href="nivo-slider.html">Nivo Slider</a></li>
-										<li><a href="media-widgets.html">Media &amp; Widgets</a></li>
-										<li><a href="table-box-prices.html">Table &#038; Box prices</a></li>
-										<li><a href="mix-various.html">Mix &#038; Various</a></li>
-										<li><a href="shop-shortcodes.html">Shop shortcodes</a></li>
-									</ul></li>
-							</ul>
-						</div>
-						<!-- END NAV -->
-
-						<!-- START SEARCH FORM -->
-						<form role="search" method="get" id="searchform" action="#" class="group">
-							<div>
-								<label class="screen-reader-text" for="s">search</label> <input type="text" value="" name="s" id="s" /> <input type="submit" id="searchsubmit" value="&gt;" /> <input type="hidden"
-									name="post_type" value="product" />
-							</div>
-						</form>
-						<!-- END SEARCH FORM -->
-
-					</div>
-					<!-- end .inner -->
-
+					<%@include file="includehead.jsp" %>
 				</div>
 				<!-- END HEADER -->
 
@@ -189,7 +89,6 @@
 
 									<div class="step step1">
 										<ul>
-
 											<li class="current"></li>
 											<li>生成订单成功</li>
 										</ul>

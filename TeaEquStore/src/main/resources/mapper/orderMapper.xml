@@ -29,8 +29,9 @@
 		select o.*,oi.itemsId,oi.goodNum,oi.subtotal,oi.eid,
 		e.e_id,e.equName,e.sellPrice,e.equPicture
 		from orders o
-		LEFT JOIN orderitems oi ON o.oid=oi.oid and o.uid=#{id}
-		LEFT JOIN equipment e on e.e_id=oi.eid 
+		LEFT JOIN orderitems oi ON
+		o.oid=oi.oid and o.uid=#{id}
+		LEFT JOIN equipment e on e.e_id=oi.eid
 		ORDER BY orderTime DESC
 		LIMIT #{begin},#{limitPage}
 	</select>
@@ -43,6 +44,13 @@
 		<result column="name" property="name" />
 		<result column="address" property="address" />
 		<result column="phone" property="phone" />
+		<!--一个订单关联一个用户 -->
+		<association property="user" javaType="User">
+			<id column="u_id" property="u_id" />
+			<result column="addressName" property="addressName" />
+			<result column="telephone" property="telephone" />
+			<result column="u_address" property="address" />
+		</association>
 		<!-- 一个订单项关联一个商品，和一个用户Id -->
 		<collection property="orderItems" ofType="OrderItems">
 			<id column="itemsId" property="itemsId" />
@@ -56,8 +64,15 @@
 			</association>
 		</collection>
 	</resultMap>
-
-
+	<!-- 找到根据订单id找到订单 -->
+	<select id="findByOrderId" parameterType="Integer" resultMap="orderList">
+		select o.*,oi.itemsId,oi.goodNum,oi.subtotal,oi.eid,
+		e.e_id,e.equName,e.sellPrice,e.equPicture,
+		u.u_id,u.addressName,u.address as u_address,u.telephone
+		FROM orders o,orderitems oi,equipment e,usertable u
+		where o.oid=#{id} AND o.oid = oi.oid and u.u_id=o.uid
+		AND e.e_id = oi.eid
+	</select>
 
 
 </mapper>

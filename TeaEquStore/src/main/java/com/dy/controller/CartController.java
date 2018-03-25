@@ -46,8 +46,7 @@ public class CartController {
 	public String removeCart(@RequestParam(value="gid") Integer gid,HttpServletRequest request){
 		Cart cart = new Cart();
 		cart = getCart(request);
-		cart.removeCart(gid);;
-		
+		cart.removeCart(gid);
 		return "cart";
 		
 	}

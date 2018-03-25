@@ -94,7 +94,7 @@
 													<th colspan="5">订单编号:<c:out value="${orList.oid}" />&nbsp;&nbsp;&nbsp;&nbsp;订单金额:<font color="red"><c:out value="${orList.total}" /> </font> &nbsp;&nbsp;&nbsp;&nbsp; <font
 														color="red"> <c:choose>
 																<c:when test="${orList.orderState==0}">
-																	<a href="">付款</a>
+																	<a href="findByOrderId?id=${orList.oid}">付款</a>
 																</c:when>
 																<c:when test="${orList.orderState==1}">已付款</c:when>
 																<c:when test="${orList.orderState==2}">

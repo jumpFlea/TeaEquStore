@@ -74,17 +74,15 @@ public class OrderController {
 		Integer id= orderService.findOrderNum(user);
 		Page<Orders> orderList = orderService.showOrderList(page,user.getU_id(),id);
 		model.addAttribute("orderList",orderList);
-	/*	for( Orders ord : orderList.getList()){
-			System.out.println(ord);
-			System.out.println(ord.getOrderItems());
-			for(OrderItems ords :ord.getOrderItems()){
-			  System.out.println(ords.getGood().getE_id());
-			  System.out.println(ords.getGoodNum());
-			  System.out.println(ords.getItemsId());
-			}
-			
-		}*/
 		return "showorder";
+	}
+	
+	//根据订单id查询订单
+	@RequestMapping("/findByOrderId")
+	public String findByOrderId(Model model,Integer id){
+		order = orderService.findByOrderId(id);
+		model.addAttribute("order", order);
+		return "order";
 	}
 	
 

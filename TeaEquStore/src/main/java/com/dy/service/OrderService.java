@@ -1,6 +1,5 @@
 package com.dy.service;
 
-import java.util.List;
 import java.util.Set;
 
 import com.dy.model.OrderItems;
@@ -18,5 +17,7 @@ public interface OrderService {
 	public int findOrderNum(User user);
 	
 	public Page<Orders> showOrderList(Integer page,Integer uid,Integer id);
+	
+	public Orders findByOrderId(Integer id);
 	
 }
