@@ -1,7 +1,6 @@
 package com.dy.controller;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -66,6 +65,9 @@ public class OrderController {
 	@RequestMapping("/showOrderList")
 	public String showOrderList(Model model,HttpServletRequest request,Integer page){
 		
+		if(page==null){
+			page=1;
+		}
 		User user = (User)request.getSession().getAttribute("user");
 		if(user==null){
 			model.addAttribute("error", "亲请先登录");
@@ -84,6 +86,10 @@ public class OrderController {
 		model.addAttribute("order", order);
 		return "order";
 	}
+	
+	
+	
+	
 	
 
 }

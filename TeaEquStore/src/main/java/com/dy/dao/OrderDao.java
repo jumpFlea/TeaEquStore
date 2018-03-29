@@ -26,5 +26,8 @@ public interface OrderDao {
 	
 	//找到根据订单id找到订单
 	public Orders findByOrderId(Integer id);
+	
+	//根据支付宝返回的值，修改订单状态
+	public void payforOrder(Orders order);
 
 }

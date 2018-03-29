@@ -205,6 +205,12 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.7.3</version>
 		</dependency>
+		<!--支付宝支付包-->
+		 <dependency>
+          <groupId>com.alipay</groupId>
+          <artifactId>sdk-java</artifactId>
+          <version>20170324180803</version>
+    </dependency>
 
 		
 

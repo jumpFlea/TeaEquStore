@@ -73,7 +73,11 @@
 		where o.oid=#{id} AND o.oid = oi.oid and u.u_id=o.uid
 		AND e.e_id = oi.eid
 	</select>
-
+	
+	<!--支付成功后修改订单状态-->
+	<update id="payforOrder" parameterType="Orders">
+		update orders set orderState=#{orderState}, trade_no=#{trade_no} where oid = #{oid}
+	</update>
 
 </mapper>
 	

@@ -49,7 +49,7 @@
 			<div class="bgWrapper group">
 				<!-- START HEADER -->
 				<div id="header" class="group">
-					<%@include file="includehead.jsp" %>
+					<%@include file="includehead.jsp"%>
 				</div>
 				<!-- END HEADER -->
 
@@ -98,7 +98,8 @@
 									<table>
 										<tbody>
 											<tr>
-												<th colspan="5">订单编号:<c:out value="${order.oid}"/>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+												<th colspan="5">订单编号:<c:out value="${order.oid}" />&nbsp;&nbsp;&nbsp;&nbsp;
+												</th>
 											</tr>
 											<tr>
 												<th>图片</th>
@@ -128,11 +129,11 @@
 										<input type="hidden" name="oid" value="" />
 										<div class="span24">
 											<p>
-												收货地址：<input name="addr" type="text" value="${ order.user.address}" style="width: 350px" /> <br /> 收货人&nbsp;&nbsp;&nbsp;：<input name="name" type="text" value="${order.user.addressName}" style="width: 150px" /> <br /> 联系方式：<input
-													name="phone" type="text" value="${order.user.telephone}" style="width: 150px" />
+												收货地址：<input name="addr" type="text" value="${ order.user.address}" style="width: 350px" /> <br /> 收货人&nbsp;&nbsp;&nbsp;：<input name="name" type="text" value="${order.user.addressName}"
+													style="width: 150px" /> <br /> 联系方式：<input name="phone" type="text" value="${order.user.telephone}" style="width: 150px" />
 
 											</p>
-											
+
 											<p>
 												选择银行：<br /> <input type="radio" name="pd_FrpId" value="ICBC-NET-B2C" checked="checked" />工商银行 <img src="${ pageContext.request.contextPath }/bank_img/icbc.bmp" align="middle" />&nbsp;&nbsp;&nbsp;&nbsp;
 												<input type="radio" name="pd_FrpId" value="BOC-NET-B2C" />中国银行 <img src="${ pageContext.request.contextPath }/bank_img/bc.bmp" align="middle" />&nbsp;&nbsp;&nbsp;&nbsp; <input
@@ -143,9 +144,9 @@
 													src="${ pageContext.request.contextPath }/bank_img/guangda.bmp" align="middle" />&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="pd_FrpId" value="CMBCHINA-NET-B2C" />招商银行 <img
 													src="${ pageContext.request.contextPath }/bank_img/cmb.bmp" align="middle" />
 											</p>
-											
+
 											<p style="text-align: right">
-												<a href="javascript:document.getElementById('orderForm').submit();"> <img src="${pageContext.request.contextPath}/images/finalbutton.gif" width="204" height="51" border="0" />
+												<a href="payforOrder?id=${order.oid}"> <img src="${pageContext.request.contextPath}/images/finalbutton.gif" width="204" height="51" border="0" />
 												</a>
 											</p>
 										</div>

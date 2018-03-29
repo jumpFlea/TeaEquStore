@@ -12,6 +12,8 @@ public class Orders {
 	private String name;
 	private String address;
 	private String phone;
+	private String trade_no;
+	
 	
 	private User user;
 	
@@ -89,9 +91,18 @@ public class Orders {
 		this.orderItems = orderItems;
 	}
 	
+	public String getTrade_no() {
+		return trade_no;
+	}
+
+	public void setTrade_no(String trade_no) {
+		this.trade_no = trade_no;
+	}
+
+	
 	public String toString(){
 		return "oid;"+oid+"total;"+total+"orderTime;"+orderTime+"orderState;"+orderState+
-				"name;"+name+"address;"+address+"phone;"+phone;
+				"name;"+name+"address;"+address+"phone;"+phone+"trade_no"+trade_no;
 	}
 	
 }

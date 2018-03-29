@@ -1,12 +1,10 @@
 package com.dy.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.dy.dao.OrderDao;
 import com.dy.model.OrderItems;
@@ -83,6 +81,14 @@ public class OrderServiceImpl implements OrderService{
 		// TODO Auto-generated method stub
 		
 		return orderDao.findByOrderId(id);
+	}
+
+	
+	
+	@Override
+	public void payforOrder(Orders order) {
+		// TODO Auto-generated method stub
+		orderDao.payforOrder(order);
 	}
 	
 	
