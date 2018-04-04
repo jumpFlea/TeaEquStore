@@ -1,33 +1,32 @@
-/*package com.dy.utils;
+package com.dy.utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ui.Model;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.github.miemiedev.mybatis.paginator.domain.Paginator;
 
 public class JsonUtil {
 	
 public static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
     
     
-    *//**
+    /**
      * 发送json格式数据
      * 
      * @throws IOException
-     *//*
+     */
     public static void sendText(HttpServletResponse response, String data) throws IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
@@ -38,11 +37,11 @@ public static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
     }
 
 
-    *//**
+    /**
      * 发送json格式数据
      * 
      * @throws IOException
-     *//*
+     */
     public static void sendJson(HttpServletResponse response, String data) throws IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
@@ -52,13 +51,13 @@ public static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
         writer.close();
     }
 
-    *//**
+    /**
      * 只发送success标志位
      * 
      * @author felix @date 2013-5-19 上午9:58:48
      * @param response
      * @throws IOException
-     *//*
+     */
     public static void sendSuccessJson(HttpServletResponse response) throws IOException {
         JSONObject result = new JSONObject();
         result.put("success", true);
@@ -66,45 +65,71 @@ public static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
     }
     
     
-    *//**
+    /**
      * 在传入参数内，加入成功标志符
      * 
      * @author felix @date 2013-5-19 上午9:58:48
      * @param response
      * @throws IOException
-     *//*
+     */
     public static void sendSuccessJson(HttpServletResponse response,JSONObject result) throws IOException {
         result.put("success", true);
         sendJson(response, result.toString()); 
     }
     
-    *//**
+    
+    
+    @SuppressWarnings( { "rawtypes", "unchecked" } )  
+    public static Object pagelistToJSONMapNew(PageList list ) {  
+      Map<String, Object> map = new HashMap<String, Object>();  
+      if(list != null) {  
+        Paginator paginator = list.getPaginator();  
+        map.put("total", paginator.getTotalCount());  
+        map.put("rows", new ArrayList(list));  
+      }  
+      return map;  
+    }  
+    
+    /**
      * 在传入参数内，加入成功标志符
      * 
      * @author felix @date 2013-5-19 上午9:58:48
      * @param response
      * @throws IOException
-     *//*
-    public static void sendSuccessJson(HttpServletResponse response,net.sf.json.JSONObject result) throws IOException {
+     */
+    /*public static void sendSuccessJson(HttpServletResponse response,net.sf.json.JSONObject result) throws IOException {
         result.put("success", true);
         sendJson(response, result.toString()); 
-    }
+    }*/
 
-    *//**
+    /**
      * 发送json格式数据
      * 
      * @throws IOException
-     *//*
+     */
     public static void sendErrorJson(HttpServletResponse response, String msg) throws IOException {
         sendErrorJson(response, msg, null);
     }
+    
+    public static void sendErrorJson(HttpServletResponse response, String msg, Exception e) throws IOException {
+		JSONObject result = new JSONObject();
+		if (e == null) {
+			logger.error(msg);
+		} else {
+			logger.error(msg, e);
+		}
+		result.put("success", false);
+		result.put("info", msg);
+		sendJson(response, result.toString());
+	}
 
-    *//**
+
+    /**
      * 发送json格式数据
      * 
      * @throws IOException
-     *//*
-    public static void sendErrorJson(HttpServletResponse response, String msg, Exception e)
+     */
+    /*public static void sendErrorJson(HttpServletResponse response, String msg, Exception e)
             throws IOException {
         JSONObject result = new JSONObject();
         if (e == null) {
@@ -125,49 +150,49 @@ public static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
         }
         sendJson(response, result.toString());
     }
+    */
     
     
     
-    
-    *//**
+    /**
      * 跳转错误页面
      * 
      * @author felix  @date 2013-7-29 下午8:51:47
      * @param model
      * @param msg
      * @return
-     *//*
-    public static String goErrorPage(Model model,String msg){
+     */
+   /* public static String goErrorPage(Model model,String msg){
     	return goErrorPage(model, msg,null);
-    }
+    }*/
     
     
     
     
-    *//**
+    /**
      * 跳转错误页面
      * 
      * @author felix  @date 2013-7-29 下午8:51:47
      * @param model
      * @param msg
      * @return
-     *//*
-    public static String goErrorPage(Model model,Exception e){
+     */
+   /* public static String goErrorPage(Model model,Exception e){
     	return goErrorPage(model,"",e);
-    }
+    }*/
     
     
 
 
-    *//**
+    /**
      * 跳转错误页面
      * @author felix 2017年9月21日 下午4:14:11
      * @param model
      * @param msg
      * @param e
      * @return
-     *//*
-    public static String goErrorPage(Model model,String msg,Exception e){
+     */
+    /*public static String goErrorPage(Model model,String msg,Exception e){
 		if (e != null) {
 		    logger.error(msg,e);
 		}
@@ -179,27 +204,27 @@ public static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
 		
     	model.addAttribute("errorMsg", msg);
 		return "/error/500";
-    }
+    }*/
     
-    *//**
+    /**
      * 获得url前缀全路径
      * 
      * @author felix  @date 2013-7-30 上午12:42:31
      * @param request
      * @return
-     *//*
+     */
     public static String getAllPath(HttpServletRequest request){
     	return request.getScheme()+"://"+request.getServerName() + request.getContextPath(); 
     }
     
     
-    *//**
+    /**
      * 获得客户端ip
      * 
      * @author felix  @date 2013-8-14 下午8:00:59
      * @param request
      * @return
-     *//*
+     */
     public static String getIpAddr(HttpServletRequest request) {
         String ip = request.getHeader("X-Real-IP");
         if (!StringUtils.isBlank(ip) && !"unknown".equalsIgnoreCase(ip)) {
@@ -220,13 +245,13 @@ public static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
     }
     
     
-    *//**
+    /**
      * 是否为ajax请求
      * 
      * @author felix  @date 2014-9-16 下午3:38:24
      * @param request
      * @return
-     *//*
+     */
     public static boolean isAjax(HttpServletRequest request){
     	 String header = request.getHeader("X-Requested-With");  
     	 return "XMLHttpRequest".equals(header);
@@ -234,13 +259,13 @@ public static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
     
     
     
-   *//**
+   /**
     * 填充数据
     * @author felix 2017年10月9日 下午7:31:23
     * @param name
     * @param obj
     * @return
-    *//*
+    */
     public static JSONObject putData(String name,Object obj){
     	JSONObject result = new JSONObject();
     	result.put(name, obj);
@@ -248,43 +273,43 @@ public static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
     }
     
     
-    *//**
+    /**
      * 将数据封装成datatable需要的格式
      * 
      * @author felix 2017年9月22日 上午10:27:47
      * @param page
-     *//*
-    public static JSONObject putData(Page page){
+     */
+   /* public static JSONObject putData(Page page){
     	JSONObject result = new JSONObject();
     	putData(result,page);
     	return result;
-    }
+    }*/
     
     
     
-    *//**
+    /**
      * 将数据封装成datatable需要的格式
      * 
      * @author felix 2017年9月22日 上午10:27:47
      * @param result
      * @param page
-     *//*
-    public static void putData(JSONObject result, Page page){
+     */
+   /* public static void putData(JSONObject result, Page page){
     	result.put("data", page.getList());
     	result.put("recordsTotal", page.getTotal());
     	result.put("recordsFiltered", page.getTotal());
-    }
+    }*/
     
     
-    *//**
+    /**
      * 获得参数中的filters
      * 
      * @author felix  
      * @date 2014-3-18 下午3:25:30
      * @param request
      * @return
-     *//*
-    public static List<PropertyFilter> getFilters(HttpServletRequest request){
+     */
+    /*public static List<PropertyFilter> getFilters(HttpServletRequest request){
     	List<PropertyFilter> filters = new ArrayList<PropertyFilter>();
     	Set<Map.Entry<String, String[]>> set = request.getParameterMap().entrySet();
     	for(Entry<String, String[]> entry: set){
@@ -295,7 +320,6 @@ public static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
     		}
     	}
     	return filters;
-    }
+    }*/
 
 }
-*/

@@ -12,7 +12,7 @@
 
 
 
-<title>Insert title here</title>
+<title>获取页面全路径工具类</title>
 </head>
 <body>
 

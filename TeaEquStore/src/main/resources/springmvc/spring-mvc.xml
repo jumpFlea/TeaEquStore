@@ -21,6 +21,7 @@
 	<mvc:resources location="/resource/fonts/" mapping="/fonts/**" />
 	<mvc:resources location="/resource/jquery/" mapping="/jquery/**" />
 	<mvc:resources location="/WEB-INF/view/" mapping="/view/**" />
+	<!-- <mvc:resources location="/WEB-INF/view/backstage/" mapping="/backstage/**" /> -->
 	<mvc:resources location="/resource/bank_img/" mapping="/bank_img/**" />
 	<mvc:resources location="/resource/json/" mapping="/json/**" />
 	<mvc:resources mapping="/res/**" location="/res/" cache-period="2592000" />

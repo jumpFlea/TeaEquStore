@@ -1,11 +1,15 @@
 package com.dy.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dy.dao.UserDao;
 import com.dy.model.User;
 import com.dy.service.UserService;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,6 +38,18 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		userDao.userRegist(user);
 		return null;
+	}
+
+	@Override
+	public List<User> selectAllUser(String keyWord,PageBounds page) {
+		// TODO Auto-generated method stub
+		return userDao.selectAllUser(keyWord,page);
+	}
+	
+	@Override 
+	public void updateStatus(int id, int status) {
+		// TODO Auto-generated method stub
+		userDao.updateStatus(id,status);
 	}
 
 }

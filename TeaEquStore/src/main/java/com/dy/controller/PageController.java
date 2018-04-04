@@ -23,4 +23,14 @@ public class PageController {
 		return "register";
 	}
 	
+	@RequestMapping("/userManager")
+	public String userManager(){
+		return "backstage/backindex";	
+	}
+	
+	@RequestMapping("/userIframe")
+	public String userIframe(){
+		return "backstage/iframe_user";	
+	}
+	
 }

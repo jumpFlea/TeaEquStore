@@ -9,6 +9,8 @@ public class User {
 	private String userStatus;
 	private String addressName;
 	private String address;
+	private Integer type;
+	
 	
 	public String getAddressName() {
 		return addressName;
@@ -62,10 +64,17 @@ public class User {
 		this.userStatus = userStatus;
 	}
 	
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	
 	public String toString(){
 		return "u_id"+u_id+";userName"+userName+";userPassWord"+userPassWord+
 				";email"+email+";telephone"+telephone+";userStatus"+userStatus
-				+";addressName"+addressName+";address"+address;
+				+";addressName"+addressName+";address"+address+"type"+type;
 		
 	}
 	

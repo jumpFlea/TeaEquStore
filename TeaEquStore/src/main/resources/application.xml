@@ -18,8 +18,10 @@
 		</property>
 	</bean>
 
-	
-	
+
+
+
+
 
 
 	<bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
@@ -77,11 +79,21 @@
 		<property name="mapperLocations" value="classpath:mapper/*.xml" />
 		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
 		<!-- <property name="typeAliasesPackage" value="com.tiantian.ckeditor.model" /> -->
+		<!--spring配置文件添加分页插件-->
+		<property name="plugins">
+			<list>
+				<bean class="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
+					<property name="dialectClass" value="com.github.miemiedev.mybatis.paginator.dialect.MySQLDialect" />
+				</bean>
+			</list>
+		</property>
 	</bean>
 
 	<!-- 自动扫描了所有的XxxxMapper.xml对应的mapper接口文件，这样就不用一个一个手动配置Mpper的映射了，只要Mapper接口类和Mapper映射文件对应起来就可以了。 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.dy.dao" />
+		<!--自动寻找分页插件的类-->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 
 
