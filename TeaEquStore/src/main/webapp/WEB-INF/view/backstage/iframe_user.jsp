@@ -27,6 +27,7 @@
 		<div class="panel-heading">
 			<h3 class="panel-title text-center">
 				用户列表
+				<input id="getUserType" value="${user.type}" type="hidden"></input>
 					<span class="panel-title text-right" style="display: block;margin-right: 0px">欢迎 <c:if test="${user.userStatus == '1'}">
 							<font color="red">${user.userName}</font>
 						</c:if> <c:if test="${user.userStatus == '2'}">

@@ -94,11 +94,11 @@ $(document).ready(function() {
 
 					+ ')>禁用 </button> &nbsp; &nbsp;' + '<button type="button" class="btn btn-outline btn-default"  onClick=deleteAccount(' + row.u_id
 
-					+ ')>删除 </button>';
+					+ ","+row.type +')>删除 </button>';
 				} else {
 					return '<button type="button" class="btn btn-outline btn-default" onClick=enableAccount(' + row.u_id
 
-					+ ')>启用</button> &nbsp; &nbsp;' + '<button type="button" class="btn btn-outline btn-default"  onClick=deleteAccount(' + row.u_id
+					+","+row.type +')>启用</button> &nbsp; &nbsp;' + '<button type="button" class="btn btn-outline btn-default"  onClick=deleteAccount(' + row.u_id
 
 					+ ')>删除 </button>';
 				}
@@ -133,7 +133,17 @@ function enableAccount(id) {
 		}
 	})
 }
-function deleteAccount(id){
+
+function deleteAccount(id,type){
+	var userType = $("#getUserType").val();
+	if(userType > type){
+		alert("可以");
+	}else if(userType = type){
+		alert("相等");
+	}else{
+		alert("不可以删除");
+	}
+	
 	
 }
 
