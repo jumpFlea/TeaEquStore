@@ -43,10 +43,16 @@ public class BackUserController {
 	//更改用户的状态
 	@RequestMapping("/updateStatus")
 	public void updateStatus(HttpServletResponse response,int id,int status) throws IOException{
-		System.out.println(id);
-		System.out.println(status);
 		userService.updateStatus(id, status);
 		JsonUtil.sendSuccessJson(response);	
+	}
+	
+	//删除用户
+	@RequestMapping("/deleteAccount")
+	public void deleteAccount(HttpServletResponse response,int id) throws IOException{
+		
+		userService.deleteAccount(id);
+		JsonUtil.sendSuccessJson(response);
 	}
 	
 

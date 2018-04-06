@@ -52,4 +52,10 @@ public class UserServiceImpl implements UserService {
 		userDao.updateStatus(id,status);
 	}
 
+	@Override
+	public void deleteAccount(int id) {
+		// TODO Auto-generated method stub
+		userDao.deleteAccount(id);
+	}
+
 }

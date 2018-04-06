@@ -94,11 +94,11 @@ $(document).ready(function() {
 
 					+ ')>禁用 </button> &nbsp; &nbsp;' + '<button type="button" class="btn btn-outline btn-default"  onClick=deleteAccount(' + row.u_id
 
-					+ ","+row.type +')>删除 </button>';
+					+ "," + row.type + ')>删除 </button>';
 				} else {
 					return '<button type="button" class="btn btn-outline btn-default" onClick=enableAccount(' + row.u_id
 
-					+","+row.type +')>启用</button> &nbsp; &nbsp;' + '<button type="button" class="btn btn-outline btn-default"  onClick=deleteAccount(' + row.u_id
+					+ "," + row.type + ')>启用</button> &nbsp; &nbsp;' + '<button type="button" class="btn btn-outline btn-default"  onClick=deleteAccount(' + row.u_id
 
 					+ ')>删除 </button>';
 				}
@@ -134,17 +134,29 @@ function enableAccount(id) {
 	})
 }
 
-function deleteAccount(id,type){
+function deleteAccount(id, type) {
 	var userType = $("#getUserType").val();
-	if(userType > type){
-		alert("可以");
-	}else if(userType = type){
-		alert("相等");
-	}else{
-		alert("不可以删除");
+	if (userType > type) {
+		deleteAccountAjax(id);
+	} else if (userType = type && userType == 2) {
+		deleteAccountAjax(id);
+	} else if (userType = type && userType != 2) {
+		alert("等级不够无法操作");
+	} else {
+		alert("亲，不可以删除");
 	}
-	
-	
+}
+
+function deleteAccountAjax(id) {
+	$.post(ctx + "/deleteAccount", {
+		"id" : id
+	}, function(result) {
+		if (result.success == true) {
+			alert("删除成功");
+			$('#userListTable').bootstrapTable('refresh');
+		} else
+			alert("删除失败");
+	});
 }
 
 function queryParams(params) {

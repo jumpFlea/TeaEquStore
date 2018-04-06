@@ -19,4 +19,6 @@ public interface UserDao {
 	
 	void updateStatus(int id,int status);
 	
+	void deleteAccount(int id);
+	
 }

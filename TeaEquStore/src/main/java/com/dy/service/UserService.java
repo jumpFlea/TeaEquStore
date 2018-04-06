@@ -23,6 +23,9 @@ public interface UserService {
 	/*更改用户状态*/
 	void updateStatus(int id,int status);
 	
+	/*删除用户*/
+	void deleteAccount(int id);
+	
 	
 	
 	

@@ -41,6 +41,12 @@
 	<update id="updateStatus">
 		update usertable set userStatus =#{1} where u_id=#{0}
 	</update>
+	
+	<!--删除用户-->
+	<delete id ="deleteAccount">
+		delete from usertable where u_id=#{1}
+	</delete>
+	
 
 
 </mapper>
