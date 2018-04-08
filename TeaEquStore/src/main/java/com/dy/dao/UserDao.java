@@ -21,4 +21,6 @@ public interface UserDao {
 	
 	void deleteAccount(int id);
 	
+	void deleteMoreAccount(String id);
+	
 }

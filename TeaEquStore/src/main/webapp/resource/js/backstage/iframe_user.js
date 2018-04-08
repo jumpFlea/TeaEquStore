@@ -40,7 +40,7 @@ $(document).ready(function() {
 			field : 'u_id',
 			title : 'ID',
 			align : 'center',
-			valign : 'middle'
+			valign : 'middle',
 		}, {
 			field : 'userName',
 			title : '用户名',
@@ -92,7 +92,7 @@ $(document).ready(function() {
 				if (row.userStatus == 1) {
 					return '<button type="button" class="btn btn-outline btn-default"  onClick=disableAccount(' + row.u_id
 
-					+ ')>禁用 </button> &nbsp; &nbsp;' + '<button type="button" class="btn btn-outline btn-default"  onClick=deleteAccount(' + row.u_id
+					+ "," + row.type + ')>禁用 </button> &nbsp; &nbsp;' + '<button type="button" class="btn btn-outline btn-default"  onClick=deleteAccount(' + row.u_id
 
 					+ "," + row.type + ')>删除 </button>';
 				} else {
@@ -100,15 +100,29 @@ $(document).ready(function() {
 
 					+ "," + row.type + ')>启用</button> &nbsp; &nbsp;' + '<button type="button" class="btn btn-outline btn-default"  onClick=deleteAccount(' + row.u_id
 
-					+ ')>删除 </button>';
+					+ "," + row.type + ')>删除 </button>';
 				}
 			}
 		} ]
 	});
 });
 
-function disableAccount(id) {
+/* 禁用用户 */
+function disableAccount(id, type) {
 	var id = id;
+	var userType = $("#getUserType").val();
+	if (userType > type) {
+		disableAccountAjax(id);
+	} else if (userType = type && userType == 2) {
+		disableAccountAjax(id);
+	} else if (userType = type && userType != 2) {
+		alert("等级不够无法操作！");
+	} else {
+		alert("亲，等级不够哦！");
+	}
+}
+
+function disableAccountAjax(id) {
 	$.post(ctx + "/updateStatus", {
 		"id" : id,
 		"status" : 0,
@@ -120,8 +134,24 @@ function disableAccount(id) {
 		}
 	})
 }
-function enableAccount(id) {
+
+/* 启用用户 */
+function enableAccount(id, type) {
 	var id = id;
+	var userType = $("#getUserType").val();
+	if (userType > type) {
+		enableAccountAjax(id);
+	} else if (userType = type && userType == 2) {
+		enableAccountAjax(id);
+	} else if (userType = type && userType != 2) {
+		alert("等级不够无法操作！");
+	} else {
+		alert("亲，等级不够哦！");
+	}
+
+}
+
+function enableAccountAjax(id) {
 	$.post(ctx + "/updateStatus", {
 		"id" : id,
 		"status" : 1,
@@ -129,11 +159,11 @@ function enableAccount(id) {
 		if (data.success == true) {
 			alert("success");
 			$('#userListTable').bootstrapTable('refresh');
-
 		}
 	})
 }
 
+/* 删除用户 */
 function deleteAccount(id, type) {
 	var userType = $("#getUserType").val();
 	if (userType > type) {
@@ -158,6 +188,77 @@ function deleteAccountAjax(id) {
 			alert("删除失败");
 	});
 }
+
+/* 批量删除 */
+$(document).on('click', '#selectMoreDelete', function(e) {
+	// 获取所有被选中的记录
+	var rows = $("#userListTable").bootstrapTable('getSelections');
+	if (rows.length == 0) {
+		alert("请先选择要删除的记录!");
+		return;
+	}
+	var ids = '';
+	for (var i = 0; i < rows.length; i++) {
+		ids += rows[i]['u_id'] + ",";
+	}
+	ids = ids.substring(0, ids.length - 1);
+	if (confirm("请谨慎操作,确定删除?")) {
+		deleteMore(ids);
+	}
+
+});
+
+function deleteMore(ids) {
+	
+	$.post(ctx+"/deleteMoreAccount", {
+		"id" : ids
+	}, function(data) {
+		if (data.success == true) {
+			alert("成功操作！")
+			$('#userListTable').bootstrapTable('refresh');
+		}else{
+			alert("亲,操作失败！")
+		}
+	});
+}
+
+/*修改用户之显示界面*/
+$(document).on('click','#updateShowAccount',function(e){
+	// 获取被选中的记录
+	var rows = $("#userListTable").bootstrapTable('getSelections');
+	if (rows.length == 0) {
+		alert("请先选择要修改的记录!");
+		return;
+	}
+	$("#userName").val(rows[0].userName);
+	$("#userPassWord").val(rows[0].userPassWord);
+	$("#email").val(rows[0].email);
+	$("#telephone").val(rows[0].telephone);
+	$("#userStatus").val(rows[0].userStatus);
+	$("#addressName").val(rows[0].addressName);
+	$("#address").val(rows[0].address);
+	$("#type").val(rows[0].type);
+	$("#updateModal").modal({
+		show : true
+	});
+})
+/*确认修改操作*/
+$(document).on('click','#sureSumbit',function(e){
+	// 获取被选中的记录
+
+	$("#userName").val();
+	$("#userPassWord").val();
+	$("#email").val();
+	$("#telephone").val();
+	$("#userStatus").val();
+	$("#addressName").val();
+	$("#address").val();
+	$("#type").val();
+	alert($("#userName").val());
+})
+
+
+
 
 function queryParams(params) {
 	var temp = { // 这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的

@@ -55,5 +55,14 @@ public class BackUserController {
 		JsonUtil.sendSuccessJson(response);
 	}
 	
+	//批量删除用户
+	@RequestMapping("/deleteMoreAccount")
+	public void deleteMoreAccount(HttpServletResponse response,String id) throws IOException{
+		/*userService.deleteAccount(id);*/
+		userService.deleteMoreAccount(id);
+		JsonUtil.sendSuccessJson(response);
+	}
+	
+	
 
 }

@@ -26,6 +26,9 @@ public interface UserService {
 	/*删除用户*/
 	void deleteAccount(int id);
 	
+	/*批量删除用户*/
+	void deleteMoreAccount(String id);
+	
 	
 	
 	

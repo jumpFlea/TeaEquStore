@@ -47,6 +47,11 @@
 		delete from usertable where u_id=#{1}
 	</delete>
 	
+	<!--批量删除用户-->
+	<delete id ="deleteMoreAccount">
+		delete from usertable where u_id in (#{1});
+	</delete>
+	
 
 
 </mapper>
