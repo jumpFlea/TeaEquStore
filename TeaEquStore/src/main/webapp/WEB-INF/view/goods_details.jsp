@@ -48,102 +48,9 @@
 			<div class="bgWrapper group">
 				<!-- START HEADER -->
 				<div id="header" class="group">
-					<!-- .inner -->
-					<div class="inner group">
-						<!-- START LOGO -->
-						<div id="logo" class="group">
-							<a href="index.html" title="Sommerce Shop"> <span class="logo-title">Sommerce Shop</span>
-							</a>
-							<p class="logo-description">The perfect e-commerce solution</p>
-						</div>
-						<!-- END LOGO -->
-
-						<!-- START LINKSBAR -->
-						<ul id="linksbar" class="group">
-							<li class="icon cart"><a class="trigger" href="cart.html"> <span> 0 items &ndash; &euro;0.00 </span>
-							</a> |
-								<div class="basketpopup">
-									<h3>购物车</h3>
-									<span class="empty">没有东西在购物车内</span>
-								</div></li>
-							<li class="icon lock"><a href="#">退出</a> |</li>
-							<li><a href="contact.html">联系我们</a> |</li>
-						</ul>
-						<div class="copyrights">
-							Collect from
-						</div>
-						<!-- END LINKSBAR -->
-						<div class="clear"></div>
-
-						<!-- START NAV -->
-						<div id="nav" class="group creative">
-							<ul id="menu-navigation" class="level-1">
-								<li><a href="goodsShow?needPage=1">首页</a>
-									<ul class="sub-menu">
-										<c:forEach items="${cate}" var="ca">
-											<li><a href="home-version-2-elegant.html">${ca.cateName}</a></li>
-										</c:forEach>
-									</ul></li>
-								<li class="megamenu"><a href="#">Shopping By</a>
-									<ul class="sub-menu">
-										<li><a href="brand.html">Brand</a>
-											<ul class="sub-menu">
-												<li><a href="#">Wallmart</a></li>
-											</ul></li>
-										<li><a href="categories.html">Categories</a>
-											<ul class="sub-menu">
-												<li><a href="#">Kitchen</a></li>
-											</ul></li>
-										<li><a href="#">Prices</a>
-											<ul class="sub-menu">
-												<li><a href="#">100 &#8211; 200 &euro;</a></li>
-											</ul></li>
-									</ul></li>
-								<li><a href="my-account.html">My Account</a>
-									<ul class="sub-menu">
-										<li><a href="change-password.html">Change Password</a></li>
-										<li><a href="edit-address.html">Edit My Address</a></li>
-										<li><a href="order-tracking.html">Track your order</a></li>
-									</ul></li>
-								<li><a href="shop.html">Shop</a></li>
-								<li><a href="blog.html">Blog</a>
-									<ul class="sub-menu">
-										<li><a href="blog.html">Big Image</a></li>
-										<li><a href="blog-small.html">Small Image</a></li>
-									</ul></li>
-								<li><a href="#">Pages</a>
-									<ul class="sub-menu">
-										<li><a href="testimonials.html">Testimonials</a></li>
-										<li><a href="faq.html">Faq</a></li>
-										<li><a href="contact.html">Get in Touch</a></li>
-
-									</ul></li>
-								<li><a href="typography.html">Shortcode</a>
-									<ul class="sub-menu">
-										<li><a href="typography.html">Typography</a></li>
-										<li><a href="alert-box-buttons.html">Alert box &#038; buttons</a></li>
-										<li><a href="icon-sections.html">Icon Sections</a></li>
-										<li><a href="nivo-slider.html">Nivo Slider</a></li>
-										<li><a href="media-widgets.html">Media &amp; Widgets</a></li>
-										<li><a href="table-box-prices.html">Table &#038; Box prices</a></li>
-										<li><a href="mix-various.html">Mix &#038; Various</a></li>
-										<li><a href="shop-shortcodes.html">Shop shortcodes</a></li>
-									</ul></li>
-							</ul>
-						</div>
-						<!-- END NAV -->
-
-						<!-- START SEARCH FORM -->
-						<form role="search" method="get" id="searchform" action="#" class="group">
-							<div>
-								<label class="screen-reader-text" for="s">search</label> <input type="text" value="" name="s" id="s" /> <input type="submit" id="searchsubmit" value="&gt;" /> <input type="hidden"
-									name="post_type" value="product" />
-							</div>
-						</form>
-						<!-- END SEARCH FORM -->
-
+					<div id="header" class="group">
+						<%@ include file="includehead.jsp"%>
 					</div>
-					<!-- end .inner -->
 
 				</div>
 				<!-- END HEADER -->
@@ -183,188 +90,83 @@
 										<ins>&#36;${goods.sellPrice}</ins>
 									</p>
 									<p>${goods.equDescription}</p>
-									<p>剩余数量：<input name="quantity" value="${goods.number}" size="4" title="Qty" class="input-text qty text" maxlength="12" /><p>
-								
-								<form action="addToCart" class="cart" method="post">
-									<div class="quantity">
-										<input name="goodNum" value="1" size="4" title="Qty" class="input-text qty text" maxlength="12" />
-										<input name="e_id" type="hidden" value="${goods.e_id}" />
-									</div>
-									<button type="submit" class="button-alt">Add to cart</button>
-									<input type="hidden" id="_n" name="_n" value="a93bb4a4c2" /><input type="hidden" name="_wp_http_referer" value="/demo/sommerce/shop/gold-mahibo/" />
-								</form>
-								<div class="product_meta">
-									<span class="sku">SKU: 27.</span> <span class="posted_in">Posted in <a href="#" rel="tag">Garden</a>, <a href="#" rel="tag">Pathio</a>, <a href="#" rel="tag">Wood</a>.
-									</span>
-								</div>
-							</div>
-							<div id="product-tabs">
-								<ul class="tabs">
-									<li class="active"><a href="#related-products">Related Products</a></li>
-									<li><a href="#tab-description">Description</a></li>
-								</ul>
-								<div class="containers">
-									<div class="panel" id="related-products">
-										<div class="related products">
-											<ul class="products">
-												<li class="product border shadow first last-row"><a href="#">
-														<div class="thumbnail">
-															<img width="150" height="150" src="images/common/001.png" class="attachment-shop_small wp-post-image" alt="001" title="001" />
-															<div class="thumb-shadow"></div>
-															<strong class="below-thumb">Elegant Glasses</strong>
-														</div> <span class="price">&#36;250.00</span>
-												</a>
-													<div class="buttons">
-														<a href="#" class="details">DETAILS</a>&nbsp;<a href="#" class="add-to-cart">ADD TO CART</a>
-													</div></li>
-												<li class="product border shadow last-row"><a href="#">
-														<div class="thumbnail">
-															<img width="150" height="150" src="images/common/warmroom-150x150.jpg" class="attachment-shop_small wp-post-image" alt="warmroom" title="warmroom" />
-															<div class="thumb-shadow"></div>
-															<strong class="below-thumb">Hot Room</strong>
-														</div> <span class="price">&#36;730.00</span>
-												</a>
-													<div class="buttons">
-														<a href="#" class="details">DETAILS</a>&nbsp;<a href="#" class="add-to-cart">ADD TO CART</a>
-													</div></li>
-												<li class="product border shadow last-row"><a href="#">
-														<div class="thumbnail">
-															<img width="150" height="150" src="images/common/ktichen21-150x150.jpg" class="attachment-shop_small wp-post-image" alt="ktichen2" title="ktichen2" />
-															<div class="thumb-shadow"></div>
-															<strong class="below-thumb">Wood Kitchen</strong>
-														</div> <span class="price">&#36;367.00</span>
-												</a>
-													<div class="buttons">
-														<a href="#" class="details">DETAILS</a>&nbsp;<a href="#" class="add-to-cart">ADD TO CART</a>
-													</div></li>
-												<li class="product border shadow last-row"><a href="#">
-														<div class="thumbnail">
-															<img width="150" height="150" src="images/common/warmroom-150x150.jpg" class="attachment-shop_small wp-post-image" alt="kitchen" title="kitchen" />
-															<div class="thumb-shadow"></div>
-															<strong class="below-thumb">Dark Kitchen</strong>
-														</div> <span class="price">&#36;940.00</span>
-												</a>
-													<div class="buttons">
-														<a href="#" class="details">DETAILS</a>&nbsp;<a href="#" class="add-to-cart">ADD TO CART</a>
-													</div></li>
-											</ul>
-											<div class="clear"></div>
+									<p>
+										剩余数量：<input type="text" readonly="true" name="quantity" value="${goods.number}" size="4" title="Qty" class="input-text qty text" maxlength="12" />
+									<p>
+									<form action="addToCart" class="cart" method="post">
+										<div class="quantity">
+											<input name="goodNum" value="1" size="4" title="Qty" class="input-text qty text" maxlength="12" /> <input name="e_id" type="hidden" value="${goods.e_id}" />
 										</div>
+										<button type="submit" class="button-alt">添加到购物车</button>
+										<input type="hidden" id="_n" name="_n" value="a93bb4a4c2" /><input type="hidden" name="_wp_http_referer" value="/demo/sommerce/shop/gold-mahibo/" />
+									</form>
+									<div class="product_meta"></div>
+								</div>
+								<div id="product-tabs">
+									<ul class="tabs">
+										<li class="active"><a href="#related-products">联系产品</a></li>
+										<li><a href="#tab-description">详情描述</a></li>
+									</ul>
+									<div class="containers">
+										<div class="panel" id="related-products">
+											<div class="related products">
+												<ul class="products">
+													<li class="product border shadow last-row"><a href="#">
+															<div class="thumbnail">
+																<img width="150" height="150" src="images/common/warmroom-150x150.jpg" class="attachment-shop_small wp-post-image" alt="kitchen" title="kitchen" />
+																<div class="thumb-shadow"></div>
+																<strong class="below-thumb">器材</strong>
+															</div> <span class="price">&#36;940.00</span>
+													</a>
+														<div class="buttons">
+															<a href="#" class="details">详情</a>&nbsp;<a href="#" class="add-to-cart">添加到购物车</a>
+														</div></li>
+												</ul>
+												<div class="clear"></div>
+											</div>
+										</div>
+										<div class="panel" id="tab-description">
+											<p>${goods.equDescription}</p>
+										</div>
+										<div class="panel" id="tab-attributes">
+											<h2>Additional Information</h2>
+										</div>
+										<div class="panel" id="tab-reviews"></div>
 									</div>
-									<div class="panel" id="tab-description">
-										<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#8217;t look
-											even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#8217;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum
-											generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-									</div>
-									<div class="panel" id="tab-attributes">
-										<h2>Additional Information</h2>
-									</div>
-									<div class="panel" id="tab-reviews"></div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- END PRIMARY SECTION -->
-			<!-- START NEWSLETTER FORM -->
-			<div id="newsletter-form" class="group">
-				<div class="inner">
-					<div class="newsletter-section group">
-						<p class="description special-font">
-							<strong>Stay Updated:</strong> subscribe our special newsletter
-						</p>
-						<form method="post" action="#">
-							<fieldset>
-								<ul class="group">
-									<li><label for="fullname">Your name</label><input type="text" name="fullname" id="fullname" class="name-field text-field autoclear" /></li>
-									<li><label for="email">Your email</label><input type="text" name="email" id="email" class="email-field text-field autoclear" /></li>
-									<li><input type="submit" value="Subscribe" class="submit-field" /></li>
-								</ul>
-							</fieldset>
-						</form>
-					</div>
-				</div>
-			</div>
-			<!-- ENDSTART NEWSLETTER FORM -->
-			<!-- START FOOTER -->
-			<div id="footer" class="group footer-sidebar-right columns-3">
-				<div class="inner">
-					<div class="footer-main">
-						<div id="nav_menu-3" class="widget-1 widget-first widget widget_nav_menu">
-							<h3>Categories</h3>
-							<div class="menu-categories-footer-container">
-								<ul id="menu-categories-footer" class="menu">
-									<li><a href="#">Kitchen</a></li>
-									<li><a href="#">Bedroom</a></li>
-									<li><a href="#">Garden</a></li>
-									<li><a href="#">Bathroom</a></li>
-									<li><a href="#">Wood</a></li>
-								</ul>
-							</div>
-						</div>
-						<div id="nav_menu-4" class="widget-2 widget widget_nav_menu">
-							<h3>Utilities</h3>
-							<div class="menu-utilities-container">
-								<ul id="menu-utilities" class="menu">
-									<li><a href="testimonials.html">Testimonial</a></li>
-									<li><a href="faq.html">FAQ</a></li>
-									<li><a href="blog.html">Blog</a></li>
-									<li><a href="contact.html">Get in Touch</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-								</ul>
-							</div>
-						</div>
-						<div id="nav_menu-5" class="widget-3 widget-last widget widget_nav_menu">
-							<h3>Get in touch</h3>
-							<div class="menu-get-in-touch-container">
-								<ul id="menu-get-in-touch" class="menu">
-									<li><a href="#">Newsletter</a></li>
-									<li><a href="http://www.facebook.com">Facebook</a></li>
-									<li><a href="http://twitter.com">Twitter</a></li>
-									<li><a href="blog.html">Blog</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="footer-sidebar">
-						<div id="recent-posts-3" class="widget-1 widget-first widget recent-posts">
-							<h3>Last News</h3>
-							<div class="recent-post group">
-								<div class="hentry-post group">
-									<a href="article.html" title="-50% on all vintage glasses, enjoy it" class="title">-50% on all vintage glasses, enjoy it</a>
-									<p>Phasellus gravida augue sit amet leo dapibus a congue velit [...]</p>
-								</div>
-								<div class="hentry-post group">
-									<a href="article.html" title="Sommerce &ndash; a beautiful ecommerce solution" class="title">Sommerce &#8211; a beautiful ecommerce solution</a>
-									<p>Etiam semper magna sit amet augue blandit vel cursus erat [...]</p>
-								</div>
-							</div>
+				<!-- END PRIMARY SECTION -->
+				<!-- START NEWSLETTER FORM -->
+				<div id="newsletter-form" class="group">
+					<div class="inner">
+						<div class="newsletter-section group">
+							<p class="description special-font">
+								<strong>Stay Updated:</strong> subscribe our special newsletter
+							</p>
+							<form method="post" action="#">
+								<fieldset>
+									<ul class="group">
+										<li><label for="fullname">Your name</label><input type="text" name="fullname" id="fullname" class="name-field text-field autoclear" /></li>
+										<li><label for="email">Your email</label><input type="text" name="email" id="email" class="email-field text-field autoclear" /></li>
+										<li><input type="submit" value="Subscribe" class="submit-field" /></li>
+									</ul>
+								</fieldset>
+							</form>
 						</div>
 					</div>
 				</div>
+				<!-- ENDSTART NEWSLETTER FORM -->
+				<!-- START FOOTER -->
+
+				<!-- END FOOTER -->
+
 			</div>
-			<!-- END FOOTER -->
-			<!-- START COPYRIGHT -->
-			<div id="copyright" class="group two-columns">
-				<div class="inner group">
-					<p class="left">
-						<img src="images/logo1.png" alt="" /> <span style="padding-left: 10px;"> <img src="images/credit-cards/paypal.png" alt="paypal" style="margin-right: 8px" /> <img
-							src="images/credit-cards/visa.png" alt="visa" style="margin-right: 8px" /> <img src="images/credit-cards/mastercard.png" alt="mastercard" style="margin-right: 8px" /> <img
-							src="images/credit-cards/cirrus.png" alt="cirrus" style="margin-right: 8px" /> <img src="images/credit-cards/amex.png" alt="amex" style="margin-right: 8px" /> <img
-							src="images/credit-cards/bank-check.png" alt="bank-check" style="margin-right: 8px" /> <img src="images/credit-cards/discover.png" alt="discover" style="margin-right: 8px" />
-						</span>
-					</p>
-					<p class="right">
-						Collect from <a href="http://www.mycodes.net/" title="源码之家" target="_blank">源码之家</a>
-					</p>
-				</div>
-			</div>
-			<!-- END COPYRIGHT -->
+			<!-- END BG WRAPPER -->
 		</div>
-		<!-- END BG WRAPPER -->
-	</div>
-	<!-- END WRAPPER -->
+		<!-- END WRAPPER -->
 	</div>
 	<!-- END LIGHT WRAPPER -->
 	<script type="text/javascript" src="js/jquery.custom.js"></script>

@@ -209,54 +209,93 @@ $(document).on('click', '#selectMoreDelete', function(e) {
 });
 
 function deleteMore(ids) {
-	
-	$.post(ctx+"/deleteMoreAccount", {
+
+	$.post(ctx + "/deleteMoreAccount", {
 		"id" : ids
 	}, function(data) {
 		if (data.success == true) {
 			alert("成功操作！")
 			$('#userListTable').bootstrapTable('refresh');
-		}else{
+		} else {
 			alert("亲,操作失败！")
 		}
 	});
 }
 
-/*修改用户之显示界面*/
-$(document).on('click','#updateShowAccount',function(e){
+/* 修改用户之显示界面 */
+$(document).on('click', '#updateShowAccount', function(e) {
 	// 获取被选中的记录
 	var rows = $("#userListTable").bootstrapTable('getSelections');
 	if (rows.length == 0) {
 		alert("请先选择要修改的记录!");
 		return;
+	} else if (rows.length == 1) {
+		$("#userId").val(rows[0].u_id);
+		$("#userName").val(rows[0].userName);
+		$("#userPassWord").val(rows[0].userPassWord);
+		$("#email").val(rows[0].email);
+		$("#telephone").val(rows[0].telephone);
+		$("#userStatus").val(rows[0].userStatus);
+		$("#addressName").val(rows[0].addressName);
+		$("#address").val(rows[0].address);
+		$("#type").val(rows[0].type);
+		$("#updateModal").modal({
+			show : true
+		});
+	} else {
+		alert("不支持多个框同时修改！");
+		return;
 	}
-	$("#userName").val(rows[0].userName);
-	$("#userPassWord").val(rows[0].userPassWord);
-	$("#email").val(rows[0].email);
-	$("#telephone").val(rows[0].telephone);
-	$("#userStatus").val(rows[0].userStatus);
-	$("#addressName").val(rows[0].addressName);
-	$("#address").val(rows[0].address);
-	$("#type").val(rows[0].type);
-	$("#updateModal").modal({
-		show : true
-	});
 })
-/*确认修改操作*/
-$(document).on('click','#sureSumbit',function(e){
+/* 确认修改操作 */
+$(document).on('click', '#sureSumbit', function(e) {
 	// 获取被选中的记录
-
-	$("#userName").val();
-	$("#userPassWord").val();
-	$("#email").val();
-	$("#telephone").val();
-	$("#userStatus").val();
-	$("#addressName").val();
-	$("#address").val();
-	$("#type").val();
-	alert($("#userName").val());
+	var userType = $("#getUserType").val();
+	var type = $("#type").val();
+	var status = $("#userStatus").val();
+	if (userType == 2) {
+		updateAccountAjax();
+	} else if (userType <= type && userType != 2) {
+		alert("等级不够,无法修改抱歉");
+	} else if (type < 0 || type > 3 || status < 0 || status > 1) {
+		alert("请检查type和status,");
+	} else
+		updateAccountAjax();
 })
 
+function updateAccountAjax() {
+	$.post(ctx + "/updateAccount", {
+		"u_id" : $("#userId").val(),
+		"userName" : $("#userName").val(),
+		"userPassWord" : $("#userPassWord").val(),
+		"email" : $("#email").val(),
+		"telephone" : $("#telephone").val(),
+		"userStatus" : $("#userStatus").val(),
+		"addressName" : $("#addressName").val(),
+		"address" : $("#address").val(),
+		"type" : $("#type").val(),
+	}, function(data) {
+		if (data.success == yes) {
+			alert("success");
+		} else {
+			alert("sorry");
+		}
+	});
+	$("#updateModal").modal("hide");
+	$('#userListTable').bootstrapTable('refresh');
+}
+
+/* 新增数据 */
+$(document).on('click', '#addAccount', function(e) {
+	// 获取被选中的记录
+	var userType = $("#getUserType").val();
+	if (userType == 2 || userType == 1) {
+		$("#updateModal").modal({
+			show : true
+		});
+	} else
+		alert("不是管理员");
+})
 
 
 

@@ -64,4 +64,16 @@ public class UserServiceImpl implements UserService {
 		userDao.deleteMoreAccount(id);
 	}
 
+	@Transactional
+	public void updateAccount(User user) {
+		// TODO Auto-generated method stub
+		userDao.updateAccount(user);
+	}
+
+	@Transactional
+	public void addAccount(User user) {
+		// TODO Auto-generated method stub
+		userDao.addAccount(user);
+	}
+
 }

@@ -4,14 +4,14 @@
 <div class="inner group">
 	<!-- START LOGO -->
 	<div id="logo" class="group">
-		<a href="index.html" title="Sommerce Shop"> <span class="logo-title">教学器材专卖店</span>
+		<a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=" title="Sommerce Shop"> <span class="logo-title">教学器材专卖店</span>
 		</a>
-		<p class="logo-description">The perfect e-commerce solution</p>
+		<p class="logo-description"></p>
 	</div>
 	<!-- END LOGO -->
 	<!-- START LINKSBAR -->
 	<ul id="linksbar" class="group">
-		<li class="icon cart"><a class="trigger" href="myCart"> <span> 0 items &ndash; &euro;0.00 </span>
+		<li class="icon cart"><a class="trigger" href="myCart"> <span>我的购物车</span>
 		</a> |
 			<div class="basketpopup">
 				<h3>购物车</h3>
@@ -20,9 +20,7 @@
 		<li class="icon lock"><a href="#">退出</a> |</li>
 		<li><a href="contact.html">联系我们</a> |</li>
 	</ul>
-	<div class="copyrights">
-		Collect from <a href="http://www.mycodes.net/" title="网站模板">网站模板</a>
-	</div>
+	<div class="copyrights"></div>
 	<!-- END LINKSBAR -->
 	<div class="clear"></div>
 
@@ -45,60 +43,23 @@
 
 			<li class="megamenu"><a href="#">购物</a>
 				<ul class="sub-menu">
-					<li><a href="brand.html">Brand</a>
-						<ul class="sub-menu">
-							<li><a href="#">Wallmart</a></li>
-							<li><a href="#">Ikea</a></li>
-							<li><a href="#">Pathio</a></li>
-							<li><a href="#">Furnishop</a></li>
-							<li><a href="#">Brand name</a></li>
-						</ul></li>
-					<li><a href="categories.html">Categories</a>
-						<ul class="sub-menu">
-							<li><a href="#">Kitchen</a></li>
-							<li><a href="#">Bedroom</a></li>
-							<li><a href="#">Garden</a></li>
-							<li><a href="#">Bathroom</a></li>
-							<li><a href="#">Wood</a></li>
-						</ul></li>
-					<li><a href="#">价格</a>
-						<ul class="sub-menu">
-							<li><a href="#">100 &#8211; 200 &euro;</a></li>
-							<li><a href="#">200 &#8211; 500 &euro;</a></li>
-							<li><a href="#">500 &#8211; 800 &euro;</a></li>
-							<li><a href="#">800 &#8211; 1000 &euro;</a></li>
-							<li><a href="#">1000 &#8211; 1200 &euro;</a></li>
-						</ul></li>
 				</ul></li>
-			<li><a href="my-account.html">我的账户</a>
+			<li><a href="#">我的账户</a>
 				<ul class="sub-menu">
 					<li><a href="change-password.html">Change Password</a></li>
-					<li><a href="edit-address.html">Edit My Address</a></li>
-					<li><a href="order-tracking.html">Track your order</a></li>
 				</ul></li>
-			<li><a href="shop.html">店</a></li>
-			<li><a href="blog.html">Blog</a>
+			<li><a href="#">店</a></li>
+			<li><a href="#">Blog</a>
 				<ul class="sub-menu">
 					<li><a href="blog.html">Big Image</a></li>
-					<li><a href="blog-small.html">Small Image</a></li>
 				</ul></li>
 			<li><a href="#">Pages</a>
 				<ul class="sub-menu">
-					<li><a href="testimonials.html">Testimonials</a></li>
-					<li><a href="faq.html">Faq</a></li>
-					<li><a href="contact.html">Get in Touch</a></li>
-
+					<li><a href="#">Testimonials</a></li>
 				</ul></li>
-			<li><a href="typography.html">简码</a>
+			<li><a href="#">简码</a>
 				<ul class="sub-menu">
 					<li><a href="typography.html">Typography</a></li>
-					<li><a href="alert-box-buttons.html">Alert box &#038; buttons</a></li>
-					<li><a href="icon-sections.html">Icon Sections</a></li>
-					<li><a href="nivo-slider.html">Nivo Slider</a></li>
-					<li><a href="media-widgets.html">Media &amp; Widgets</a></li>
-					<li><a href="table-box-prices.html">Table &#038; Box prices</a></li>
-					<li><a href="mix-various.html">Mix &#038; Various</a></li>
-					<li><a href="shop-shortcodes.html">Shop shortcodes</a></li>
 				</ul></li>
 		</ul>
 	</div>

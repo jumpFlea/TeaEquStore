@@ -38,17 +38,16 @@
 		</div>
 		<div class="panel-body">
 			<div class="list-op" id="list_op">
+				<button type="button" class="btn btn-info" id="addAccount">
+					<span class="glyphicon glyphicon-plus"></span>增加
+				</button>
+				<button type="button" class="btn btn-info" id="updateShowAccount">
+					<span class="glyphicon glyphicon-plus"></span>修改
+				</button>
 				<button type="button" class="btn btn-info" id="selectMoreDelete">
 					<span class="glyphicon glyphicon-plus"></span>批量删除&nbsp;&nbsp;
 				</button>
-
-				<button type="button" class="btn btn-info"  id="updateShowAccount">
-					<span class="glyphicon glyphicon-plus"></span>修改
-				</button>
 			</div>
-
-
-
 		</div>
 
 		<table id="userListTable" data-detail-view="true">
@@ -70,7 +69,8 @@
 				<div class="modal-body">
 					<form id='searchForm' class="bs-example bs-example-form" role="form">
 						<div class="input-group" style="width: 100%">
-							<span class="input-group-addon text-center" style="width: 95px">用户名<i class="icon-th"></i></span> <input type="text" class=" form-control" name="userName" id="userName">
+							<input type="hidden" class=" form-control" name="userName" id="userId"> <span class="input-group-addon text-center" style="width: 95px">用户名<i class="icon-th"></i></span> <input
+								type="text" class=" form-control" name="userName" id="userName">
 						</div>
 						<div class="input-group" style="width: 100%">
 							<span class="input-group-addon" style="width: 95px">密码：<i class="icon-th"></i></span> <input type="text" class="form-control" name="userPassWord" id="userPassWord">

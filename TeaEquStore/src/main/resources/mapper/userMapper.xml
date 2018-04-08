@@ -41,17 +41,32 @@
 	<update id="updateStatus">
 		update usertable set userStatus =#{1} where u_id=#{0}
 	</update>
-	
-	<!--删除用户-->
-	<delete id ="deleteAccount">
+
+	<!--删除用户 -->
+	<delete id="deleteAccount">
 		delete from usertable where u_id=#{1}
 	</delete>
-	
-	<!--批量删除用户-->
-	<delete id ="deleteMoreAccount">
+
+	<!--批量删除用户 -->
+	<delete id="deleteMoreAccount">
 		delete from usertable where u_id in (#{1});
 	</delete>
-	
+
+	<!--修改用户信息 -->
+	<delete id="updateAccount">
+		update usertable
+		set userName=#{userName},userPassWord=#{userPassWord},
+		telephone=#{telephone},email=#{email},
+		userStatus=#{userStatus},addressName=#{addressName},
+		address=#{address},type=#{type}
+		WHERE u_id =#{u_id}
+	</delete>
+
+	<!--后台增加用户 -->
+	<insert id="addAccount">
+		INSERT into usertable(userName,userPassWord,telephone,email,userStatus,addressName,address,type)
+		value(#{userName},#{userPassWord},#{telephone},#{email},#{userStatus},#{addressName},#{address},#{type})
+	</insert>
 
 
 </mapper>

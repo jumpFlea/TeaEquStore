@@ -3,6 +3,7 @@ package com.dy.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dy.model.User;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
@@ -23,4 +24,7 @@ public interface UserDao {
 	
 	void deleteMoreAccount(String id);
 	
+	void updateAccount(User user);
+	
+	void addAccount(User user);
 }
