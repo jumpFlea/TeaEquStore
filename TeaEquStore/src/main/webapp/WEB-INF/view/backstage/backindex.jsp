@@ -47,14 +47,14 @@
 					</div>
 					<div class="logo-element">H+</div>
 				</li>
-				<!-- <li><a href="#"> <i class="fa fa-home"></i> <span class="nav-label">主页</span> <span class="fa arrow"></span>
-				</a>
-					<ul class="nav nav-second-level">
-						<li><a class="J_menuItem" href="index_v1.html" data-index="0">主页示例一</a></li>
-					</ul></li> -->
 				<li><a href="${ctx}/page/userManager"><i class="fa fa-table"></i> <span class="nav-label">用户管理</span><span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a class="J_menuItem" href="${ctx}/page/jumpLogin">查看用户 <!--<span class="label label-danger pull-right">推荐</span>--></a></li>
+					</ul></li>
+				<li><a href="#"> <i class="fa fa-home"></i> <span class="nav-label">主页</span> <span class="fa arrow"></span>
+				</a>
+					<ul class="nav nav-second-level">
+						<li><a class="J_menuItem" href="index_v1.html" data-index="0">主页示例一</a></li>
 					</ul></li>
 
 			</ul>

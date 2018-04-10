@@ -90,9 +90,7 @@ public class OrderServiceImpl implements OrderService{
 		// TODO Auto-generated method stub
 		orderDao.payforOrder(order);
 	}
-	
-	
-	
+
 	
 	
 }

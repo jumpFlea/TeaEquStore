@@ -43,7 +43,7 @@ public class UserController {
 		/*System.out.println(user.getUserName());*/
 		if(user!=null){
 			request.getSession().setAttribute("user", user);
-			return "redirect:/goodsShow?needPage=1&mainPage=1&cateName=&cateSecName=";
+			return "redirect:/goodsShow?needPage=1&mainPage=1&cateName=&cateSecName=&search=";
 		}
 		/*logger.info("now {}" , user);*/
 		return "login";

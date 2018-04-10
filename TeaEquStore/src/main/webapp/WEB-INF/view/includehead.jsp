@@ -4,7 +4,7 @@
 <div class="inner group">
 	<!-- START LOGO -->
 	<div id="logo" class="group">
-		<a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=" title="Sommerce Shop"> <span class="logo-title">教学器材专卖店</span>
+		<a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=&search=" title="Sommerce Shop"> <span class="logo-title">教学器材专卖店</span>
 		</a>
 		<p class="logo-description"></p>
 	</div>
@@ -28,13 +28,13 @@
 	<div id="nav" class="group creative">
 		<ul id="menu-navigation" class="level-1">
 			<!--遍历出主页下的一二级分类-->
-			<li><a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=">主页</a>
+			<li><a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=&search=">主页</a>
 				<ul class="sub-menu">
 					<c:forEach items="${cate}" var="ca">
 						<li><a href="goodsShow?cateName=${ca.cateName}&mainPage=1&needPage=1&cateSecName=">${ca.cateName}</a>
 							<ul class="sub-menu">
 								<c:forEach items="${ca.categorysecond}" var="cat">
-									<li><a href="goodsShow?cateName=${ca.cateName}&mainPage=1&needPage=1&cateSecName=${cat.cateSecName}">${cat.cateSecName}</a></li>
+									<li><a href="goodsShow?cateName=${ca.cateName}&mainPage=1&needPage=1&cateSecName=${cat.cateSecName}&search=${search}">${cat.cateSecName}</a></li>
 								</c:forEach>
 							</ul></li>
 					</c:forEach>

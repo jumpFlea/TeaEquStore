@@ -6,19 +6,36 @@
 
 	<!-- 查询商品信息记录 -->
 	<select id="selectAllGoods" parameterType="Page" resultType="Goods">
-		select e.* 
+		select e.*
 		<choose>
-			<when test="! attribute.equals('') and cateSecName.equals('')">
+			<when test="! gname.equals('') and attribute.equals('') and cateSecName.equals('')">
+				from equipment e where equName like CONCAT('%',#{gname},'%') and status = 1
+			</when>
+			<when test="! attribute.equals('') and ! gname.equals('') and cateSecName.equals('') ">
 				from equipment e,category c,categorysecond ca
 				where e.cateSecId=ca.cateSecId and ca.cateId=c.cateId
-				and c.cateName=#{attribute}
+				and c.cateName=#{attribute} and equName like CONCAT('%',#{gname},'%') and status =
+				1
 			</when>
-			<when test="!cateSecName.equals('')">
+			<when test="! attribute.equals('') and cateSecName.equals('') and gname.equals('')">
+				from equipment e,category c,categorysecond ca
+				where e.cateSecId=ca.cateSecId and ca.cateId=c.cateId
+				and c.cateName=#{attribute} and status = 1
+			</when>
+			<when test="!cateSecName.equals('') and ! gname.equals('')">
+				from equipment e LEFT JOIN categorysecond ca on e.cateSecId=ca.cateSecId
+				JOIN category c on ca.cateId=c.cateId AND ca.cateSecName=#{cateSecName} and equName like
+				CONCAT('%',#{gname},'%')
+				and status = 1
+			</when>
+			<when test="!cateSecName.equals('') and gname.equals('')">
 				from equipment e LEFT JOIN categorysecond ca on e.cateSecId=ca.cateSecId
 				JOIN category c on ca.cateId=c.cateId AND ca.cateSecName=#{cateSecName}
+				and status = 1
 			</when>
+
 			<otherwise>
-				from equipment e
+				from equipment e where status = 1
 			</otherwise>
 		</choose>
 		limit #{begin},#{limitPage};
@@ -28,17 +45,33 @@
 	<select id="findAllNum" resultType="int">
 		select count(e_id)
 		<choose>
-			<when test="! cateType.equals('') and cateSecName.equals('')">
+			<when test="! search.equals('') and cateType.equals('') and cateSecName.equals('')">
+				from equipment e where equName like CONCAT('%',#{search},'%') and status = 1
+			</when>
+			<when test="! cateType.equals('') and cateSecName.equals('') and ! search.equals('')">
 				from equipment e,category c,categorysecond ca
 				where e.cateSecId=ca.cateSecId and ca.cateId=c.cateId
+				and c.cateName=#{cateType} and equName like CONCAT('%',#{search},'%') and status =
+				1
+			</when>
+			<when test="! cateType.equals('') and cateSecName.equals('') and search.equals('')">
+				from equipment e,category c,categorysecond ca
+				where e.cateSecId=ca.cateSecId and ca.cateId=c.cateId and status = 1
 				and c.cateName=#{cateType}
 			</when>
-			<when test="!cateSecName.equals('')">
-				 from equipment e LEFT JOIN categorysecond ca on e.cateSecId=ca.cateSecId
+			<when test="!cateSecName.equals('') and ! search.equals('')">
+				from equipment e LEFT JOIN categorysecond ca on e.cateSecId=ca.cateSecId
+				JOIN category c on ca.cateId=c.cateId AND ca.cateSecName=#{cateSecName} and equName like
+				CONCAT('%',#{search},'%')
+				and status = 1
+			</when>
+			<when test="!cateSecName.equals('') and search.equals('')">
+				from equipment e LEFT JOIN categorysecond ca on e.cateSecId=ca.cateSecId
 				JOIN category c on ca.cateId=c.cateId AND ca.cateSecName=#{cateSecName}
+				and status = 1
 			</when>
 			<otherwise>
-				from equipment e
+				from equipment e where status = 1
 			</otherwise>
 		</choose>
 	</select>
@@ -70,13 +103,35 @@
 	</select>
 
 	<!--查询所有的二级分类 -->
-	<select id="findAllSecCate" resultType="Categorysecond">
+	<select id="findAllCateSec" resultType="Categorysecond">
 		select * from categorysecond;
 	</select>
 
 	<!--根据商品id查询商品信息 -->
 	<select id="findByGoodsId" resultType="Goods">
 		select * from equipment where e_id =#{goodsId};
+	</select>
+
+	<!-- 更改数据库商品数量:减去购买的数量 -->
+	<update id="updateGoodsNum" parameterType="java.util.List">
+		<foreach collection="list" item="orderItems" separator=";">
+			UPDATE equipment
+			<set>
+				number = number - #{orderItems.goodNum}
+			</set>
+			<where>
+				e_id = #{orderItems.good.e_id}
+			</where>
+		</foreach>
+	</update>
+	
+	<!--后台管理员数据操作部分 -->
+	<!--查找所有商品-->
+	<select id="selectAllUser" resultType="User">
+		select * from userTable
+		<if test="keyWord != null and keyWord !=''">
+			where userName like '%${keyWord}%'
+		</if>
 	</select>
 </mapper>
 	

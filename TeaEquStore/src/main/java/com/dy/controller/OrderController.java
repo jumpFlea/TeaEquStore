@@ -1,6 +1,8 @@
 package com.dy.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import com.dy.model.OrderItems;
 import com.dy.model.Orders;
 import com.dy.model.Page;
 import com.dy.model.User;
+import com.dy.service.GoodsService;
 import com.dy.service.OrderService;
 
 @Controller
@@ -24,6 +27,8 @@ public class OrderController {
 
 	@Resource
 	private OrderService orderService;
+	@Resource
+	private GoodsService goodsService;
 
 	//提交订单保存到数据库
 	@RequestMapping("/submitOrder")
@@ -56,7 +61,11 @@ public class OrderController {
 			// 将购物项添加到订单里面
 			order.getOrderItems().add(orderItems);
 		}
+		//保存数据库到订单
 		orderService.insertOrderItems(order.getOrderItems());
+		//更新数据库的数据
+		List<OrderItems> orderItems = new ArrayList<>(order.getOrderItems());
+		goodsService.updateGoodsNum(orderItems);
 		model.addAttribute("order",order);
 		return "order";
 	}

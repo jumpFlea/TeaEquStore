@@ -14,6 +14,12 @@ public class Goods {
 	private String vendorName; // '厂家名',
 	private String equPicture; // '商品图片',
 	private int cateSecId; // '二级分类，指向categorysecond表的cateSecId',
+	private int uid;//"发布用户id"
+	private int status;//商品状态
+
+	
+
+	
 
 	public int getE_id() {
 		return e_id;
@@ -110,9 +116,25 @@ public class Goods {
 	public void setCateSecId(int cateSecId) {
 		this.cateSecId = cateSecId;
 	}
+	
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 	public String toString() {
 		return "{e_id:" + e_id + "equName:" + equName + "sellPrice:" + sellPrice + "marketPrice:" + marketPrice + "number:" + number + "器材销售数量sellNumber:" + sellNumber + "是否热销，0为否1为是isHot:" + isHot + "是否新品，0为否1为是isNew:" + isNew + "商品描述equDescription:" + equDescription + "厂家名vendorName:" + vendorName
-				+ "商品图片equPicture:" + equPicture + "cateSecId:"+"}";
+				+ "商品图片equPicture:" + equPicture + "cateSecId:"+cateSecId+"uid:"+uid+"}";
 	}
 }

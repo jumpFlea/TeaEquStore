@@ -6,14 +6,17 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dy.dao.GoodsDao;
 import com.dy.model.Category;
 import com.dy.model.Categorysecond;
 import com.dy.model.Goods;
+import com.dy.model.OrderItems;
 import com.dy.model.Page;
 import com.dy.model.User;
 import com.dy.service.GoodsService;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -21,8 +24,9 @@ public class GoodsServiceImpl implements GoodsService {
 	@Autowired
 	private GoodsDao goodsDao;
 
+	//根据条件查询所有信息
 	@Override
-	public Page<Goods> selectAllGoods(int currentPage, String cateName, String cateSecName) {
+	public Page<Goods> selectAllGoods(int currentPage, String cateName, String cateSecName,String search) {
 		// TODO Auto-generated method stub
 		Page<Goods> p = new Page<Goods>();
 		
@@ -32,7 +36,7 @@ public class GoodsServiceImpl implements GoodsService {
 		int limit = 6;
 		p.setLimitPage(limit);
 		// 获取当前的总记录数，并设置到page里面对应的属性,设置总页数
-		int count  = goodsDao.findAllNum(cateName,cateSecName);
+		int count  = goodsDao.findAllNum(cateName,cateSecName,search);
 		if (count % limit == 0) {
 			count = count / limit;
 			p.setCountPage(count);
@@ -45,6 +49,7 @@ public class GoodsServiceImpl implements GoodsService {
 		p.setBegin(begin);
 		p.setAttribute(cateName);
 		p.setCateSecName(cateSecName);
+		p.setGname(search);
 		/* System.out.println(p.getAttribute()); */
 		/* p.setGname(gname); */
 		// 获取图片的信息，存于page中
@@ -53,6 +58,7 @@ public class GoodsServiceImpl implements GoodsService {
 		return p;
 	}
 
+	//显示热火的商品
 	@Override
 	public Page<Goods> indexShow(int currentPage, String type, String gname) {
 		// TODO Auto-generated method stub
@@ -99,6 +105,20 @@ public class GoodsServiceImpl implements GoodsService {
 	public Goods findByGoodsId(int goodsId) {
 		// TODO Auto-generated method stub
 		return goodsDao.findByGoodsId(goodsId);
+	}
+
+	@Transactional
+	public void updateGoodsNum(List<OrderItems> orderItems) {
+		// TODO Auto-generated method stub
+		goodsDao.updateGoodsNum(orderItems);
+	}
+
+	/*后台操作action*/
+	/*查询所有用户*/
+	@Override
+	public List<Goods> backSelectAllGoods(String keyWord, PageBounds page) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

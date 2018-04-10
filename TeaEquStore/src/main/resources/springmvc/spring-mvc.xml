@@ -12,10 +12,9 @@
 	<mvc:annotation-driven />
 	<!-- 扫描controller（controller层注入） -->
 	<!-- <context:component-scan base-package="com.dy.controller" /> -->
-	<context:component-scan base-package="com.dy" use-default-filters="false" >
-        <context:include-filter type="annotation"
-            expression="org.springframework.stereotype.Controller" />
-    </context:component-scan>
+	<context:component-scan base-package="com.dy" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
 
 	<!-- 该配置的作用是：DispatcherServlet不会拦截以/css、js开头的所有请求路径，并当作静态资源 css,js,imgs -->
 	<mvc:resources location="/resource/css/" mapping="/css/**" />
@@ -33,7 +32,7 @@
 
 	<!-- 对模型视图添加前后缀 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/view/" p:suffix=".jsp" />
-	
+
 	<!--转化json -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
@@ -51,6 +50,11 @@
 			</list>
 		</property>
 	</bean>
-	
-	
+
+	<!-- 设置上传文件最大值 3M=3*1024*1024(B)=3145728 bytes -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="3145728" />
+	</bean>
+
+
 </beans>

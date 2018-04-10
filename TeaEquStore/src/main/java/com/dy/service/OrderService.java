@@ -20,6 +20,7 @@ public interface OrderService {
 	
 	public Orders findByOrderId(Integer id);
 	
-	public void payforOrder(Orders order);  
+	public void payforOrder(Orders order); 
+	
 	
 }

@@ -54,7 +54,7 @@
 					<div class="inner group">
 						<!-- START LOGO -->
 						<div id="logo" class="group">
-							<a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=" title="Sommerce Shop"> <span class="logo-title">教学器材专卖店</span>
+							<a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=&search=" title="教学器材"> <span class="logo-title">教学器材专卖店</span>
 							</a>
 							<p class="logo-description">TeaEquStore</p>
 						</div>
@@ -78,13 +78,13 @@
 						<div id="nav" class="group creative">
 							<ul id="menu-navigation" class="level-1">
 								<!--遍历出主页下的一二级分类-->
-								<li><a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=">主页</a>
+								<li><a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=&search=">主页</a>
 									<ul class="sub-menu">
 										<c:forEach items="${cate}" var="ca">
-											<li><a href="goodsShow?cateName=${ca.cateName}&mainPage=1&needPage=1&cateSecName=">${ca.cateName}</a>
+											<li><a href="goodsShow?cateName=${ca.cateName}&mainPage=1&needPage=1&cateSecName=&search=">${ca.cateName}</a>
 												<ul class="sub-menu">
 													<c:forEach items="${ca.categorysecond}" var="cat">
-														<li><a href="goodsShow?cateName=${ca.cateName}&mainPage=1&needPage=1&cateSecName=${cat.cateSecName}">${cat.cateSecName}</a></li>
+														<li><a href="goodsShow?cateName=${ca.cateName}&mainPage=1&needPage=1&cateSecName=${cat.cateSecName}&search=">${cat.cateSecName}</a></li>
 													</c:forEach>
 												</ul></li>
 										</c:forEach>
@@ -118,14 +118,14 @@
 						<!-- END NAV -->
 
 						<!-- START SEARCH FORM -->
-						<form role="search" method="post" id="searchform" action="#" class="group">
+						<form role="search" method="post" id="searchform" action="goodsShow" class="group">
 							<div>
 								<input type="hidden" name="cateName" value="${cateName}"> 
 								<input type="hidden" name="cateSecName" value="${cateSecName}">
 								<input type="hidden" name="mainPage" value="1">
 								<input type="hidden" name="needPage" value="1"> 
 								<label class="screen-reader-text" for="s">search</label>
-								<input type="text" value="" name="s" id="s" /> <input type="submit" id="searchsubmit" value="&gt;" /> <input type="hidden" name="post_type" value="product" />
+								<input type="text" value="" name="search" id="s" /> <input type="submit" id="searchsubmit" value="&gt;" /> <input type="hidden" name="post_type" value="product" />
 							</div>
 						</form>
 						<!-- END SEARCH FORM -->
@@ -234,18 +234,18 @@
 										<nav>
 											<ul class="pagination">
 												<c:if test="${showGoodsAllList.currentPage!=1}">
-													<li><a href="goodsShow?mainPage=${showGoodsAllList.currentPage-1}&cateName=${cateName}&needPage=1&cateSecName=${cateSecName}"><span aria-hidden="true">&laquo;</span></a></li>
+													<li><a href="goodsShow?mainPage=${showGoodsAllList.currentPage-1}&cateName=${cateName}&needPage=1&cateSecName=${cateSecName}&search=${search}"><span aria-hidden="true">&laquo;</span></a></li>
 												</c:if>
 												<c:forEach var="i" begin="1" end="${showGoodsAllList.countPage}">
 													<c:if test="${i==showGoodsAllList.currentPage}">
 														<li class="active"><a>${i}</a></li>
 													</c:if>
 													<c:if test="${i!=showGoodsAllList.currentPage}">
-														<li><a href="goodsShow?mainPage=${i}&needPage=1&cateName=${cateName}&cateSecName=${cateSecName}">${i}</a></li>
+														<li><a href="goodsShow?mainPage=${i}&needPage=1&cateName=${cateName}&cateSecName=${cateSecName}&search=${search}">${i}</a></li>
 													</c:if>
 												</c:forEach>
 												<c:if test="${showGoodsAllList.currentPage!=showGoodsAllList.countPage}">
-													<li><a href="goodsShow?mainPage=${showGoodsAllList.currentPage+1}&cateName=${cateName}&needPage=1&cateSecName=${cateSecName}"><span>&raquo;</span></a></li>
+													<li><a href="goodsShow?mainPage=${showGoodsAllList.currentPage+1}&cateName=${cateName}&needPage=1&cateSecName=${cateSecName}&search=${search}"><span>&raquo;</span></a></li>
 												</c:if>
 											</ul>
 										</nav>
@@ -283,7 +283,7 @@
 										<nav>
 											<ul class="pagination">
 												<c:if test="${showGoodsList.currentPage!=1}">
-													<li><a href="goodsShow?needPage=${showGoodsList.currentPage-1}&mainPage=1&cateName=&cateSecName="><span aria-hidden="true">&laquo;</span></a></li>
+													<li><a href="goodsShow?needPage=${showGoodsList.currentPage-1}&mainPage=1&cateName=&cateSecName=&search="><span aria-hidden="true">&laquo;</span></a></li>
 												</c:if>
 												<c:forEach var="i" begin="1" end="${showGoodsList.countPage}">
 													<c:if test="${i==showGoodsList.currentPage}">

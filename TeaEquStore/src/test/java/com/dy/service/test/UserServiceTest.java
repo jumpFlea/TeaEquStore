@@ -22,7 +22,7 @@ public class UserServiceTest extends SpringTestCase {
 		System.out.println(user.getUserName() + ":" + user.getUserPassWord());*/
 		/*userService.selectByUserName("12");*/
 		
-		Page<Goods> good = goodsService.selectAllGoods(1, "标本", null);
+		Page<Goods> good = goodsService.selectAllGoods(1, "标本", null,null);
 		System.out.println(good.getList().get(0));
 		System.out.println(good.getList().size());
 		

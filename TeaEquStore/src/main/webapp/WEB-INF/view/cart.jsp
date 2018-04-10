@@ -104,7 +104,7 @@
 												<em id="promotion"></em> <em> 登录后确认是否享有优惠 </em> 赠送积分: <em id="effectivePoint"></em> 商品金额: <strong id="effectivePrice">￥${cart.total}元 </strong>
 											</div>
 											<div class="bottom">
-												<a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=" class="large green sc-button">继续购物</a> <a href="clearCart" id="clear" class="clear">清空购物车</a> <a href="submitOrder"
+												<a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=&search=" class="large green sc-button">继续购物</a> <a href="clearCart" id="clear" class="clear">清空购物车</a> <a href="submitOrder"
 													id="submit" class="submit">提交订单</a>
 											</div>
 
@@ -114,7 +114,7 @@
 										<div id="post-12" class="post-12 page type-page status-publish hentry group">
 											<p>亲，你的购物车是空的</p>
 											<p>
-												<a class="button" href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=">&larr; 返回购物</a>
+												<a class="button" href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=&search=">&larr; 返回购物</a>
 											</p>
 
 										</div>
