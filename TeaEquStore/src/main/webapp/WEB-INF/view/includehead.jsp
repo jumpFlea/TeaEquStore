@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- .inner -->
 <div class="inner group">
 	<!-- START LOGO -->
@@ -17,6 +17,9 @@
 				<h3>购物车</h3>
 				<span class="empty">没有东西在购物车内</span>
 			</div></li>
+		<c:if test="${user.type==1||user.type==2}">
+			<li><a href="page/userManager">进入后台</a> |</li>
+		</c:if>
 		<li class="icon lock"><a href="#">退出</a> |</li>
 		<li><a href="contact.html">联系我们</a> |</li>
 	</ul>
@@ -41,26 +44,8 @@
 				</ul></li>
 			<!--遍历出主页下的一二级分类end-->
 
-			<li class="megamenu"><a href="#">购物</a>
-				<ul class="sub-menu">
-				</ul></li>
-			<li><a href="#">我的账户</a>
-				<ul class="sub-menu">
-					<li><a href="change-password.html">Change Password</a></li>
-				</ul></li>
-			<li><a href="#">店</a></li>
-			<li><a href="#">Blog</a>
-				<ul class="sub-menu">
-					<li><a href="blog.html">Big Image</a></li>
-				</ul></li>
-			<li><a href="#">Pages</a>
-				<ul class="sub-menu">
-					<li><a href="#">Testimonials</a></li>
-				</ul></li>
-			<li><a href="#">简码</a>
-				<ul class="sub-menu">
-					<li><a href="typography.html">Typography</a></li>
-				</ul></li>
+			<li class="megamenu"><a href="jumpRelease">发布商品</a></li>
+			<li><a href="shop.html">我的资料</a></li>
 		</ul>
 	</div>
 	<!-- END NAV -->

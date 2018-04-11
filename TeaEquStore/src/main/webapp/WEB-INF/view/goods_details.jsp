@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
-<title>Sommerce Shop | The perfect e-commerce solution</title>
+<title>详情界面</title>
 
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" media="all" href="css/style1.css" />

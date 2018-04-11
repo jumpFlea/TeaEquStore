@@ -124,14 +124,50 @@
 			</where>
 		</foreach>
 	</update>
-	
+
+	<!-- 发布商品 -->
+	<insert id="insertGoods">
+		insert into equipment (equName,sellPrice,marketPrice,number,equDescription,equPicture,cateSecId,uid,`status`,releaseTime)
+		value(#{equName},#{sellPrice},#{marketPrice},#{number},
+		#{equDescription},#{equPicture},#{cateSecId},
+		#{uid},#{status},#{releaseTime})
+	</insert>
+
 	<!--后台管理员数据操作部分 -->
-	<!--查找所有商品-->
-	<select id="selectAllUser" resultType="User">
-		select * from userTable
+	<!--查找所有商品 -->
+	<select id="backSelectAllGoods" resultType="Goods">
+		select * from equipment
 		<if test="keyWord != null and keyWord !=''">
-			where userName like '%${keyWord}%'
+			where equName like '%${keyWord}%'
 		</if>
 	</select>
+	
+	<!-- /*审核商品*/ -->
+	<update id="updateStatus" >
+		update equipment set status = #{1} where e_id in (#{0})
+	</update>
+	
+	<!-- /*批量审核商品*/ -->
+	<update id="updateMoreGoods" >
+		update equipment set status = #{1} where e_id in (#{0})
+	</update>
+	
+	
+	<!--批量删除商品 -->
+	<delete id="deleteMoreGoods">
+		delete from equipment where e_id in (#{1});
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
 	

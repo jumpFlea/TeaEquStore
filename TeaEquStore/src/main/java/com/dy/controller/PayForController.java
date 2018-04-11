@@ -1,6 +1,7 @@
 package com.dy.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -63,9 +64,12 @@ public class PayForController {
 		String result = alipayClient.pageExecute(alipayRequest).getBody();
 
 		rep.setContentType("text/html;charset=" + AlipayConfig.charset);
-		rep.getWriter().write(result);// 直接将完整的表单html输出到页面
-		rep.getWriter().flush();
-		rep.getWriter().close();
+		/*
+		 * rep.getWriter().write(result);// 直接将完整的表单html输出到页面
+		 * rep.getWriter().flush(); rep.getWriter().close();
+		 */
+		PrintWriter out = rep.getWriter();
+		out.print(result);
 
 	}
 
@@ -99,12 +103,10 @@ public class PayForController {
 
 			// 付款金额
 			String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
-			
 
 			Log.info("订单处理：系统订单号" + out_trade_no + "支付宝交易号：" + trade_no);
 			// 系统处理根据支付宝回调更改订单状态或者其他关联表的数据
 			Orders order = orderService.findByOrderId(Integer.valueOf(out_trade_no));
-			
 
 			if (order == null) {
 				signVerified = false;
@@ -138,7 +140,7 @@ public class PayForController {
 	}
 
 	// 异步通知
-	@RequestMapping(value = "/notify_url", method = RequestMethod.POST)
+	@RequestMapping(value = "notify_url", method = RequestMethod.POST)
 	public String notifyUrl(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException, IOException {
 
 		// 获取支付宝POST过来反馈信息
@@ -181,8 +183,8 @@ public class PayForController {
 			Log.info("订单处理：系统订单号" + out_trade_no + "支付宝交易号：" + trade_no);
 			// 系统处理根据支付宝回调更改订单状态或者其他关联表的数据
 			Orders order = orderService.findByOrderId(Integer.valueOf(out_trade_no));
-			
-			//已经支付好了
+
+			// 已经支付好了
 			if (trade_status.equals("TRADE_FINISHED") || trade_status.equals("TRADE_SUCCESS")) {
 				// 修改订单状态为已支付
 				order.setOrderState(1);
@@ -220,7 +222,13 @@ public class PayForController {
 		}
 		request.setAttribute("signVerified", signVerified);
 		response.getWriter().write("success");
-		return "showOrderList";
+		return "null";
+	}
+
+	@RequestMapping("return_url")
+	public String return_Url() {
+		return "redirect:/goodsShow?needPage=1&mainPage=1&cateName=&cateSecName=&search=";
+
 	}
 
 }

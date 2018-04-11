@@ -112,13 +112,41 @@ public class GoodsServiceImpl implements GoodsService {
 		// TODO Auto-generated method stub
 		goodsDao.updateGoodsNum(orderItems);
 	}
+	
+	@Transactional
+	public void insertGoods(Goods goods) {
+		// TODO Auto-generated method stub
+		goodsDao.insertGoods(goods);
+	}
+	
+	
+	
 
 	/*后台操作action*/
 	/*查询所有用户*/
 	@Override
 	public List<Goods> backSelectAllGoods(String keyWord, PageBounds page) {
 		// TODO Auto-generated method stub
-		return null;
+		return goodsDao.backSelectAllGoods(keyWord, page);
+	}
+
+	/*审核商品*/
+	@Transactional
+	public void updateStatus(String id,int status) {
+		// TODO Auto-generated method stub
+		goodsDao.updateStatus(id,status);
+	}
+	
+	@Transactional
+	public void updateMoreGoods(String id,int status) {
+		// TODO Auto-generated method stub
+		goodsDao.updateMoreGoods(id,status);
+	}
+
+	@Transactional
+	public void deleteMoreGoods(String id) {
+		// TODO Auto-generated method stub
+		goodsDao.deleteMoreGoods(id);
 	}
 
 }

@@ -40,15 +40,23 @@ public interface GoodsDao {
 	/* 根据商品id查询到商品的详情 */
 	Goods findByGoodsId(int goodsId);
 
-	/* 更改商品数量*/
+	/* 更改商品数量 */
 	void updateGoodsNum(List<OrderItems> orderItems);
+
+	/* 插入商品 */
+	void insertGoods(Goods goods);
+
+	/* 后台操作部分 */
+	/* 查询所有商品 */
+	List<Goods> backSelectAllGoods(@Param(value = "keyWord") String keyWord, PageBounds page);
+
+	/* 审核商品 */
+	void updateStatus(String id, int status);
 	
-	
-	
-	/*后台操作部分*/
-	/*查询所有商品*/
-	List<Goods> backSelectAllGoods(String keyWord, PageBounds page);
-	
-	
+	/*批量审核商品*/
+	void updateMoreGoods(String id,int status);
+
+	/* 删除商品 */
+	void deleteMoreGoods(String id);
 
 }

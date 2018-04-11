@@ -13,12 +13,12 @@
 <meta name="description" content="">
 
 <link rel="shortcut icon" href="favicon.ico">
-<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-<link href="css/animate.min.css" rel="stylesheet">
-<link href="css/summernote.css" rel="stylesheet">
-<link href="css/summernote-bs3.css" rel="stylesheet">
-<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/animate.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/summernote.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/summernote-bs3.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 
 <style>
 .droppable-active {
@@ -59,7 +59,7 @@
 						<div class="alert alert-info" style="text-align: center">
 							<h3>发布商品</h3>
 						</div>
-						<form action="releaseGoods" class="form-horizontal m-t" enctype=multipart/form-data method="post">
+						<form action="${pageContext.request.contextPath}/backgoods/releaseGoods" class="form-horizontal m-t" enctype=multipart/form-data method="post">
 							<div class="form-group draggable">
 								<label class="col-sm-3 control-label">商品名:</label>
 								<div class="col-sm-9">
@@ -127,11 +127,11 @@
 
 		</div>
 	</div>
-	<script src="js/backstage/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="js/content.min.js?v=1.0.0"></script>
-	<script src="js/jquery-ui-1.10.4.min.js"></script>
-	<script src="js/plugins/beautifyhtml/beautifyhtml.js"></script>
+	<script src="${pageContext.request.contextPath}/js/backstage/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="${pageContext.request.contextPath}/js/content.min.js?v=1.0.0"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.4.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/plugins/beautifyhtml/beautifyhtml.js"></script>
 
 </body>
 

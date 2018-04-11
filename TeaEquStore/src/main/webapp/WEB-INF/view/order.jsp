@@ -66,10 +66,9 @@
 						<!-- START CONTENT -->
 						<div id="content" role="main" class="group">
 							<div id="crumbs" class="theme_breadcumb">
-								<a class="home" href="home.html">Home Page</a> &rsaquo; <a class="no-link current" href="#">Cart</a>
 								<div class="breadcrumb-end"></div>
 							</div>
-							<h2>Cart</h2>
+							<h2>订单</h2>
 							<!--订单列表start-->
 							<div class="container header">
 								<div class="span5"></div>

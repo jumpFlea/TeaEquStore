@@ -4,7 +4,7 @@
 
 $(document).ready(function() {
 	$("#goodsListTable").bootstrapTable({
-		url : ctx + "/userListController",
+		url : ctx + "/backgoods/goodsListController",
 		method : "post",
 		contentType : "application/x-www-form-urlencoded",
 		toolbar : '#toolbar', // 工具按钮用哪个容器
@@ -51,44 +51,33 @@ $(document).ready(function() {
 			title : '出售价格',
 			align : 'center',
 			valign : 'middle'
-		}, 
-		{
+		}, {
 			field : 'number',
 			title : '拥有数量',
 			align : 'center',
-			valign : 'middle'
-		},
-		{
+			valign : 'middle',
+			formatter : function(value, row, index) {
+				if (row.number <=5) {
+					return '<label style="color: red">'+row.number+'</label>';
+				} else {
+					return '<label style="color: blue">'+row.number+'</label>';
+				}
+			}
+		}, {
 			field : 'sellNumber',
 			title : '销售数量',
 			align : 'center',
 			valign : 'middle'
-		},{
-			field : 'status',
-			title : '状态',
-			align : 'center',
-			valign : 'middle',
-			formatter : function(value, row, index) {
-				if (row.status === 0) {
-					return '<button type="button" class="btn btn-outline btn-primary"   onClick=SuperVipAccount(' + row.id
-
-					+ ')>超级管理员 </button>';
-				} else {
-					return '<button type="button" class="btn btn-outline btn-default" onClick=NolmalAccount(' + row.id
-
-					+ ')>普通用户</button>';
-				}
-			}
 		}, {
 			field : 'status',
 			title : '状态',
 			align : 'center',
 			valign : 'middle',
 			formatter : function(value, row, index) {
-				if (row.userStatus == 1) {
-					return "<label style='color: green'>正常</label>";
+				if (row.status == 1) {
+					return "<label style='color: green'>上线</label>";
 				} else {
-					return "<label style='color: red'>未审核</label>";
+					return "<label style='color: red'>下线</label>";
 				}
 			}
 		}, {
@@ -97,43 +86,27 @@ $(document).ready(function() {
 			align : 'center',
 			valign : 'middle',
 			formatter : function(value, row, index) {
-				if (row.userStatus == 1) {
-					return '<button type="button" class="btn btn-outline btn-default"  onClick=disableAccount(' + row.e_id
+				if (row.status === 0) {
+					return '<button type="button" class="btn btn-outline btn-primary"   onClick=openStatus(' + row.e_id
 
-					+  ')>禁用 </button> &nbsp; &nbsp;' + '<button type="button" class="btn btn-outline btn-default"  onClick=deleteAccount(' + row.u_id
-
-					+ ')>删除 </button>';
+					+ ')>上线</button>';
 				} else {
-					return '<button type="button" class="btn btn-outline btn-default" onClick=enableAccount(' + row.e_id
+					return '<button type="button" class="btn btn-outline btn-default" onClick=closeStatus(' + row.e_id
 
-					+ ')>审核</button> &nbsp; &nbsp;' + '<button type="button" class="btn btn-outline btn-default"  onClick=deleteAccount(' + row.e_id
-
-					+  ')>删除 </button>';
+					+ ')>下线</button>';
 				}
 			}
 		} ]
 	});
 });
 
-/* 禁用用户 */
-function disableAccount(id, type) {
+/* 上线 */
+function openStatus(id) {
 	var id = id;
-	var userType = $("#getUserType").val();
-	if (userType > type) {
-		disableAccountAjax(id);
-	} else if (userType = type && userType == 2) {
-		disableAccountAjax(id);
-	} else if (userType = type && userType != 2) {
-		alert("等级不够无法操作！");
-	} else {
-		alert("亲，等级不够哦！");
-	}
-}
-
-function disableAccountAjax(id) {
-	$.post(ctx + "/updateStatus", {
+	alert(id);
+	$.post(ctx + "/backgoods/updateGoodsStatus", {
 		"id" : id,
-		"status" : 0,
+		"status" : 1,
 	}, function(data) {
 		if (data.success == true) {
 			alert("success");
@@ -143,26 +116,13 @@ function disableAccountAjax(id) {
 	})
 }
 
-/* 启用用户 */
-function enableAccount(id, type) {
+/* 下线 */
+function closeStatus(id) {
 	var id = id;
-	var userType = $("#getUserType").val();
-	if (userType > type) {
-		enableAccountAjax(id);
-	} else if (userType = type && userType == 2) {
-		enableAccountAjax(id);
-	} else if (userType = type && userType != 2) {
-		alert("等级不够无法操作！");
-	} else {
-		alert("亲，等级不够哦！");
-	}
-
-}
-
-function enableAccountAjax(id) {
-	$.post(ctx + "/updateStatus", {
+	alert(id);
+	$.post(ctx + "/backgoods/updateGoodsStatus", {
 		"id" : id,
-		"status" : 1,
+		"status" : 0,
 	}, function(data) {
 		if (data.success == true) {
 			alert("success");
@@ -171,82 +131,28 @@ function enableAccountAjax(id) {
 	})
 }
 
-/* 删除用户 */
-function deleteAccount(id, type) {
-	var userType = $("#getUserType").val();
-	if (userType > type) {
-		deleteAccountAjax(id);
-	} else if (userType = type && userType == 2) {
-		deleteAccountAjax(id);
-	} else if (userType = type && userType != 2) {
-		alert("等级不够无法操作");
-	} else {
-		alert("亲，不可以删除");
-	}
-}
-
-function deleteAccountAjax(id) {
-	$.post(ctx + "/deleteAccount", {
-		"id" : id
-	}, function(result) {
-		if (result.success == true) {
-			alert("删除成功");
-			$('#goodsListTable').bootstrapTable('refresh');
-		} else
-			alert("删除失败");
-	});
-}
-
-/* 批量删除 */
-$(document).on('click', '#selectMoreDelete', function(e) {
-	// 获取所有被选中的记录
-	var rows = $("#goodsListTable").bootstrapTable('getSelections');
-	if (rows.length == 0) {
-		alert("请先选择要删除的记录!");
-		return;
-	}
-	var ids = '';
-	for (var i = 0; i < rows.length; i++) {
-		ids += rows[i]['u_id'] + ",";
-	}
-	ids = ids.substring(0, ids.length - 1);
-	if (confirm("请谨慎操作,确定删除?")) {
-		deleteMore(ids);
-	}
-
-});
-
-function deleteMore(ids) {
-
-	$.post(ctx + "/deleteMoreAccount", {
-		"id" : ids
-	}, function(data) {
-		if (data.success == true) {
-			alert("成功操作！")
-			$('#goodsListTable').bootstrapTable('refresh');
-		} else {
-			alert("亲,操作失败！")
-		}
-	});
-}
-
 /* 修改用户之显示界面 */
-$(document).on('click', '#updateShowAccount', function(e) {
+$(document).on('click', '#updateShowGoods', function(e) {
 	// 获取被选中的记录
 	var rows = $("#goodsListTable").bootstrapTable('getSelections');
+	alert(rows[0].equPicture);
 	if (rows.length == 0) {
 		alert("请先选择要修改的记录!");
 		return;
 	} else if (rows.length == 1) {
-		$("#userId").val(rows[0].u_id);
-		$("#userName").val(rows[0].userName);
-		$("#userPassWord").val(rows[0].userPassWord);
-		$("#email").val(rows[0].email);
-		$("#telephone").val(rows[0].telephone);
-		$("#userStatus").val(rows[0].userStatus);
-		$("#addressName").val(rows[0].addressName);
-		$("#address").val(rows[0].address);
-		$("#type").val(rows[0].type);
+		$("#eid").val(rows[0].e_id);
+		$("#equName").val(rows[0].equName);
+		$("#sellPrice").val(rows[0].sellPrice);
+		$("#marketPrice").val(rows[0].marketPrice);
+		$("#number").val(rows[0].number);
+		$("#sellNumber").val(rows[0].sellNumber);
+		$("#isHot").val(rows[0].isHot);
+		$("#isNew").val(rows[0].isNew);
+		$("#equDescription").val(rows[0].equDescription);
+		$("#showImage").attr("src", ctx + "/" + rows[0].equPicture);
+		$("#cateSecId").val(rows[0].cateSecId);
+		$("#uid").val(rows[0].uid);
+		$("#status").val(rows[0].status);
 		$("#updateModal").modal({
 			show : true
 		});
@@ -258,17 +164,6 @@ $(document).on('click', '#updateShowAccount', function(e) {
 /* 确认修改操作 */
 $(document).on('click', '#sureSumbit', function(e) {
 	// 获取被选中的记录
-	var userType = $("#getUserType").val();
-	var type = $("#type").val();
-	var status = $("#userStatus").val();
-	if (userType == 2) {
-		updateAccountAjax();
-	} else if (userType <= type && userType != 2) {
-		alert("等级不够,无法修改抱歉");
-	} else if (type < 0 || type > 3 || status < 0 || status > 1) {
-		alert("请检查type和status,");
-	} else
-		updateAccountAjax();
 })
 
 function updateAccountAjax() {
@@ -293,6 +188,51 @@ function updateAccountAjax() {
 	$('#goodsListTable').bootstrapTable('refresh');
 }
 
+function enableAccountAjax(id) {
+	$.post(ctx + "/updateStatus", {
+		"id" : id,
+		"status" : 1,
+	}, function(data) {
+		if (data.success == true) {
+			alert("success");
+			$('#goodsListTable').bootstrapTable('refresh');
+		}
+	})
+}
+
+/* 批量删除 */
+$(document).on('click', '#selectMoreDelete', function(e) {
+	// 获取所有被选中的记录
+	var rows = $("#goodsListTable").bootstrapTable('getSelections');
+	if (rows.length == 0) {
+		alert("请先选择要删除的记录!");
+		return;
+	}
+	var ids = '';
+	for (var i = 0; i < rows.length; i++) {
+		ids += rows[i]['e_id'] + ",";
+	}
+	ids = ids.substring(0, ids.length - 1);
+	if (confirm("请谨慎操作,确定删除?")) {
+		deleteMore(ids);
+	}
+
+});
+
+function deleteMore(ids) {
+
+	$.post(ctx + "/deleteMoreAccount", {
+		"id" : ids
+	}, function(data) {
+		if (data.success == true) {
+			alert("成功操作！")
+			$('#goodsListTable').bootstrapTable('refresh');
+		} else {
+			alert("亲,操作失败！")
+		}
+	});
+}
+
 /* 新增数据 */
 $(document).on('click', '#addAccount', function(e) {
 	// 获取被选中的记录
@@ -304,8 +244,6 @@ $(document).on('click', '#addAccount', function(e) {
 	} else
 		alert("不是管理员");
 })
-
-
 
 function queryParams(params) {
 	var temp = { // 这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的

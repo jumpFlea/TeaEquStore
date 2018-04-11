@@ -47,14 +47,20 @@
 					</div>
 					<div class="logo-element">H+</div>
 				</li>
-				<li><a href="${ctx}/page/userManager"><i class="fa fa-table"></i> <span class="nav-label">用户管理</span><span class="fa arrow"></span></a>
+				<li><a class="J_iframe" href="javascript:;"> <i class="fa fa-user"></i> <span class="nav-label">用户管理</span><span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a class="J_menuItem" href="${ctx}/page/jumpLogin">查看用户 <!--<span class="label label-danger pull-right">推荐</span>--></a></li>
+						<li><a class="J_menuItem" href="${ctx}/page/userIframe">查看用户 </a></li>
 					</ul></li>
-				<li><a href="#"> <i class="fa fa-home"></i> <span class="nav-label">主页</span> <span class="fa arrow"></span>
+				<li><a class="J_iframe" href="#"> <i class="fa fa-edit"></i> <span class="nav-label">商品管理</span> <span class="fa arrow"></span>
 				</a>
 					<ul class="nav nav-second-level">
-						<li><a class="J_menuItem" href="index_v1.html" data-index="0">主页示例一</a></li>
+						<li><a class="J_menuItem" href="${ctx}/page/goodsIframe" id="lookGoods">查看商品 </a></li>
+						<li><a class="J_menuItem" href="${ctx}/backgoods/backJumpRelease" id="lookGoods">发布商品</a></li>
+					</ul></li>
+				<li><a class="J_iframe" href="#"> <i class="fa fa-pencil"></i> <span class="nav-label">分类管理</span> <span class="fa arrow"></span>
+				</a>
+					<ul class="nav nav-second-level">
+						<li><a class="J_menuItem" href="${ctx}/page/goodsIframe" id="lookGoods">查看分类 </a></li>
 					</ul></li>
 
 			</ul>
@@ -159,11 +165,11 @@
 				<a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
 			</div>
 			<div class="row J_mainContent" id="content-main">
-				<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${ pageContext.request.contextPath }/page/userIframe" frameborder="0" data-id="index_v1.html" seamless></iframe>
+				<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${ pageContext.request.contextPath }/page/userIframe" frameborder="0" data-id="" seamless></iframe>
 			</div>
 			<div class="footer">
 				<div class="pull-right">
-					&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>
+					&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank"></a>
 				</div>
 			</div>
 		</div>
@@ -360,5 +366,7 @@
 	<script src="${ctx}/js/backstage/hplus.min.js?v=4.1.0"></script>
 	<script type="text/javascript" src="${ctx}/js/backstage/contabs.min.js"></script>
 	<script src="${ctx}/js/backstage/pace.min.js"></script>
+	<%-- <script src="${ctx}/js/backstage/iframe_goods.js"></script> --%>
+
 </body>
 </html>

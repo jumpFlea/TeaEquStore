@@ -2,6 +2,7 @@ package com.dy.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ import com.dy.model.Category;
 import com.dy.model.Categorysecond;
 import com.dy.model.Goods;
 import com.dy.model.Page;
+import com.dy.model.User;
 import com.dy.service.GoodsService;
 
 /**
@@ -83,17 +85,28 @@ public class GoodsController {
 
 	}
 
-	/* 发布商品 */
+	/* 前台发布商品 */
 	@RequestMapping("/releaseGoods")
-	public String releaseGoods(MultipartFile upload, Goods good) {
-
+	public String releaseGoods(MultipartFile upload, Goods goods, HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute("user");
+		
+		if (user != null) {
+			goods.setUid(user.getU_id());
+		} else {
+			return "userProve";
+		}
+		if(user.getType()==1||user.getType()==2){
+			goods.setStatus(1);
+		}else
+			goods.setStatus(0);
+			goods.setReleaseTime(new Date());
 		if (!upload.isEmpty()) {
 			String path = "C:\\Users\\Administrator\\git\\TeaEquStore\\TeaEquStore\\src\\main\\webapp\\resource\\images\\releasepic\\";
 			// 新的图片名称,随机获取一个值并赋予.jpg的后缀
 			String newFileName = UUID.randomUUID() + ".jpg";
 			// Name:写进数据库中的image地址
 			String dbName = "images/releasepic/" + newFileName;
-			good.setEquPicture(dbName);
+			goods.setEquPicture(dbName);
 			// 新的图片
 			File newFile = new File(path + newFileName);
 			try {
@@ -105,13 +118,9 @@ public class GoodsController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			goodsService.insertGoods(goods);
 		}
 		return "release_goods";
 	}
-	
-	
-	
-	
-	
 
 }

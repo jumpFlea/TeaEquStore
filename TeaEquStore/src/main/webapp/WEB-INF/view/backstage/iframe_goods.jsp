@@ -38,14 +38,14 @@
 		</div>
 		<div class="panel-body">
 			<div class="list-op" id="list_op">
-				<button type="button" class="btn btn-info" id="addAccount">
-					<span class="glyphicon glyphicon-plus"></span>增加
-				</button>
-				<button type="button" class="btn btn-info" id="updateShowAccount">
+				<button type="button" class="btn btn-info" id="updateShowGoods">
 					<span class="glyphicon glyphicon-plus"></span>修改
 				</button>
 				<button type="button" class="btn btn-info" id="selectMoreDelete">
 					<span class="glyphicon glyphicon-plus"></span>批量删除&nbsp;&nbsp;
+				</button>
+				<button type="button" class="btn btn-info" id="updateMoreGoods">
+					<span class="glyphicon glyphicon-plus"></span>批量审核&nbsp;&nbsp;
 				</button>
 			</div>
 		</div>
@@ -64,38 +64,66 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h4 class="modal-title" id="myModalLabel">当前用户</h4>
+					<h4 class="modal-title" id="myModalLabel">当前商品:</h4>
 				</div>
 				<div class="modal-body">
 					<form id='searchForm' class="bs-example bs-example-form" role="form">
 						<div class="input-group" style="width: 100%">
-							<input type="hidden" class=" form-control" name="userName" id="userId"> <span class="input-group-addon text-center" style="width: 95px">用户名<i class="icon-th"></i></span> <input
-								type="text" class=" form-control" name="userName" id="userName">
+							<input type="hidden" class=" form-control" name="eid" id="eid"> <span class="input-group-addon text-center" style="width: 95px">器材名<i class="icon-th"></i></span> <input type="text"
+								class=" form-control" name="equName" id="equName">
 						</div>
 						<div class="input-group" style="width: 100%">
-							<span class="input-group-addon" style="width: 95px">密码：<i class="icon-th"></i></span> <input type="text" class="form-control" name="userPassWord" id="userPassWord">
+							<span class="input-group-addon" style="width: 95px">出售价格<i class="icon-th"></i></span> <input type="text" class="form-control" name="sellPrice" id="sellPrice">
 						</div>
 
 						<div class="input-group" style="width: 100%">
-							<span class="input-group-addon text-center" style="width: 95px">邮件<i class="icon-th"></i></span> <input type="text" class=" form-control" name="email" id="email">
+							<span class="input-group-addon text-center" style="width: 95px">市场价格<i class="icon-th"></i></span> <input type="text" class=" form-control" name="marketPrice" id="marketPrice">
 						</div>
 						<div class="input-group" style="width: 100%">
 
-							<span class="input-group-addon text-center" style="width: 95px">电话号码<i class="icon-th"></i></span> <input type="text" class=" form-control" name="telephone" id="telephone">
+							<span class="input-group-addon text-center" style="width: 95px">存留数量<i class="icon-th"></i></span> <input type="text" class=" form-control" name="number" id="number">
 						</div>
 						<div class="input-group" style="width: 100%">
-							<span class="input-group-addon text-center" style="width: 95px">状态<i class="icon-th"></i></span> <input type="text" class=" form-control" name="userStatus" id="userStatus">
+							<span class="input-group-addon text-center" style="width: 95px">出售数量<i class="icon-th"></i></span> <input type="text" class=" form-control" name="sellNumber" id="sellNumber">
 						</div>
 						<div class="input-group" style="width: 100%">
-							<span class="input-group-addon text-center" style="width: 95px">收货人姓名<i class="icon-th"></i></span> <input type="text" class=" form-control" name="addressName" id="addressName">
+							<span class="input-group-addon text-center" style="width: 95px">是否热销<i class="icon-th"></i></span> <input type="text" class=" form-control" name="isHot" id="isHot">
 						</div>
 						<div class="input-group" style="width: 100%">
 
-							<span class="input-group-addon text-center" style="width: 95px">收货人地址<i class="icon-th"></i></span> <input type="text" class=" form-control" name="address" id="address">
+							<span class="input-group-addon text-center" style="width: 95px">是否新品<i class="icon-th"></i></span> <input type="text" class=" form-control" name="isNew" id="isNew">
 						</div>
 						<div class="input-group" style="width: 100%">
-							<span class="input-group-addon text-center" style="width: 95px">类型<i class="icon-th"></i></span> <input type="text" class=" form-control" name="type" id="type">
+							<span class="input-group-addon text-center" style="width: 95px">商品描述<i class="icon-th"></i></span> <input type="text" class=" form-control" name="equDescription" id="equDescription">
 						</div>
+						<div class="input-group" style="width: 100%">
+							<span class="input-group-addon text-center" style="width: 95px">二级id名<i class="icon-th"></i></span> <input type="text" class=" form-control" name="cateSecId" id="cateSecId">
+						</div>
+						<div class="input-group" style="width: 100%">
+							<span class="input-group-addon text-center" style="width: 95px">商品:</span>
+							<div class="form-group draggable">
+								<label class="col-sm-3 control-label"></label>
+								<div class="col-sm-9">
+
+									<p class="input-wrap" style="margin-top: 7px">
+										<a onClick="$('input[name=upload]').click()">添加图片</a>
+									<div id="release_pic"><img src="images/common/interior-150x150.jpg" id="showImage"></div>
+									<input class="release_input" type="file" name="upload" onchange="previewImage(this)" style="display: none"> <span class="cover-show"></span>
+									</p>
+
+								</div>
+							</div>
+						</div>
+						<div class="input-group" style="width: 100%">
+							<span class="input-group-addon text-center" style="width: 95px">发布人id:<i class="icon-th"></i></span> <input type="text" class=" form-control" name="uid" id="uid">
+						</div>
+						<div class="input-group" style="width: 100%">
+							<span class="input-group-addon text-center" style="width: 95px">当前状态<i class="icon-th"></i></span> <input type="text" class=" form-control" name="status" id="status">
+						</div>
+						<div class="input-group" style="width: 100%">
+							<span class="input-group-addon text-center" style="width: 95px">发布时间<i class="icon-th"></i></span> <input type="text" class=" form-control" name="type" id="type">
+						</div>
+
 					</form>
 
 
@@ -111,5 +139,52 @@
 	</div>
 	<!-- /.modal -->
 
-</body>
-</html>
+	<script type="text/javascript">
+		function previewImage(file) {
+			var MAXWIDTH = 180;
+			var MAXHEIGHT = 180;
+			var div = document.getElementById('release_pic');
+			if (file.files && file.files[0]) {
+				div.innerHTML = '<img id=imghead>';
+				var img = document.getElementById('imghead');
+				img.onload = function() {
+					var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+					img.width = rect.width;
+					img.height = rect.height;
+					img.style.marginLeft = rect.left + 'px';
+					img.style.marginTop = rect.top + 'px';
+				}
+				var reader = new FileReader();
+				reader.onload = function(evt) {
+					img.src = evt.target.result;
+				}
+				reader.readAsDataURL(file.files[0]);
+			}
+		}
+
+		function clacImgZoomParam(maxWidth, maxHeight, width, height) {
+			var param = {
+				top : 0,
+				left : 0,
+				width : width,
+				height : height
+			};
+			if (width > maxWidth || height > maxHeight) {
+				rateWidth = width / maxWidth;
+				rateHeight = height / maxHeight;
+				if (rateWidth > rateHeight) {
+					param.width = maxWidth;
+					param.height = Math.round(height / rateWidth);
+				} else {
+					param.width = Math.round(width / rateHeight);
+					param.height = maxHeight;
+				}
+			}
+			param.left = Math.round((maxWidth - param.width) / 2);
+			param.top = Math.round((maxHeight - param.height) / 2);
+			return param;
+		}
+</script>
+		</body>
+		</html>
+	

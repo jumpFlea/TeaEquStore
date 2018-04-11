@@ -2,6 +2,8 @@ package com.dy.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.dy.model.Category;
 import com.dy.model.Categorysecond;
 import com.dy.model.Goods;
@@ -28,8 +30,24 @@ public interface GoodsService {
 
 	/* 提交订单时更改商品数量 */
 	void updateGoodsNum(List<OrderItems> orderItems);
+	
+	
+	/*插入商品*/
+	void insertGoods(Goods goods);
 
 	/* 后台操作 */
 	/*查找所有用户*/
 	List<Goods> backSelectAllGoods(String keyWord,PageBounds page);
+	
+	/*审核商品*/
+	void updateStatus(String id,int status);
+	
+	/*批量审核商品*/
+	void updateMoreGoods(String id,int status);
+	
+	/*批量删除商品*/
+	void deleteMoreGoods(String id);
+	
+	
+	
 }

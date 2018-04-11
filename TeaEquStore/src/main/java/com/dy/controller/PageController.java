@@ -33,6 +33,14 @@ public class PageController {
 		return "backstage/iframe_user";	
 	}
 	
+	@RequestMapping("/goodsIframe")
+	public String goodsInframe(){
+		return "backstage/iframe_goods";
+	}
 	
+	/*@RequestMapping("/backreleaseGoods")
+	public String backreleaseGoods(){
+		return "backstage/backrelease_goods";
+	}*/
 	
 }

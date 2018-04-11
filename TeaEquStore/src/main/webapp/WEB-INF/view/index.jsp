@@ -56,7 +56,13 @@
 						<div id="logo" class="group">
 							<a href="goodsShow?cateName=&mainPage=1&needPage=1&cateSecName=&search=" title="教学器材"> <span class="logo-title">教学器材专卖店</span>
 							</a>
-							<p class="logo-description">TeaEquStore</p>
+							<p class="logo-description">
+								<c:if test="${user!=null}">欢迎&nbsp;&nbsp;<font color="red">${user.userName}</font>
+									<c:if test="${user.type==0}">&nbsp;&nbsp;用户</c:if>
+									<c:if test="${user.type==1}">&nbsp;&nbsp;管理员</c:if>
+									<c:if test="${user.type==2}">&nbsp;&nbsp;超级管理员</c:if>
+								</c:if>
+							</p>
 						</div>
 						<!-- END LOGO -->
 						<!-- START LINKSBAR -->
@@ -68,6 +74,9 @@
 									<span class="empty">没有东西在购物车内</span>
 								</div></li>
 							<li><a href="showOrderList?page=1">我的订单</a> |</li>
+							<c:if test="${user.type==1||user.type==2}">
+								<li><a href="page/userManager">进入后台</a> |</li>
+							</c:if>
 							<li class="icon lock"><a href="#">退出</a> |</li>
 						</ul>
 						<div class="copyrights"></div>
@@ -91,41 +100,17 @@
 									</ul></li>
 								<!--遍历出主页下的一二级分类end-->
 
-								<li class="megamenu"><a href="#">购物</a>
-									<ul class="sub-menu">
-
-									</ul></li>
-								<li><a href="my-account.html">我的账户</a>
-									<ul class="sub-menu">
-
-									</ul></li>
-								<li><a href="shop.html">店</a></li>
-								<li><a href="blog.html">Blog</a>
-									<ul class="sub-menu">
-
-									</ul></li>
-								<li><a href="#">Pages</a>
-									<ul class="sub-menu">
-
-
-									</ul></li>
-								<li><a href="typography.html">简码</a>
-									<ul class="sub-menu">
-
-									</ul></li>
-							</ul>
+								<li class="megamenu"><a href="jumpRelease">发布商品</a></li>
+								<li class="megamenu"><a href="shop.html">我的资料</a></li>
 						</div>
 						<!-- END NAV -->
 
 						<!-- START SEARCH FORM -->
 						<form role="search" method="post" id="searchform" action="goodsShow" class="group">
 							<div>
-								<input type="hidden" name="cateName" value="${cateName}"> 
-								<input type="hidden" name="cateSecName" value="${cateSecName}">
-								<input type="hidden" name="mainPage" value="1">
-								<input type="hidden" name="needPage" value="1"> 
-								<label class="screen-reader-text" for="s">search</label>
-								<input type="text" value="" name="search" id="s" /> <input type="submit" id="searchsubmit" value="&gt;" /> <input type="hidden" name="post_type" value="product" />
+								<input type="hidden" name="cateName" value="${cateName}"> <input type="hidden" name="cateSecName" value="${cateSecName}"> <input type="hidden" name="mainPage" value="1">
+								<input type="hidden" name="needPage" value="1"> <label class="screen-reader-text" for="s">search</label> <input type="text" value="" name="search" id="s" /> <input type="submit"
+									id="searchsubmit" value="&gt;" /> <input type="hidden" name="post_type" value="product" />
 							</div>
 						</form>
 						<!-- END SEARCH FORM -->
@@ -209,7 +194,7 @@
 								<div class="boxed-content group">
 									<div class="box-title group">
 										<h3>主打产品</h3>
-										<p>our selection of specials items</p>
+										<p></p>
 									</div>
 									<div class="box-content group">
 										<ul class="products">
@@ -218,7 +203,7 @@
 														<div class="thumbnail">
 															<img width="150" height="150" src="${g.equPicture}" class="attachment-shop_small wp-post-image" alt="001" title="001" />
 															<div class="thumb-shadow"></div>
-															<strong class="below-thumb">Elegant Glasses</strong>
+															<strong class="below-thumb">${g.equName}</strong>
 														</div> <span class="price">&#36;${g.sellPrice}</span>
 												</a>
 													<div class="buttons">

@@ -27,11 +27,11 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmgSlFyG16+1iysFUOV6oYTZItoDoqWj78VRht6FS4gtsAVzJXwjArsEwmu9ZWfDrxIbnEtEJDCHaKmquDadZHA0F/hsCeNx/vkUxBymxNNTVLQ5t+UHyCOp4/+jZHXYDvqkds5F9Rn+0hVfndsVzpPOGeas0D8ShkfRJJZOkehBpUYc1rBOrJ5j8r6D7SKpf7TMBn+N9MX3KmhIf2qFVYBjrCcOebfyShI3n+Lj/5YAySWAZOosep0eeSOuto22CXEIwNciIpi2/SWN13XUNIXJwoD1dAqepeisS+v1sAzCX0A7OouhhD6HK4P0mRpbh8bv8DbHZj0IVpFepF59suwIDAQAB";
 
 	// 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    /*efxvqy.8ahpmw*/
-	public static String notify_url = "http://hyq3jn.natappfree.cc/TeaEquStore/showOrderList";
+    /*efxvqy.8ahpmw.6gknqd.w93brj*/
+	public static String notify_url = "http://w93brj.natappfree.cc/TeaEquStore/notify_url";
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String return_url = "http://hyq3jn.natappfree.cc/TeaEquStore/returnUrl";
+	public static String return_url = "http://w93brj.natappfree.cc/TeaEquStore/return_url";
 
 	// 签名方式
 	public static String sign_type = "RSA2";
