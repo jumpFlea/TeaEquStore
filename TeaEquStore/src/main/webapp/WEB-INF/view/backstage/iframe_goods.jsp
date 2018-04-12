@@ -18,6 +18,7 @@
 <script src="${ctx}/js/backstage/bootstrap-table.min.js"></script>
 <script src="${ctx}/js/backstage/bootstrap-table-mobile.min.js"></script>
 <script src="${ctx}/js/backstage/locale/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/backstage/ajaxfileupload.js"></script>
 <script type="text/javascript" src="${ctx}/js/backstage/iframe_goods.js"></script>
 </head>
 
@@ -107,8 +108,8 @@
 
 									<p class="input-wrap" style="margin-top: 7px">
 										<a onClick="$('input[name=upload]').click()">添加图片</a>
-									<div id="release_pic"><img src="images/common/interior-150x150.jpg" id="showImage"></div>
-									<input class="release_input" type="file" name="upload" onchange="previewImage(this)" style="display: none"> <span class="cover-show"></span>
+									<div id="release_pic"><img src="images/common/interior-150x150.jpg" id="showImage" style="width:180px;height:180px;"></div>
+									<input class="release_input" type="file" id="upload" name="upload" onchange="previewImage(this)" style="display: none"> <span class="cover-show"></span>
 									</p>
 
 								</div>
@@ -121,7 +122,7 @@
 							<span class="input-group-addon text-center" style="width: 95px">当前状态<i class="icon-th"></i></span> <input type="text" class=" form-control" name="status" id="status">
 						</div>
 						<div class="input-group" style="width: 100%">
-							<span class="input-group-addon text-center" style="width: 95px">发布时间<i class="icon-th"></i></span> <input type="text" class=" form-control" name="type" id="type">
+							<span class="input-group-addon text-center" style="width: 95px">发布时间<i class="icon-th"></i></span> <input type="text" class=" form-control" name="releaseTime" id="releaseTime">
 						</div>
 
 					</form>

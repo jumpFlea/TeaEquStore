@@ -57,17 +57,25 @@ $(document).ready(function() {
 			align : 'center',
 			valign : 'middle',
 			formatter : function(value, row, index) {
-				if (row.number <=5) {
-					return '<label style="color: red">'+row.number+'</label>';
+				if (row.number <= 5) {
+					return '<label style="color: red">' + row.number + '</label>' + '&nbsp;&nbsp;&nbsp;<span class="label label-warning">告急</span>';
 				} else {
-					return '<label style="color: blue">'+row.number+'</label>';
+					return '<label style="color: blue">' + row.number + '</label>';
 				}
 			}
 		}, {
 			field : 'sellNumber',
 			title : '销售数量',
 			align : 'center',
-			valign : 'middle'
+			valign : 'middle',
+			field : 'number',
+			formatter : function(value, row, index) {
+				if (row.sellNumber >= 50) {
+					return '<label style="color: red">' + row.sellNumber + '</label>' + '&nbsp;&nbsp;&nbsp;<span class="label label-danger">火热</span>';
+				} else {
+					return '<label>' + row.sellNumber + '</label>';
+				}
+			}
 		}, {
 			field : 'status',
 			title : '状态',
@@ -135,7 +143,6 @@ function closeStatus(id) {
 $(document).on('click', '#updateShowGoods', function(e) {
 	// 获取被选中的记录
 	var rows = $("#goodsListTable").bootstrapTable('getSelections');
-	alert(rows[0].equPicture);
 	if (rows.length == 0) {
 		alert("请先选择要修改的记录!");
 		return;
@@ -153,6 +160,8 @@ $(document).on('click', '#updateShowGoods', function(e) {
 		$("#cateSecId").val(rows[0].cateSecId);
 		$("#uid").val(rows[0].uid);
 		$("#status").val(rows[0].status);
+		$("#status").val(rows[0].status);
+		$("#releaseTime").val(rows[0].releaseTime);
 		$("#updateModal").modal({
 			show : true
 		});
@@ -163,7 +172,39 @@ $(document).on('click', '#updateShowGoods', function(e) {
 })
 /* 确认修改操作 */
 $(document).on('click', '#sureSumbit', function(e) {
-	// 获取被选中的记录
+	$.ajaxFileUpload({
+		type : "POST",
+		url : ctx + "/backgoods/updateSelectGoods",
+		data : {
+			e_id : $("#eid").val(),
+			equName : $("#equName").val(),
+			sellPrice : $("#sellPrice").val(),
+			marketPrice : $("#marketPrice").val(),
+			number : $("#number").val(),
+			sellNumber : $("#sellNumber").val(),
+			isHot : $("#isHot").val(),
+			isNew : $("#isNew").val(),
+			equDescription : $("#equDescription").val(),
+			cateSecId : $("#cateSecId").val(),
+			uid : $("#uid").val(),
+			status : $("#status").val()
+		/* releaseTime : $("#releaseTime").val() */
+		},// 要传到后台的参数，没有可以不写
+		secureuri : false,// 是否启用安全提交，默认为false
+		fileElementId : 'upload',// 文件选择框的id属性
+		dataType : 'json',// 服务器返回的格式
+		async : false,
+		success : function(data) {
+			if (data.success == true) {
+				alert("success");
+			} else {
+				alert("亲，fail");
+			}
+		},
+	});
+	$("#updateModal").modal("hide");
+	$('#goodsListTable').bootstrapTable('refresh');
+
 })
 
 function updateAccountAjax() {
@@ -180,12 +221,13 @@ function updateAccountAjax() {
 	}, function(data) {
 		if (data.success == yes) {
 			alert("success");
+			$("#updateModal").modal("hide");
+			$('#goodsListTable').bootstrapTable('refresh');
 		} else {
 			alert("sorry");
 		}
 	});
-	$("#updateModal").modal("hide");
-	$('#goodsListTable').bootstrapTable('refresh');
+
 }
 
 function enableAccountAjax(id) {

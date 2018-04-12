@@ -149,4 +149,10 @@ public class GoodsServiceImpl implements GoodsService {
 		goodsDao.deleteMoreGoods(id);
 	}
 
+	@Transactional
+	public void updateSelectGoods(Goods goods) {
+		// TODO Auto-generated method stub
+		goodsDao.updateSelectGoods(goods);
+	}
+
 }

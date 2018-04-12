@@ -58,5 +58,9 @@ public interface GoodsDao {
 
 	/* 删除商品 */
 	void deleteMoreGoods(String id);
+	
+	/*修改商品*/
+	void updateSelectGoods(Goods goods);
+	
 
 }

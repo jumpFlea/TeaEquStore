@@ -37,7 +37,6 @@ public class PayForController {
 	@RequestMapping("/payforOrder")
 	public void payforOrder(Model model, Integer id, HttpServletRequest request, HttpServletResponse rep) throws AlipayApiException, IOException {
 
-		System.out.println(id);
 		// 得到订单类的信息
 		order = orderService.findByOrderId(id);
 

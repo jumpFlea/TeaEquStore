@@ -117,7 +117,8 @@
 		<foreach collection="list" item="orderItems" separator=";">
 			UPDATE equipment
 			<set>
-				number = number - #{orderItems.goodNum}
+				number = number - #{orderItems.goodNum},
+				sellNumber = sellNumber + #{orderItems.goodNum}
 			</set>
 			<where>
 				e_id = #{orderItems.good.e_id}
@@ -158,7 +159,25 @@
 		delete from equipment where e_id in (#{1});
 	</delete>
 	
+	<!-- /*修改商品*/ -->
 	
+	<update id="updateSelectGoods" >
+		update equipment set equName = #{equName}, 
+		sellPrice = #{sellPrice},
+		marketPrice = #{marketPrice},
+		number= #{number},
+		sellNumber= #{sellNumber},
+		isHot= #{isHot},
+		isNew= #{isNew},
+		equDescription= #{equDescription},
+		vendorName= #{vendorName},
+		equPicture= #{equPicture}, 
+		cateSecId= #{cateSecId},
+		uid=#{uid},
+		`status`=#{status},
+		releaseTime=#{releaseTime}
+		where e_id = #{e_id}
+	</update>
 	
 	
 	

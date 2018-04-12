@@ -38,6 +38,11 @@ public class PageController {
 		return "backstage/iframe_goods";
 	}
 	
+	@RequestMapping("/echartsIframe")
+	public String echartsIframe(){
+		return "backstage/iframe_echarts";
+	}
+	
 	/*@RequestMapping("/backreleaseGoods")
 	public String backreleaseGoods(){
 		return "backstage/backrelease_goods";

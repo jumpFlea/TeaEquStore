@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.dy.model.Categorysecond;
 import com.dy.model.Goods;
 import com.dy.model.User;
@@ -100,11 +101,68 @@ public class BackGoodsController {
 		return "backstage/backrelease_goods";
 	}
 
+	/* 更新商品 */
+	@RequestMapping("/updateSelectGoods")
+	public void updateSelectGoods(MultipartFile upload, Goods goods, HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		 goods.setReleaseTime(new Date()); 
+		if (!upload.isEmpty()) {
+			String path = "C:\\Users\\Administrator\\git\\TeaEquStore\\TeaEquStore\\src\\main\\webapp\\resource\\images\\backreleasepic\\";
+			// 新的图片名称,随机获取一个值并赋予.jpg的后缀
+			String newFileName = UUID.randomUUID() + ".jpg";
+			// Name:写进数据库中的image地址
+			String dbName = "images/backreleasepic/" + newFileName;
+			goods.setEquPicture(dbName);
+			// 新的图片
+			File newFile = new File(path + newFileName);
+			try {
+				upload.transferTo(newFile);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			goodsService.updateSelectGoods(goods);
+		}
+		JsonUtil.sendSuccessJson(response);
+	}
+
 	// 批量删除用户
 	@RequestMapping("/deleteMoreGoods")
 	public void deleteMoreGoods(HttpServletResponse response, String id) throws IOException {
 		goodsService.deleteMoreGoods(id);
 		JsonUtil.sendSuccessJson(response);
+	}
+
+	/**
+	 * 去饼图
+	 *@author DY
+	 *2018年4月12日  上午12:40:26
+	 *@return
+	 *
+	 */
+	@RequestMapping("/go-echarts")
+	public String goEcharts(){
+		return "backstage/iframe_echarts";
+	}
+	
+	
+	// 销售饼图
+	@RequestMapping("/echarts")
+	public void echarts(HttpServletResponse response) throws IOException {
+		try{
+			JSONObject result = new JSONObject();
+			PageBounds pageBounds = new PageBounds();
+			List<Goods> list = goodsService.backSelectAllGoods(null, pageBounds);
+			result.put("list", list);
+			JsonUtil.sendSuccessJson(response, result);
+		}
+         catch(Exception e){
+        	 e.printStackTrace();
+        	 JsonUtil.sendErrorJson(response, e.getMessage());
+         }
 	}
 	//
 	// // 修改用户或增加用户
