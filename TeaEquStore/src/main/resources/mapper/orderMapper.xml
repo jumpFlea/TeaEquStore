@@ -19,9 +19,10 @@
 		</foreach>
 	</insert>
 
-	<!-- 根据此用户的id查询订单的记录数 -->
+	<!-- 根据此用户的id查询订单项里面商品的记录数 -->
 	<select id="findOrderNum" parameterType="User" resultType="int">
-		select count(oid) FROM orders where uid=#{u_id}
+		select count(itemsId) from orders o,orderitems oi
+		where o.oid = oi.oid and uid = #{u_id}
 	</select>
 
 	<!--分页查询出所有订单 -->
@@ -68,13 +69,19 @@
 	<select id="findByOrderId" parameterType="Integer" resultMap="orderList">
 		select o.*,oi.itemsId,oi.goodNum,oi.subtotal,oi.eid,
 		e.e_id,e.equName,e.sellPrice,e.equPicture,
-		u.u_id,u.addressName,u.address as u_address,u.telephone
+		u.u_id,u.addressName,u.address as
+		u_address,u.telephone
 		FROM orders o,orderitems oi,equipment e,usertable u
 		where o.oid=#{id} AND o.oid = oi.oid and u.u_id=o.uid
 		AND e.e_id = oi.eid
 	</select>
-	
-	<!--支付成功后修改订单状态-->
+
+	<!--进入支付后修改支付收获信息 -->
+	<update id="updateReceiptInformation" parameterType="Orders">
+		update orders set address=#{address}, name=#{name},phone=#{phone} where oid = #{oid}
+	</update>
+
+	<!--支付成功后修改订单状态 -->
 	<update id="payforOrder" parameterType="Orders">
 		update orders set orderState=#{orderState}, trade_no=#{trade_no} where oid = #{oid}
 	</update>

@@ -82,6 +82,13 @@ public class OrderServiceImpl implements OrderService{
 		
 		return orderDao.findByOrderId(id);
 	}
+	
+	//更改订单里面的收货人信息
+	@Override
+	public void updateReceiptInformation(Orders orders) {
+		// TODO Auto-generated method stub
+		orderDao.updateReceiptInformation(orders);
+	}
 
 	
 	
@@ -90,6 +97,8 @@ public class OrderServiceImpl implements OrderService{
 		// TODO Auto-generated method stub
 		orderDao.payforOrder(order);
 	}
+
+	
 
 	
 	

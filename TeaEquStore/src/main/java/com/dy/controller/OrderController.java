@@ -66,6 +66,7 @@ public class OrderController {
 		//更新数据库的数据
 		List<OrderItems> orderItems = new ArrayList<>(order.getOrderItems());
 		goodsService.updateGoodsNum(orderItems);
+		cart.clearCart();
 		model.addAttribute("order",order);
 		return "order";
 	}

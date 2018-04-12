@@ -54,10 +54,10 @@ public interface GoodsDao {
 	void updateStatus(String id, int status);
 	
 	/*批量审核商品*/
-	void updateMoreGoods(String id,int status);
+	void updateMoreGoods(@Param(value = "id") String id,int status);
 
 	/* 删除商品 */
-	void deleteMoreGoods(String id);
+	void deleteMoreGoods(@Param(value = "id")String id);
 	
 	/*修改商品*/
 	void updateSelectGoods(Goods goods);

@@ -22,7 +22,7 @@ public interface UserDao {
 	
 	void deleteAccount(int id);
 	
-	void deleteMoreAccount(String id);
+	void deleteMoreAccount(@Param(value="id")String id);
 	
 	void updateAccount(User user);
 	

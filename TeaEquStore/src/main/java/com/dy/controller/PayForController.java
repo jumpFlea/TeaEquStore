@@ -35,10 +35,11 @@ public class PayForController {
 
 	// 提交订单到支付宝支付
 	@RequestMapping("/payforOrder")
-	public void payforOrder(Model model, Integer id, HttpServletRequest request, HttpServletResponse rep) throws AlipayApiException, IOException {
+	public void payforOrder(Model model, Orders orders, HttpServletRequest request, HttpServletResponse rep) throws AlipayApiException, IOException {
 
 		// 得到订单类的信息
-		order = orderService.findByOrderId(id);
+		order = orderService.findByOrderId(orders.getOid());
+		orderService.updateReceiptInformation(orders);
 
 		// 获得初始化的AlipayClient
 		AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);

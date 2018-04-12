@@ -49,7 +49,7 @@
 
 	<!--批量删除用户 -->
 	<delete id="deleteMoreAccount">
-		delete from usertable where u_id in (#{1});
+		delete from usertable where u_id in (${id});
 	</delete>
 
 	<!--修改用户信息 -->

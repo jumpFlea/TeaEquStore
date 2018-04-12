@@ -55,13 +55,22 @@
 				</a>
 					<ul class="nav nav-second-level">
 						<li><a class="J_menuItem" href="${ctx}/page/goodsIframe" id="lookGoods">查看商品 </a></li>
-						<li><a class="J_menuItem" href="${ctx}/backgoods/backJumpRelease" id="lookGoods">发布商品</a></li>
+						<li><a class="J_menuItem" href="${ctx}/backgoods/backJumpRelease" id="releaseGoods">发布商品</a></li>
+						<li><a class="J_menuItem" href="${ctx}/page/go-echarts" id="sellShow">销售情况</a></li>
+					</ul></li>
+				<li><a class="J_iframe" href="#"> <i class="fa fa-edit"></i> <span class="nav-label">订单管理</span> <span class="fa arrow"></span>
+				</a>
+					<ul class="nav nav-second-level">
+						<li><a class="J_menuItem" href="${ctx}/page/goListOrder" id="lookOrderList">订单列表 </a></li>
+						<li><a class="J_menuItem" href="${ctx}/backgoods/backJumpRelease" id="releaseGoods">发布商品</a></li>
+						<li><a class="J_menuItem" href="${ctx}/page/go-echarts" id="sellShow">销售情况</a></li>
 					</ul></li>
 				<li><a class="J_iframe" href="#"> <i class="fa fa-pencil"></i> <span class="nav-label">分类管理</span> <span class="fa arrow"></span>
 				</a>
 					<ul class="nav nav-second-level">
 						<li><a class="J_menuItem" href="${ctx}/page/goodsIframe" id="lookGoods">查看分类 </a></li>
 					</ul></li>
+
 
 			</ul>
 		</div>

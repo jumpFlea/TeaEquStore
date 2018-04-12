@@ -185,6 +185,7 @@ $(document).on('click', '#sureSumbit', function(e) {
 			isHot : $("#isHot").val(),
 			isNew : $("#isNew").val(),
 			equDescription : $("#equDescription").val(),
+			equPicture:$("#showImage").val(),
 			cateSecId : $("#cateSecId").val(),
 			uid : $("#uid").val(),
 			status : $("#status").val()
@@ -197,6 +198,7 @@ $(document).on('click', '#sureSumbit', function(e) {
 		success : function(data) {
 			if (data.success == true) {
 				alert("success");
+				
 			} else {
 				alert("亲，fail");
 			}
@@ -204,7 +206,48 @@ $(document).on('click', '#sureSumbit', function(e) {
 	});
 	$("#updateModal").modal("hide");
 	$('#goodsListTable').bootstrapTable('refresh');
+})
 
+
+/* 批量审核 */
+$(document).on('click', '#updateMoreGoods', function(e) {
+	var rows  = $("#goodsListTable").bootstrapTable('getSelections');
+	if(rows.length==0){
+		alert("请选择数据");
+		return
+	}
+	var ids = '';
+	var status;
+	for(var i = 0 ;i<rows.length;i++){
+		if(rows[0]['status']!=rows[i]['status']){
+			alert("不好意思，您选中的状态不一");
+			return
+		}else{
+			ids +=rows[i]['e_id']+",";  
+		}
+	}
+	alert(ids)
+	if(rows[0]['status']==1){
+		status=0;
+	}else{
+		status=1;
+	}
+	
+	ids = ids.substring(0, ids.length - 1);
+	$.post(ctx+"/backgoods/updateMoreGoods",{
+		id:ids,
+		status:status
+	},function(data){
+		if(data.success==true){
+			alert("success");
+			$("#updateModal").modal("hide");
+			$('#goodsListTable').bootstrapTable('refresh');
+		}else{
+			alert("fail");
+			$("#updateModal").modal("hide");
+			$('#goodsListTable').bootstrapTable('refresh');
+		}
+	});
 })
 
 function updateAccountAjax() {
@@ -263,7 +306,7 @@ $(document).on('click', '#selectMoreDelete', function(e) {
 
 function deleteMore(ids) {
 
-	$.post(ctx + "/deleteMoreAccount", {
+	$.post(ctx + "/backgoods/deleteMoreGoods", {
 		"id" : ids
 	}, function(data) {
 		if (data.success == true) {
@@ -275,17 +318,6 @@ function deleteMore(ids) {
 	});
 }
 
-/* 新增数据 */
-$(document).on('click', '#addAccount', function(e) {
-	// 获取被选中的记录
-	var userType = $("#getUserType").val();
-	if (userType == 2 || userType == 1) {
-		$("#updateModal").modal({
-			show : true
-		});
-	} else
-		alert("不是管理员");
-})
 
 function queryParams(params) {
 	var temp = { // 这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的

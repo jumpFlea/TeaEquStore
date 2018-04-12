@@ -58,8 +58,15 @@ public class BackGoodsController {
 	// 批量审核商品
 	@RequestMapping("/updateMoreGoods")
 	public void updateMoreGoods(HttpServletResponse response, String id, int status) throws IOException {
-		goodsService.updateMoreGoods(id, status);
-		JsonUtil.sendSuccessJson(response);
+		
+		try {
+			goodsService.updateMoreGoods(id, status);
+			JsonUtil.sendSuccessJson(response);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			JsonUtil.sendErrorJson(response, e.getMessage());
+		}
 	}
 
 	/* 跳转到发布页面,并获取二级分类的值 */
@@ -105,7 +112,7 @@ public class BackGoodsController {
 	@RequestMapping("/updateSelectGoods")
 	public void updateSelectGoods(MultipartFile upload, Goods goods, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		 goods.setReleaseTime(new Date()); 
+		goods.setReleaseTime(new Date());
 		if (!upload.isEmpty()) {
 			String path = "C:\\Users\\Administrator\\git\\TeaEquStore\\TeaEquStore\\src\\main\\webapp\\resource\\images\\backreleasepic\\";
 			// 新的图片名称,随机获取一个值并赋予.jpg的后缀
@@ -124,45 +131,31 @@ public class BackGoodsController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			goodsService.updateSelectGoods(goods);
 		}
+		goodsService.updateSelectGoods(goods);
 		JsonUtil.sendSuccessJson(response);
 	}
 
-	// 批量删除用户
+	// 批量删除商品
 	@RequestMapping("/deleteMoreGoods")
 	public void deleteMoreGoods(HttpServletResponse response, String id) throws IOException {
 		goodsService.deleteMoreGoods(id);
 		JsonUtil.sendSuccessJson(response);
 	}
 
-	/**
-	 * 去饼图
-	 *@author DY
-	 *2018年4月12日  上午12:40:26
-	 *@return
-	 *
-	 */
-	@RequestMapping("/go-echarts")
-	public String goEcharts(){
-		return "backstage/iframe_echarts";
-	}
-	
-	
 	// 销售饼图
 	@RequestMapping("/echarts")
 	public void echarts(HttpServletResponse response) throws IOException {
-		try{
+		try {
 			JSONObject result = new JSONObject();
 			PageBounds pageBounds = new PageBounds();
 			List<Goods> list = goodsService.backSelectAllGoods(null, pageBounds);
 			result.put("list", list);
 			JsonUtil.sendSuccessJson(response, result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			JsonUtil.sendErrorJson(response, e.getMessage());
 		}
-         catch(Exception e){
-        	 e.printStackTrace();
-        	 JsonUtil.sendErrorJson(response, e.getMessage());
-         }
 	}
 	//
 	// // 修改用户或增加用户

@@ -124,11 +124,11 @@
 									<div class="total">
 										<em id="promotion"></em> 商品金额: <strong id="effectivePrice">￥${order.total}元 </strong>
 									</div>
-									<form id="orderForm" action="" method="post">
-										<input type="hidden" name="oid" value="" />
+									<form id="orderForm" action="payforOrder" method="post">
+										<input type="hidden" name="oid" value="${order.oid}" />
 										<div class="span24">
 											<p>
-												收货地址：<input name="addr" type="text" value="${ order.user.address}" style="width: 350px" /> <br /> 收货人&nbsp;&nbsp;&nbsp;：<input name="name" type="text" value="${order.user.addressName}"
+												收货地址：<input name="address" type="text" value="${ order.user.address}" style="width: 350px" /> <br /> 收货人&nbsp;&nbsp;&nbsp;：<input name="name" type="text" value="${order.user.addressName}"
 													style="width: 150px" /> <br /> 联系方式：<input name="phone" type="text" value="${order.user.telephone}" style="width: 150px" />
 
 											</p>
@@ -145,8 +145,9 @@
 											</p>
 
 											<p style="text-align: right">
-												<a href="payforOrder?id=${order.oid}"> <img src="${pageContext.request.contextPath}/images/finalbutton.gif" width="204" height="51" border="0" />
-												</a>
+												<%-- <a href="payforOrder?id=${order.oid}"> <img src="${pageContext.request.contextPath}/images/finalbutton.gif" width="204" height="51" border="0" />
+												</a> --%>
+												<button type="submit"><img src="${pageContext.request.contextPath}/images/finalbutton.gif" width="204" height="51" border="0" /></button>
 											</p>
 										</div>
 									</form>

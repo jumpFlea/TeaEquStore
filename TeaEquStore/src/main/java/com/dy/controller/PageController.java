@@ -33,15 +33,36 @@ public class PageController {
 		return "backstage/iframe_user";	
 	}
 	
+	
 	@RequestMapping("/goodsIframe")
 	public String goodsInframe(){
 		return "backstage/iframe_goods";
 	}
 	
-	@RequestMapping("/echartsIframe")
-	public String echartsIframe(){
+
+	/**
+	 * 去饼图
+	 *@author DY
+	 *2018年4月12日  上午12:40:26
+	 *@return
+	 *
+	 */
+	@RequestMapping("/go-echarts")
+	public String goEcharts(){
 		return "backstage/iframe_echarts";
 	}
+	
+	
+	@RequestMapping("/goListOrder")
+	public String goListOrder(){
+		return "backstage/list-order";
+	}
+	
+/*	@RequestMapping("/echartsIframe")
+	public String echartsIframe(){
+		return "backstage/iframe_echarts";
+	}*/
+	
 	
 	/*@RequestMapping("/backreleaseGoods")
 	public String backreleaseGoods(){

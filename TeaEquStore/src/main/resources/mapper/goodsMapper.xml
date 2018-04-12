@@ -114,15 +114,10 @@
 
 	<!-- 更改数据库商品数量:减去购买的数量 -->
 	<update id="updateGoodsNum" parameterType="java.util.List">
-		<foreach collection="list" item="orderItems" separator=";">
-			UPDATE equipment
-			<set>
-				number = number - #{orderItems.goodNum},
-				sellNumber = sellNumber + #{orderItems.goodNum}
-			</set>
-			<where>
-				e_id = #{orderItems.good.e_id}
-			</where>
+		<foreach collection="list" item="orderItems" >
+			update  equipment set	number = number - #{orderItems.goodNum},
+			sellNumber = sellNumber + #{orderItems.goodNum} where
+			e_id = #{orderItems.good.e_id};
 		</foreach>
 	</update>
 
@@ -145,18 +140,18 @@
 	
 	<!-- /*审核商品*/ -->
 	<update id="updateStatus" >
-		update equipment set status = #{1} where e_id in (#{0})
+		update equipment set `status` = #{1} where e_id in (#{0})
 	</update>
 	
 	<!-- /*批量审核商品*/ -->
 	<update id="updateMoreGoods" >
-		update equipment set status = #{1} where e_id in (#{0})
+		update equipment set `status` = #{1} where e_id in (${id})
 	</update>
 	
 	
 	<!--批量删除商品 -->
 	<delete id="deleteMoreGoods">
-		delete from equipment where e_id in (#{1});
+		delete from equipment where e_id in (${id});
 	</delete>
 	
 	<!-- /*修改商品*/ -->
