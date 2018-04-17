@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.dy.model.Goods;
 import com.dy.model.User;
 import com.dy.service.UserService;
 import com.dy.utils.JsonUtil;
@@ -72,5 +73,18 @@ public class BackUserController {
 			userService.addAccount(user);
 			JsonUtil.sendSuccessJson(response);
 	}
+	
+	//查找用户发布信息
+	@RequestMapping("/selectUserReleaseGoods")
+	public void selectUserReleaseGoods(){
+		
+	List<Goods>	goods = userService.selectUserReleaseGoods("5");
+	System.out.println(goods);
+	for(int i=0;i<goods.size();i++){
+		System.out.println(goods.get(i).getUser());
+	}
+	
+	}
+
 
 }

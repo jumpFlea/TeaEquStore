@@ -8,9 +8,6 @@
 		function goListOrder(){
 			location.href = ctx + "/admin/orderInfo/go/list-order";
 		}
-		/*$("#deliver").click(function(){
-			$("#myModal").modal("show");
-		});*/
 		function deliver(orderId){
 			//弹框初始化
 			$("#all").click();

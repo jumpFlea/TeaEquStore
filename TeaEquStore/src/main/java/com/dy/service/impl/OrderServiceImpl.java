@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import com.dy.dao.OrderDao;
 import com.dy.model.OrderItems;
 import com.dy.model.Orders;
+import com.dy.model.OrdersSearch;
 import com.dy.model.Page;
 import com.dy.model.User;
 import com.dy.service.OrderService;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 
 /**
  * @author DY
@@ -96,6 +98,12 @@ public class OrderServiceImpl implements OrderService{
 	public void payforOrder(Orders order) {
 		// TODO Auto-generated method stub
 		orderDao.payforOrder(order);
+	}
+
+	@Override
+	public List<Orders> backShowOrderList(OrdersSearch ordersSearch,PageBounds pageBounds) {
+		// TODO Auto-generated method stub
+		return orderDao.backShowOrderList(ordersSearch,pageBounds);
 	}
 
 	

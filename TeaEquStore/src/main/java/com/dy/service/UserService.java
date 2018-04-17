@@ -2,6 +2,9 @@ package com.dy.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.dy.model.Goods;
 import com.dy.model.User;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 
@@ -14,7 +17,7 @@ public interface UserService {
 	Integer selectByUserName(String userName);
 	
 	/*用户注册*/
-	User userRegist(User user);
+	void userRegist(User user);
 	
 	
 	/*查找所有用户*/
@@ -34,6 +37,9 @@ public interface UserService {
 	
 	/*修改用户*/
 	void addAccount(User user);
+	
+	/*查看发布商品*/
+	List<Goods> selectUserReleaseGoods(String releaseTime);
 	
 	
 	

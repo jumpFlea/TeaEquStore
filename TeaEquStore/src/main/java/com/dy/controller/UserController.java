@@ -1,5 +1,4 @@
-package com.dy.controller;
-
+package com.dy.controller; 	
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -64,7 +63,8 @@ public class UserController {
 	/*用户注册*/
 	@RequestMapping("/userRegist")
 	public   String userRegist(User user){
-		return null;
+		userService.userRegist(user);
+		return "login";
 		
 	}
 }

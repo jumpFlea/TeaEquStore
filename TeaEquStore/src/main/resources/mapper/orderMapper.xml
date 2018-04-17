@@ -85,6 +85,65 @@
 	<update id="payforOrder" parameterType="Orders">
 		update orders set orderState=#{orderState}, trade_no=#{trade_no} where oid = #{oid}
 	</update>
+	
+	<!--订单后台处理-->
+	<!--根据条件显示订单-->
+	<select id="backShowOrderList" parameterType="OrdersSearch" resultMap="orderListTwo">
+		select o.*,oi.itemsId,oi.goodNum,oi.subtotal,oi.eid,
+		e.e_id,e.equName,e.sellPrice,e.equPicture,u.u_id,u.userName
+		from orders o
+		LEFT JOIN orderitems oi ON o.oid=oi.oid 
+		LEFT JOIN equipment e on e.e_id=oi.eid
+		LEFT JOIN usertable u on u.u_id =o.uid
+		WHERE 1= 1
+		<if test="oid!=null">
+			and	o.oid  like '%${oid}%' 
+		</if>
+		<if test="eid!=null">
+			and e.e_id like '%${eid}%'
+		</if>
+		<if test="equName!=null">
+			and e.equName like '%${equName!=null}%'
+		</if>
+		<if test="name!=null">
+			and o.name like '%${name}%'
+		</if>
+		<if test="phone!=null">
+			and o.phone like '%${phone}%'
+		</if>
+		<if test="orderStart!=null and orderEnd!=null">
+			and o.orderTime  &gt;= #{orderStart} and &lt;= #{orderEnd}
+		</if>
+		ORDER BY o.orderTime DESC
+	</select>
+	<!-- 一个订单关联多个订单项 -->
+	<resultMap type="Orders" id="orderListTwo">
+		<id column="oid" property="oid" />
+		<result column="total" property="total" />
+		<result column="orderTime" property="orderTime" />
+		<result column="orderState" property="orderState" />
+		<result column="name" property="name" />
+		<result column="address" property="address" />
+		<result column="phone" property="phone" />
+		<!--一个订单关联一个用户 -->
+		<association property="user" javaType="User">
+			<id column="u_id" property="u_id" />
+			<result column="userName" property="userName" />
+		</association>
+		<!-- 一个订单项关联一个商品，和一个用户Id -->
+		<collection property="orderItems" ofType="OrderItems">
+			<id column="itemsId" property="itemsId" />
+			<result column="goodNum" property="goodNum" />
+			<result column="subtotal" property="subtotal" />
+			<association property="good" javaType="Goods">
+				<id column="e_id" property="e_id" />
+				<result column="equName" property="equName" />
+				<result column="sellPrice" property="sellPrice" />
+				<result column="equPicture" property="equPicture" />
+			</association>
+		</collection>
+	</resultMap>
+	
 
 </mapper>
 	

@@ -159,49 +159,49 @@
 					<div class="ibox-content">
 						<div class="panel-body  bg-from pad0B">
 							<form id="exprot" action="${ctx }/admin/orderInfo/export" method="post">
-								<div class="col-lg-4 form-group">
+								<div class="col-lg-4 form-group" style="margin-bottom: 15px; width: 40%; float: left">
 									<div class="input-group">
 										<span class="input-group-btn">
 											<button class="btn btn-primary" type="button">
 												<font>订单编号：</font>
 											</button>
-										</span><input type="text" id="orderNumber" name="orderNumber" class="form-control trimInput">
+										</span><input type="text" id="orderNumber" name="oid" class="form-control trimInput">
 									</div>
 								</div>
-								<div class="col-lg-4 form-group">
+								<div class="col-lg-4 form-group" style="margin-bottom: 15px; width: 40%; float: left">
 									<div class="input-group">
 										<span class="input-group-btn">
 											<button class="btn btn-primary" type="button">
 												<font>商品编号：</font>
 											</button>
-										</span><input type="text" id="productSerial" name="productSerial" class="form-control trimInput">
+										</span><input type="text" id="productSerial" name="eid" class="form-control trimInput">
 									</div>
 								</div>
-								<div class="col-lg-4 form-group">
+								<div class="col-lg-4 form-group" style="margin-bottom: 15px; width: 40%; float: left">
 									<div class="input-group">
 										<span class="input-group-btn">
 											<button class="btn btn-primary" type="button">
 												<font>商品名称：</font>
 											</button>
-										</span><input type="text" id="productName1" name="productName1" class="form-control trimInput">
+										</span><input type="text" id="productName1" name="equName" class="form-control trimInput">
 									</div>
 								</div>
-								<div class="col-lg-4 form-group">
+								<div class="col-lg-4 form-group" style="margin-bottom: 15px; width: 40%; float: left">
 									<div class="input-group">
 										<span class="input-group-btn">
 											<button class="btn btn-primary" type="button">
 												<font>收货人：</font>
 											</button>
-										</span><input type="text" id="receiveName" name="receiveName" class="form-control trimInput">
+										</span><input type="text" id="receiveName" name="name" class="form-control trimInput">
 									</div>
 								</div>
-								<div class="col-lg-4 form-group">
+								<div class="col-lg-4 form-group" style="margin-bottom: 15px; width: 40%; float: left">
 									<div class="input-group">
 										<span class="input-group-btn">
 											<button class="btn btn-primary" type="button">
 												<font>收货人手机号：</font>
 											</button>
-										</span><input type="text" id="receivePhone" name="receivePhone" class="form-control trimInput">
+										</span><input type="text" id="receivePhone" name="phone" class="form-control trimInput">
 									</div>
 								</div>
 								<!-- <div class="col-lg-4 form-group">
@@ -230,29 +230,19 @@
 										</select>
 									</div>
 								</div> -->
-								<div class="col-lg-5 form-group">
+								<div class="col-lg-5 form-group" style="margin-bottom: 15px; width: 40%; float: left">
 									<div class="input-group">
 										<span class="input-group-btn">
 											<button class="btn btn-primary" type="button">
 												<font>下单时间：</font>
 											</button>
-										</span> <input type="text" id="beginCreateTime" name="beginCreateTime" class="form-control"> <span class="input-group-btn">
+										</span> <input type="text" id="beginCreateTime" name="orderStart" class="form-control"> <span class="input-group-btn">
 											<button tabindex="-1" class="btn btn-white" type="button">--</button>
-										</span> <input type="text" id="endCreateTime" name="endCreateTime" class="form-control">
+										</span> <input type="text" id="endCreateTime" name="orderEnd" class="form-control">
 
 									</div>
 								</div>
-								<div class="col-lg-5 form-group">
-									<div class="input-group">
-										<span class="input-group-btn">
-											<button class="btn btn-primary" type="button">
-												<font>支付时间：</font>
-											</button>
-										</span> <input type="text" id="beginPayTime" name="beginPayTime" class="form-control"> <span class="input-group-btn">
-											<button tabindex="-1" class="btn btn-white" type="button">--</button>
-										</span> <input type="text" id="endPayTime" name="endPayTime" class="form-control">
-									</div>
-								</div>
+
 								<div class="col-lg-6 form-group" style="margin-bottom: 0px;">
 									<input type="hidden" name="totalResults" id="totalResults" /> <input class="glyphicon-search" type="hidden" name="state" id="state" />
 									<div id="btnSearch" class="btn btn-primary btn-outline glyphicon glyphicon-search">搜索</div>
@@ -622,261 +612,211 @@
 			}
 		});
 		$(".dataContent")
-				.initPageBar(
+				.initPageBar(				
 						{
-							url : ctx + "/admin/orderInfo/list-order", // 数据加载所调用的url
+							url : ctx + "/backorders/ordersListController", // 数据加载所调用的url
 							ctrlContent : $(".pageBar"), // 分页控件的容器对象，分页空间指的是：上一页，下一页，首页，尾页……等
 							htmlContent : function(data) {// 拼接返回的数据作为页面展示的html代码。
-
 								var html = "";
+								alert("DDDD");
 								if (data.list == null || data.list.length == 0) {
 									html = '<p style="text-align: center;">暂无数据</p>';
 									return html;
 								}
 								$(".totalPage").val(data.totalPage);
 								$("#totalResults").val(data.totalResults);
-								for (var i = 0; i < data.list.length; i++) {
+								alert(data.list);
+								for ( var i = 0; i < data.list.length; i++) {
 									var order = data.list[i];
-									if (null == order.listSplitSingle) {
-
-										var deliverType = '';
-
-										for (var x = 0; x < order.orderItems.length; x++) {
-											if (order.orderItems[x].notDelivered > 0) {
-												deliverType = '(<a style="color:red">部分发货</a>)';
-											}
+									if(1==1){
+										
+										var deliverType='';
+										var orderType='';
+										/* if(order.orderType==1){
+											orderType= '<a style="color:red">(拼团'+order.orderTypeStateStr+')</a>';
 										}
-										var orderType = '';
-										if (order.orderType == 1) {
-											orderType = '<a style="color:red">(拼团' + order.orderTypeStateStr + ')</a>';
-										}
-										if (order.orderType == 2) {
-											orderType = '<a style="color:red">(砍价' + order.orderTypeStateStr + ')</a>';
-										}
-
-										html += '<div class="col-sm-12 order-list-tr"  style="padding-left: 0px;padding-right: 0px;">' + '<div class="col-sm-12 order-list-tr-head">'
-												+ '<div class="col-sm-2"><input type="checkbox" value="'+order.id+'" name="id" />&nbsp;&nbsp;' + order.userName + "(  " + order.userSerial + "  )"
-												+ '</div>';
-
-										html += '<div class="col-sm-4 remark-'+order.id+'">';
-										html += '<img style="display:none" class="img" src="${ctx }/images/flag/pic'+order.backgroundMemoMark+'.png">';
-										if (order.backgroundMemoMark > 0) {
-											html += '<img class="old-img" src="${ctx }/images/flag/pic'+order.backgroundMemoMark+'.png">';
-										}
-										if (order.state == 5) {
-											html += '订单编号 : ' + order.orderNumber + deliverType + '<span style="margin-left:20px;">' + getIsSelfStr(order.orderItems[0].isSelf) + orderType
-													+ '</span></div>';
-										} else {
-											html += '订单编号 : ' + order.orderNumber + '<span style="margin-left:20px;">' + getIsSelfStr(order.orderItems[0].isSelf) + orderType + '</span></div>';
-										}
-
-										html += '<div class="col-sm-3">下单时间 : ' + order.createTime + '</div>';
-										if (order.orderType == 3) {
-											html += '<div class="col-sm-3">订单类型 :虚拟订单</div>' + '</div>';
-										} else {
-											html += '<div class="col-sm-3">订单类型 : ' + order.typeStr + '</div>' + '</div>';
-										}
-
-										//var orderItem = order.orderItems[x];
-										html += '<div class="col-sm-12 order-list-tr-content">';
-										//'<div class="col-sm-2" style="line-height:30px;">' + orderItem.productName + '<br><img src="' + orderItem.productPic + '"@120w_120h_1e_1c_75Q.jpg"></div>' +
-										html += '<div class="col-sm-3">';
-										for (var index = 0; index < order.orderItems.length; index++) {
-											html += '<div class="col-sm-12 text-left pull-left" style="line-height:30px"><img class="ver-T" src="' + order.orderItems[index].productPic + '"@120w_120h_1e_1c_75Q.jpg"><div class="ver-T content"><div><p>'
-													+ order.orderItems[index].productName + '</p></div></div></div>';
-										}
-										html += '</div>';
-										html += '<div class="col-sm-1">';
-										for (var index = 0; index < order.orderItems.length; index++) {
-											html += '<div class="col-sm-12 pull-left" style="line-height:60px">' + order.orderItems[index].price + "*" + order.orderItems[index].quantity + '</div>';
-										}
-										html += '</div>';
-										/* html += '<div class="col-sm-1">';
-										for(var index = 0 ; index < order.orderItems.length ; index++){
-											html += '<div class="col-sm-12 pull-left" style="line-height:60px">' + order.orderItems[index].quantity + '</div>' ;
-										}
-										html += '</div>'; */
-
-										/* '<div class="col-sm-1">' + orderItem.productSerial + '</div>' + */
-
-										html += '<div class="col-sm-1" style="display:table;height:100%"><div style="display:table-cell;vertical-align:middle;">' + order.receiveName + "<br>"
-												+ order.receivePhone + '</div></div>'
-												+ '<div class="col-sm-1" style="display:table;height:100%"><div style="display:table-cell;vertical-align:middle;">' + order.payPrice + '</div></div>'
-												+ '<div class="col-sm-2" style="display:table;height:100%"><div class="orderRemark" style="display:table-cell;vertical-align:middle;">' + order.remark
-												+ '</div></div>';
-										if (order.refundType == 0 && order.refundState != 7) {
-											html += '<div class="col-sm-1 table-div order-'+order.id+'"><p>' + order.stateStr + '<a style="color:red">(' + getRefundSater(order.refundState, 0)
-													+ ')</a></p></div>';
-										} else if (order.refundType == 1 && order.refundState != 7) {
-											html += '<div class="col-sm-1 table-div order-'+order.id+'"><p>' + order.stateStr + '<a style="color:red">(' + getRefundSater(order.refundState, 1)
-													+ ')</a></p></div>';
-										} else {
-											html += '<div class="col-sm-1 table-div order-'+order.id+'"><p>' + order.stateStr + '</p></div>';
-										}
-
-										html += '<div class="col-sm-2"><div style="display:table-cell;vertical-align:middle;">' +
-
-										'<shiro:hasPermission name="orderInfo:order:detail"><a title = "订单详情" class="btn btn-primary newTab" data-url="' + ctx + '/admin/orderInfo/go/detail-order?id='
-												+ order.id + '"  >查看详情</a></shiro:hasPermission>&nbsp;&nbsp;';
-
-										html += '<shiro:hasPermission name="orderInfo:order:deliver"><a class="btn btn-primary deliver-' + order.id + ' " style="display:none;" onclick="deliver('
-												+ order.id + ')"  >发货</a></shiro:hasPermission>';
-
-										if (order.state == 3 && order.isAbord == 0) {
-											html += '<shiro:hasPermission name="orderInfo:order:deliver"><a class="btn btn-primary btn-deliver-' + order.id + '" onclick="deliver(' + order.id
-													+ ')"  >发货</a></shiro:hasPermission>&nbsp;&nbsp;';
-										}
-										if (order.state == 3 && order.isAbord == 1) {
-											html += '<shiro:hasPermission name="orderInfo:order:clearance"><a class="btn btn-primary clearance-' + order.id + '" onclick="customsClearance(4,'
-													+ order.id + ');" >清关</a></shiro:hasPermission>&nbsp;&nbsp;';
-										}
-										if (order.state == 4 || order.state == 5 && deliverType.length > 0) {
-											html += '<shiro:hasPermission name="orderInfo:order:deliver"><a class="btn btn-primary btn-deliver-' + order.id + '" onclick="deliver(' + order.id
-													+ ')"  >发货</a></shiro:hasPermission>&nbsp;&nbsp;';
-										}
-										/* if(order.refundType == 0 ||order.refundType == 1 ){
-											html += '<a class="btn btn-primary"  >查看售后单详情</a>&nbsp;&nbsp;' ;
-										}  */
-										if (order.orderType == 3 && order.state != 8) {
-											html += '<a class="btn btn-primary archive-' + order.id + '" onclick="customsArchive(8,' + order.id + ');" >归档</a>';
-										}
-										if (order.state < 9) {
-											if (order.isCloseRefund == 0 && order.orderType != 3) {
-												html += '<shiro:hasPermission name="orderInfo:close:refund"><a class="btn btn-primary close-refund-' + order.id + '" onclick="closeRefund(' + order.id
-														+ ')"  >关闭售后</a></shiro:hasPermission>&nbsp;&nbsp;';
-											}
-											if (order.state == 1 || order.refundType == 0 || order.refundType == 1) {
-												html += '<shiro:hasPermission name="orderInfo:close:order"><a class="btn btn-primary close-order-' + order.id + '" onclick="closeOrder(' + order.id
-														+ ');"  >关闭订单</a></shiro:hasPermission>&nbsp;&nbsp;';
-											}
-											if (order.refundType == 0 || order.refundType == 1 && order.state != 8) {
-												html += '<a class="btn btn-primary archive-' + order.id + '" onclick="customsArchive(8,' + order.id + ');" >归档</a>';
-											}
-										}
-										html += '<shiro:hasPermission name="orderInfo:order:remark"><a class="btn btn-primary" onclick="backgroundRemark(' + order.id
-												+ ');"  >备注</a></shiro:hasPermission>&nbsp;&nbsp;';
-
-										html += '</div></div></div>';
-
-										html += '</div>';
-
-									} else {
-										html += '<div class="col-sm-12 order-list-tr"  style="padding-left: 0px;padding-right: 0px;">' + '<div class="col-sm-12 order-list-tr-head">'
-												+ '<div class="col-sm-2">' + order.userName + "(  " + order.userSerial + "  )" + '</div>';
-
-										html += '<div class="col-sm-4">订单编号 : ' + order.originOrderNumber + "  (<a style='color:red'>原始</a>)" + '</div>' +
-
-										'<div class="col-sm-3">订单类型 : ' + order.typeStr + '</div>' + '</div>';
-										var listSplitSingle = order.listSplitSingle;
-										for (var j = 0; j < listSplitSingle.length; j++) {
-
-											//发货状态
-											var deliverType = '';
-
-											for (var x = 0; x < listSplitSingle[j].orderItems.length; x++) {
-												if (listSplitSingle[j].orderItems[x].notDelivered > 0) {
-													deliverType = '(<a style="color:red">部分发货</a>)';
-												}
-											}
-
-											html += '<div class="col-sm-12 order-list-tr-head">'
-													+ '<div class="col-sm-4 remark-'+order.listSplitSingle[j].id+'"><input type="checkbox" value="'+listSplitSingle[j].id+'" name="id" />&nbsp;&nbsp;';
-											html += '<img style="display:none;" src="${ctx }/images/flag/pic'+order.listSplitSingle[j].backgroundMemoMark+'.png">';
-											if (order.listSplitSingle[j].backgroundMemoMark > 0) {
-												html += '<img src="${ctx }/images/flag/pic'+order.listSplitSingle[j].backgroundMemoMark+'.png">';
-											}
-											if (order.listSplitSingle[j].state == 5) {
-												html += '订单编号 : ' + listSplitSingle[j].orderNumber + deliverType + '</div>';
-											} else {
-												html += '订单编号 : ' + listSplitSingle[j].orderNumber + '</div>';
-											}
-
-											html += '<div class="col-sm-3">下单时间 : ' + listSplitSingle[j].createTime + '<span style="margin-left: 20px;">'
-													+ getIsSelfStr(listSplitSingle[j].orderItems[0].isSelf) + '</span></div>' + '</div>';
-											//遍历所有商品信息	
-											html += '<div class="col-sm-12 order-list-tr-content">';
-											//'<div class="col-sm-2" style="line-height:30px;">' + orderItem.productName + '<br><img src="' + orderItem.productPic + '"@120w_120h_1e_1c_75Q.jpg"></div>' +
-											/* for(var index = 0 ; index < listSplitSingle[j].orderItems.length; index++){
-												html += '<div class="col-sm-3" style="line-height:30px;margin-top: 10px;"><img class="ver-T" src="' + listSplitSingle[j].orderItems[index].productPic + '"@120w_120h_1e_1c_75Q.jpg"><div class="ver-T content"><div><p>' + listSplitSingle[j].orderItems[index].productName + '</p></div></div></div>' ;
-											}
-											/* '<div class="col-sm-1">' + orderItem.productSerial + '</div>' + */
-											/* for(var index = 0 ; index < listSplitSingle[j].orderItems.length ; index++){
-												html += '<div class="col-sm-1">' + listSplitSingle[j].orderItems[index].price + '</div>' ;
-											}
-											for(var index = 0 ; index < listSplitSingle[j].orderItems.length ; index++){
-												html += '<div class="col-sm-1">' + listSplitSingle[j].orderItems[index].quantity + '</div>' ;
-											}  */
-											html += '<div class="col-sm-3">';
-											for (var index = 0; index < listSplitSingle[j].orderItems.length; index++) {
-												html += '<div class="col-sm-12 text-left pull-left" style="line-height:30px"><img class="ver-T" src="' + listSplitSingle[j].orderItems[index].productPic + '"@120w_120h_1e_1c_75Q.jpg"><div class="ver-T content"><div><p>'
-														+ listSplitSingle[j].orderItems[index].productName + '</p></div></div></div>';
-											}
-											html += '</div>';
-											html += '<div class="col-sm-1">';
-											for (var index = 0; index < listSplitSingle[j].orderItems.length; index++) {
-												html += '<div class="col-sm-12 pull-left">' + listSplitSingle[j].orderItems[index].price + "*" + listSplitSingle[j].orderItems[index].quantity
-														+ '</div>';
-											}
-											html += '</div>';
-											/* html += '<div class="col-sm-1">';
-											for(var index = 0 ; index < listSplitSingle[j].orderItems.length ; index++){
-												html += '<div class="col-sm-12 pull-left">' + listSplitSingle[j].orderItems[index].quantity + '</div>' ;
-											}
-											html += '</div>'; */
-											html += '<div class="col-sm-1" style="display:table;height:100%"><div style="display:table-cell;vertical-align:middle;">' + listSplitSingle[j].receiveName
-													+ "<br>" + listSplitSingle[j].receivePhone + '</div></div>'
-													+ '<div class="col-sm-1" style="display:table;height:100%"><div style="display:table-cell;vertical-align:middle;">' + listSplitSingle[j].payPrice
-													+ '</div></div>' + '<div class="col-sm-2" style="display:table;height:100%"><div style="display:table-cell;vertical-align:middle;">'
-													+ listSplitSingle[j].remark + '</div></div>';
-
-											if (order.listSplitSingle[j].refundType == 0 && order.listSplitSingle[j].refundState != 7) {
-												html += '<div class="col-sm-1  table-div order-'+order.id+'"><p>' + order.listSplitSingle[j].stateStr + '(<a style="color:red">'
-														+ getRefundSater(order.listSplitSingle[j].refundState, 0) + '</a>)</p></div>';
-											} else if (order.listSplitSingle[j].refundType == 1 && order.listSplitSingle[j].refundState != 7) {
-												html += '<div class="col-sm-1  table-div order-'+order.listSplitSingle[j].id+'"><p>' + order.listSplitSingle[j].stateStr + '(<a style="color:red">'
-														+ getRefundSater(order.listSplitSingle[j].refundState, 1) + '</a>)</p></div>';
-											} else {
-												html += '<div class="col-sm-1  table-div order-'+order.listSplitSingle[j].id+'"><p>' + order.listSplitSingle[j].stateStr + '</p></div>';
-											}
-
-											html += '<div class="col-sm-2" style="display:table;height:100%"><div style="display:table-cell;vertical-align:middle;">'
-													+ '<shiro:hasPermission name="orderInfo:order:detail"><a title = "订单详情" class="btn btn-primary newTab" data-url="' + ctx
-													+ '/admin/orderInfo/go/detail-order?id=' + order.listSplitSingle[j].id + '"  >查看详情</a></shiro:hasPermission>&nbsp;&nbsp;';
-											html += '<shiro:hasPermission name="orderInfo:order:deliver"><a class="btn btn-primary deliver-' + order.listSplitSingle[j].id
-													+ ' deliver" style="display:none;" onclick="deliver(' + order.listSplitSingle[j].id + ')"  >发货</a></shiro:hasPermission>';
-											if (order.listSplitSingle[j].state == 3 && order.listSplitSingle[j].isAbord == 0) {
-												html += '<shiro:hasPermission name="orderInfo:order:deliver"><a class="btn btn-primary btn-deliver-' + order.listSplitSingle[j].id
-														+ '" onclick="deliver(' + order.listSplitSingle[j].id + ')"  >发货</a></shiro:hasPermission>&nbsp;&nbsp;';
-											}
-											if (order.listSplitSingle[j].state == 3 && order.listSplitSingle[j].isAbord == 1) {
-												html += '<shiro:hasPermission name="orderInfo:order:clearance"><a class="btn btn-primary clearance-' + order.listSplitSingle[j].id
-														+ '" onclick="customsClearance(4,' + order.listSplitSingle[j].id + ');" >清关</a></shiro:hasPermission>&nbsp;&nbsp;';
-											}
-											if (order.listSplitSingle[j].state == 4 || order.listSplitSingle[j].state == 5 && deliverType.length > 0) {
-												html += '<shiro:hasPermission name="orderInfo:order:deliver"><a class="btn btn-primary btn-deliver-' + order.listSplitSingle[j].id
-														+ '" onclick="deliver(' + order.listSplitSingle[j].id + ')"  >发货</a></shiro:hasPermission>&nbsp;&nbsp;';
-											}
-											/* if(order.listSplitSingle[j].refundType == 0 ||order.listSplitSingle[j].refundType == 1 ){
-												html += '<a class="btn btn-primary"  >查看售后单详情</a>&nbsp;&nbsp;' ;
+										if(order.orderType==2){
+											orderType= '<a style="color:red">(砍价'+order.orderTypeStateStr+')</a>';
+										} */	
+							
+										html += '<div class="col-sm-12 order-list-tr"  style="padding-left: 0px;padding-right: 0px;">' +
+										'<div class="col-sm-12 order-list-tr-head">' +
+											'<div class="col-sm-2"><input type="checkbox" value="'+order.oid+'" name="id" />&nbsp;&nbsp;' + order.name +'</div>' ;
+											
+											html += '<div class="col-sm-4 remark-'+order.oid+'">';
+											html+= '<img style="display:none" class="img" src="">';
+											/* if(order.backgroundMemoMark>0){
+												html+= '<img class="old-img" src="${ctx }/images/flag/pic'+order.backgroundMemoMark+'.png">';
 											} */
-											if (order.listSplitSingle[j].state < 9) {
-												if (order.listSplitSingle[j].isCloseRefund == 0) {
-													html += '<shiro:hasPermission name="orderInfo:close:refund"><a class="btn btn-primary close-refund-' + order.id + '" onclick="closeRefund('
-															+ order.listSplitSingle[j].id + ')"  >关闭售后</a></shiro:hasPermission>&nbsp;&nbsp;';
+											
+											html += '订单编号 : ' + order.oid+'<span style="margin-left:20px;">'+getIsSelfStr(order.orderItems[0].isSelf)+orderType+'</span></div>' ;
+											html+='<div class="col-sm-3">下单时间 : ' + order.changTime + '</div>';
+											if(order.orderState==0){
+											html +=	'<div class="col-sm-3">订单状态 : 未付款  </div>' +'</div>';
+											}else if(order.orderState==1){
+											html +=	'<div class="col-sm-3">订单状态 : 已付款  </div>' +'</div>';
+											}else if(order.orderState==2){
+											html +=	'<div class="col-sm-3">订单状态 : 待发货  </div>' +'</div>';
+											}else{
+											html +=	'<div class="col-sm-3">订单状态 : 待收货  </div>' +'</div>';
+											}
+											//var orderItem = order.orderItems[x];
+											html += 
+											'<div class="col-sm-12 order-list-tr-content">' ;
+												
+												html += '<div class="col-sm-3">';
+												for(var index = 0 ; index < order.orderItems.length ; index++){
+													html += '<div class="col-sm-12 text-left pull-left" style="line-height:30px"><img class="ver-T" src="' +ctx +'/'+ order.orderItems[index].good.equPicture + '"><div class="ver-T content"><div><p>' + order.orderItems[index].good.equName + '</p></div></div></div>' ;
 												}
-												if (order.listSplitSingle[j].state == 1 || order.listSplitSingle[j].refundType == 0 || order.listSplitSingle[j].refundType == 1) {
-													html += '<shiro:hasPermission name="orderInfo:close:order"><a class="btn btn-primary close-order-' + order.id + '" onclick="closeOrder('
-															+ order.listSplitSingle[j].id + ');"  >关闭订单</a></shiro:hasPermission>&nbsp;&nbsp;';
+												html += '</div>';
+												html += '<div class="col-sm-1">';
+												for(var index = 0 ; index < order.orderItems.length ; index++){
+													html += '<div class="col-sm-12 pull-left" style="line-height:60px">'+ order.orderItems[index].subtotal + '</div>' ;
+												}
+												html += '</div>';
+												
+												
+												html +=
+												'<div class="col-sm-1" style="display:table;height:100%"><div style="display:table-cell;vertical-align:middle;">' + order.name +"<br>"+ order.phone + '</div></div>' +
+												'<div class="col-sm-1" style="display:table;height:100%"><div style="display:table-cell;vertical-align:middle;">' + order.subtotal + '</div></div>' +
+												'<div class="col-sm-2" style="display:table;height:100%"><div class="orderRemark" style="display:table-cell;vertical-align:middle;">' + order.remark + '</div></div>' ;
+												if(order.refundType==0 && order.refundState!=7 ){
+													html += '<div class="col-sm-1 table-div order-'+order.id+'"><p>' + order.stateStr + '<a style="color:red">('+getRefundSater(order.refundState,0)+')</a></p></div>' ;
+												}else if(order.refundType==1 && order.refundState!=7 ){
+													html += '<div class="col-sm-1 table-div order-'+order.id+'"><p>' + order.stateStr + '<a style="color:red">('+getRefundSater(order.refundState,1)+')</a></p></div>' ;
+												} else{
+													html += '<div class="col-sm-1 table-div order-'+order.id+'"><p>' + order.stateStr + '</p></div>' ;		
+												}
+																							
+												html += '<div class="col-sm-2"><div style="display:table-cell;vertical-align:middle;">' +
+												
+													'<shiro:hasPermission name="orderInfo:order:detail"><a title = "订单详情" class="btn btn-primary newTab" data-url="'+ctx +'/admin/orderInfo/go/detail-order?id='+ order.id +'"  >查看详情</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+													
+														html += '<shiro:hasPermission name="orderInfo:order:deliver"><a class="btn btn-primary deliver-'+order.id+' " style="display:none;" onclick="deliver('+order.id+')"  >发货</a></shiro:hasPermission>' ;
+
+														if(order.state == 3 && order.isAbord == 0){
+															html += '<shiro:hasPermission name="orderInfo:order:deliver"><a class="btn btn-primary btn-deliver-'+order.id+'" onclick="deliver('+order.id+')"  >发货</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+														}
+														if(order.state == 3 && order.isAbord == 1){
+															html += '<shiro:hasPermission name="orderInfo:order:clearance"><a class="btn btn-primary clearance-'+order.id+'" onclick="customsClearance(4,'+order.id+');" >清关</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+														}
+														if(order.state == 4 ||order.state == 5&&deliverType.length>0){
+															html += '<shiro:hasPermission name="orderInfo:order:deliver"><a class="btn btn-primary btn-deliver-'+order.id+'" onclick="deliver('+order.id+')"  >发货</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+														} 
+														/* if(order.refundType == 0 ||order.refundType == 1 ){
+															html += '<a class="btn btn-primary"  >查看售后单详情</a>&nbsp;&nbsp;' ;
+														}  */
+														if(order.orderType==3&&order.state!=8){
+															html += '<a class="btn btn-primary archive-'+order.id+'" onclick="customsArchive(8,'+order.id+');" >归档</a>' ;
+														}
+														if(order.state < 9){		
+															if(order.isCloseRefund == 0&&order.orderType!=3){
+																html += '<shiro:hasPermission name="orderInfo:close:refund"><a class="btn btn-primary close-refund-'+order.id+'" onclick="closeRefund('+order.id+')"  >关闭售后</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+															}	
+															if(order.state == 1 ||order.refundType==0 ||order.refundType==1){
+																html += '<shiro:hasPermission name="orderInfo:close:order"><a class="btn btn-primary close-order-'+order.id+'" onclick="closeOrder('+order.id+');"  >关闭订单</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+															}
+															if(order.refundType==0 ||order.refundType==1&&order.state!=8){
+																html += '<a class="btn btn-primary archive-'+order.id+'" onclick="customsArchive(8,'+order.id+');" >归档</a>' ;
+															}
+														}
+														html += '<shiro:hasPermission name="orderInfo:order:remark"><a class="btn btn-primary" onclick="backgroundRemark('+order.id+');"  >备注</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+													
+												html += '</div></div></div>';
+											
+										html += '</div>';
+										
+									}else{
+										html += '<div class="col-sm-12 order-list-tr"  style="padding-left: 0px;padding-right: 0px;">' +
+										'<div class="col-sm-12 order-list-tr-head">' +
+											'<div class="col-sm-2">' + order.userName + "(  "+order.userSerial+"  )"+'</div>' ;
+											
+											html += '<div class="col-sm-4">订单编号 : ' + order.originOrderNumber + "  (<a style='color:red'>原始</a>)"+'</div>' +
+											
+											'<div class="col-sm-3">订单类型 : ' + order.typeStr + '</div>' +
+										'</div>';
+										var listSplitSingle = order.listSplitSingle;
+										for ( var j = 0;j < listSplitSingle.length;j++){
+											
+											//发货状态
+											var deliverType='';
+											
+											for( var x = 0;x < listSplitSingle[j].orderItems.length;x++){
+												if(listSplitSingle[j].orderItems[x].notDelivered > 0){
+													deliverType='(<a style="color:red">部分发货</a>)';
 												}
 											}
-											html += '<shiro:hasPermission name="orderInfo:order:remark"><a class="btn btn-primary" onclick="backgroundRemark(' + order.listSplitSingle[j].id
-													+ ');" >备注</a></shiro:hasPermission>&nbsp;&nbsp;';
+											
+											html+= '<div class="col-sm-12 order-list-tr-head">' +
+												'<div class="col-sm-4 remark-'+order.listSplitSingle[j].id+'"><input type="checkbox" value="'+listSplitSingle[j].id+'" name="id" />&nbsp;&nbsp;';
+												html+= '<img style="display:none;" src="${ctx }/images/flag/pic'+order.listSplitSingle[j].backgroundMemoMark+'.png">';
+												if(order.listSplitSingle[j].backgroundMemoMark>0){
+													html+= '<img src="${ctx }/images/flag/pic'+order.listSplitSingle[j].backgroundMemoMark+'.png">';
+												}
+												if(order.listSplitSingle[j].state==5){
+													html += '订单编号 : ' + listSplitSingle[j].orderNumber+deliverType+'</div>' ;
+												} else{
+													html += '订单编号 : ' + listSplitSingle[j].orderNumber+'</div>' ;
+												}
+												
+												html+= '<div class="col-sm-3">下单时间 : ' + listSplitSingle[j].createTime + '<span style="margin-left: 20px;">'+ getIsSelfStr(listSplitSingle[j].orderItems[0].isSelf) +'</span></div>' +
+											'</div>';
+											//遍历所有商品信息	
+											html += 
+												'<div class="col-sm-12 order-list-tr-content">' ;
+												
+													html += '<div class="col-sm-3">';
+													for(var index = 0 ; index < listSplitSingle[j].orderItems.length ; index++){
+														html += '<div class="col-sm-12 text-left pull-left" style="line-height:30px"><img class="ver-T" src="' + listSplitSingle[j].orderItems[index].productPic + '"@120w_120h_1e_1c_75Q.jpg"><div class="ver-T content"><div><p>' + listSplitSingle[j].orderItems[index].productName + '</p></div></div></div>' ;
+													}
+													html += '</div>';
+													html += '<div class="col-sm-1">';
+													for(var index = 0 ; index < listSplitSingle[j].orderItems.length ; index++){
+														html += '<div class="col-sm-12 pull-left">' + listSplitSingle[j].orderItems[index].price +"*"+listSplitSingle[j].orderItems[index].quantity +  '</div>' ;
+													}
+													html += '</div>';
+																		
+													html +=
+														'<div class="col-sm-1" style="display:table;height:100%"><div style="display:table-cell;vertical-align:middle;">' + listSplitSingle[j].receiveName +"<br>"+ listSplitSingle[j].receivePhone + '</div></div>' +
+														'<div class="col-sm-1" style="display:table;height:100%"><div style="display:table-cell;vertical-align:middle;">' + listSplitSingle[j].payPrice + '</div></div>' +
+														'<div class="col-sm-2" style="display:table;height:100%"><div style="display:table-cell;vertical-align:middle;">' + listSplitSingle[j].remark + '</div></div>' ;
+																
+													if(order.listSplitSingle[j].refundType==0  && order.listSplitSingle[j].refundState!=7 ){
+														html += '<div class="col-sm-1  table-div order-'+order.id+'"><p>' + order.listSplitSingle[j].stateStr + '(<a style="color:red">'+getRefundSater(order.listSplitSingle[j].refundState,0)+'</a>)</p></div>' ;
+													}else if(order.listSplitSingle[j].refundType==1 && order.listSplitSingle[j].refundState!=7 ){
+														html += '<div class="col-sm-1  table-div order-'+order.listSplitSingle[j].id+'"><p>' + order.listSplitSingle[j].stateStr + '(<a style="color:red">'+getRefundSater(order.listSplitSingle[j].refundState,1)+'</a>)</p></div>' ;
+													} else{
+														html += '<div class="col-sm-1  table-div order-'+order.listSplitSingle[j].id+'"><p>' + order.listSplitSingle[j].stateStr + '</p></div>' ;		
+													}
 
-											html += '</div></div></div>';
-
+													html+= '<div class="col-sm-2" style="display:table;height:100%"><div style="display:table-cell;vertical-align:middle;">' +
+														'<shiro:hasPermission name="orderInfo:order:detail"><a title = "订单详情" class="btn btn-primary newTab" data-url="'+ctx +'/admin/orderInfo/go/detail-order?id='+order.listSplitSingle[j].id+'"  >查看详情</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+														html += '<shiro:hasPermission name="orderInfo:order:deliver"><a class="btn btn-primary deliver-'+order.listSplitSingle[j].id+' deliver" style="display:none;" onclick="deliver('+order.listSplitSingle[j].id+')"  >发货</a></shiro:hasPermission>' ;
+														if(order.listSplitSingle[j].state == 3 && order.listSplitSingle[j].isAbord == 0){
+															html += '<shiro:hasPermission name="orderInfo:order:deliver"><a class="btn btn-primary btn-deliver-'+order.listSplitSingle[j].id+'" onclick="deliver('+order.listSplitSingle[j].id+')"  >发货</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+														}
+														if(order.listSplitSingle[j].state == 3 && order.listSplitSingle[j].isAbord == 1){
+															html += '<shiro:hasPermission name="orderInfo:order:clearance"><a class="btn btn-primary clearance-'+order.listSplitSingle[j].id+'" onclick="customsClearance(4,'+order.listSplitSingle[j].id+');" >清关</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+														}
+														if(order.listSplitSingle[j].state == 4 || order.listSplitSingle[j].state == 5 && deliverType.length >0 ){
+															html += '<shiro:hasPermission name="orderInfo:order:deliver"><a class="btn btn-primary btn-deliver-'+order.listSplitSingle[j].id+'" onclick="deliver('+order.listSplitSingle[j].id+')"  >发货</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+														}
+														
+														if(order.listSplitSingle[j].state < 9){
+															if(order.listSplitSingle[j].isCloseRefund == 0 ){
+																html += '<shiro:hasPermission name="orderInfo:close:refund"><a class="btn btn-primary close-refund-'+order.id+'" onclick="closeRefund('+order.listSplitSingle[j].id+')"  >关闭售后</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+															}
+															if(order.listSplitSingle[j].state == 1 ||order.listSplitSingle[j].refundType==0 ||order.listSplitSingle[j].refundType==1){
+																html += '<shiro:hasPermission name="orderInfo:close:order"><a class="btn btn-primary close-order-'+order.id+'" onclick="closeOrder('+order.listSplitSingle[j].id+');"  >关闭订单</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+															}									
+														}
+													html += '<shiro:hasPermission name="orderInfo:order:remark"><a class="btn btn-primary" onclick="backgroundRemark('+order.listSplitSingle[j].id+');" >备注</a></shiro:hasPermission>&nbsp;&nbsp;' ;
+													
+												html += '</div></div></div>';
+											
 										}
-										html += '</div>';
-
+										html+='</div>';
+										
 									}
 								}
 								$("input[name='selectAll']").prop("checked", false);

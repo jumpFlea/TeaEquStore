@@ -7,8 +7,10 @@ import org.apache.ibatis.annotations.Param;
 
 import com.dy.model.OrderItems;
 import com.dy.model.Orders;
+import com.dy.model.OrdersSearch;
 import com.dy.model.Page;
 import com.dy.model.User;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 
 public interface OrderDao {
 
@@ -32,6 +34,10 @@ public interface OrderDao {
 	
 	//根据支付宝返回的值，修改订单状态
 	public void payforOrder(Orders order);
+	
+	//后台显示orderList
+	List<Orders> backShowOrderList(OrdersSearch ordersSearch,PageBounds pageBounds);
+	
 	
 
 }

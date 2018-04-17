@@ -1,20 +1,33 @@
 package com.dy.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Orders {
-	private int oid;
-	private double total;
-	private Date orderTime;
-	private Integer orderState;
-	private String name;
-	private String address;
-	private String phone;
-	private String trade_no;
+	private int oid;//订单号
+	private double total;//总计
+	private Date orderTime;//订单时间 
+	private Integer orderState;//订单状态
+	private String name;//收货人姓名
+	private String address;//收获地址
+	private String phone;//收货人电话
+	private String trade_no;//支付宝交易号
+	private String changTime;//订单时间
 	
 	
+	public String getChangTime() {
+		 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 changTime = format.format(this.orderTime);
+		 return changTime;
+	}
+
+	public void setChangTime(String changTime) {
+		this.changTime = changTime;
+	}
+
+
 	private User user;
 	
 	private Set<OrderItems> orderItems=new HashSet<OrderItems>();

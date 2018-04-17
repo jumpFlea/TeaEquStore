@@ -109,6 +109,7 @@ $(function() {
 
 		},
 		submitHandler : function() {
+			form.submit(); 
 			alert("注册成功");
 		}
 

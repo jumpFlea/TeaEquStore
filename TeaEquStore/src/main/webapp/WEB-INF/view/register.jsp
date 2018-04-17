@@ -19,7 +19,7 @@
 			<p>welcome to the page</p>
 		</div>
 
-		<form action="${ctx}/" method="post" id="registerForm">
+		<form action="${ctx}/userRegist" method="post" id="registerForm">
 			<div>
 				<input type="text" id = "userName" name="userName" class="username" placeholder="您的用户名" autocomplete="off" />
 			</div>
@@ -29,9 +29,15 @@
 			<div>
 				<input type="password" name="confirm_password" class="confirm_password" placeholder="再次输入密码" oncontextmenu="return false" onpaste="return false" />
 			</div>
-			<!-- <div>
+			<div>
 				<input type="text" name="telephone" class="phone_number" placeholder="输入手机号码" autocomplete="off" id="number" />
-			</div> -->
+			</div>
+			<div>
+				<input type="text" name="addressName" class="confirm_password" placeholder="收货人姓名"  />
+			</div>
+			<div>
+				<input type="text" name="address" class="confirm_password" placeholder="收货人地址"  />
+			</div>
 			<div>
 				<input type="email" name="email" class="email" placeholder="输入邮箱地址" oncontextmenu="return false" onpaste="return false" />
 			</div>

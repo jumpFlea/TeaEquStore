@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dy.dao.UserDao;
+import com.dy.model.Goods;
 import com.dy.model.User;
 import com.dy.service.UserService;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
@@ -34,10 +35,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User userRegist(User user) {
+	public void userRegist(User user) {
 		// TODO Auto-generated method stub
 		userDao.userRegist(user);
-		return null;
+		
 	}
 
 	@Override
@@ -74,6 +75,12 @@ public class UserServiceImpl implements UserService {
 	public void addAccount(User user) {
 		// TODO Auto-generated method stub
 		userDao.addAccount(user);
+	}
+
+	@Override
+	public List<Goods> selectUserReleaseGoods(String releaseTime) {
+		// TODO Auto-generated method stub
+		return userDao.selectUserReleaseGoods(releaseTime);
 	}
 
 }

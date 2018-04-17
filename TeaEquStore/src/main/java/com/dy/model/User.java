@@ -1,5 +1,7 @@
 package com.dy.model;
 
+import java.util.List;
+
 public class User {
 	private Integer u_id;
 	private String userName;
@@ -10,6 +12,9 @@ public class User {
 	private String addressName;
 	private String address;
 	private Integer type;
+	private int countNum;
+	private List<Goods> goods;
+	
 	
 	
 	public String getAddressName() {
@@ -69,6 +74,19 @@ public class User {
 	}
 	public void setType(Integer type) {
 		this.type = type;
+	}
+	
+	public List<Goods> getGoods() {
+		return goods;
+	}
+	public void setGoods(List<Goods> goods) {
+		this.goods = goods;
+	}
+	public int getCountNum() {
+		return countNum;
+	}
+	public void setCountNum(int countNum) {
+		this.countNum = countNum;
 	}
 	
 	public String toString(){

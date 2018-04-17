@@ -18,7 +18,10 @@ public class Goods {
 	private int cateSecId; // '二级分类，指向categorysecond表的cateSecId',
 	private int uid;// "发布用户id"
 	private int status;// 商品状态
-	private Date releaseTime;
+	private Date releaseTime;//发布时间
+	private User user;//关联用户
+
+	
 
 	public int getE_id() {
 		return e_id;
@@ -138,6 +141,14 @@ public class Goods {
 
 	public void setReleaseTime(Date releaseTime) {
 		this.releaseTime = releaseTime;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String toString() {

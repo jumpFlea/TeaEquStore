@@ -82,6 +82,20 @@ public class JsonUtil {
 		sendJson(response, result.toString());
 	}
 
+	/* 订单 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void pageListToJSONMapNew(HttpServletResponse response, PageList list) throws IOException {
+		JSONObject result = new JSONObject();
+		if (list != null) {
+			Paginator paginator = list.getPaginator();
+			result.put("list", list);
+			result.put("totalPage", paginator.getTotalPages());
+			result.put("totalResults",paginator.getTotalCount());
+			result.put("success", true);
+		}
+		sendJson(response, result.toString());
+	}
+	
 	/* bootstrap */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Object pagelistToJSONMapNew(PageList list) {

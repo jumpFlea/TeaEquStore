@@ -25,7 +25,8 @@
 
 	<!--用户注册 -->
 	<insert id="userRegist" parameterType="User">
-		insert into userTable(userName,userPassWord,email,telephone) values(#{userName},#{userPassWord},#{email},#{telephone});
+		insert into userTable(userName,userPassWord,email,telephone,addressName,address) 
+		values(#{userName},#{userPassWord},#{email},#{telephone},#{addressName},#{address});
 	</insert>
 
 	<!--后台管理员数据操作部分 -->
@@ -68,5 +69,30 @@
 		value(#{userName},#{userPassWord},#{telephone},#{email},#{userStatus},#{addressName},#{address},#{type})
 	</insert>
 
+	<!--查看用户发布的商品数
+	<resultMap id="userResultMap" type="User">
+
+	</resultMap> -->
+	<resultMap id="goodsResultMap" type="Goods">
+		<id property="e_id" column="e_id" />
+		<result property="equName" column="equName"/>
+		<association property="user" javaType="User" >
+			<id property="u_id" column="u_id"></id>
+			<result property="countNum" column="countNum" />
+			<result property="userName" column="userName"/>
+		</association>
+	</resultMap>
+	<select id="selectUserReleaseGoods" resultMap="goodsResultMap" >
+		SELECT u.u_id,u.userName,count(e.uid) as countNum FROM equipment e,usertable u
+		where u.u_id=e.uid
+		<if test="!releaseTime.equals('') and releaseTime!=null">
+			and TO_DAYS(NOW()) - TO_DAYS(releaseTime) &lt;=#{releaseTime}
+		</if>
+		GROUP BY e.uid
+	</select>
+	<!-- <select id = "selectUserReleaseGoods" resultMap="goodsResultMap">
+		select e.*,u.* from equipment e,usertable u
+		where e.uid = u.u_id 
+	</select> -->
 
 </mapper>
